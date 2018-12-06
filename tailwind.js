@@ -60,6 +60,7 @@ let colors = {
   "grey-light": "#dae1e7",
   "grey-lighter": "#f1f5f8",
   "grey-lightest": "#f8fafc",
+  "grey-new-light" : "#a9a9a9",
   "grey-new": "#616161",
   white: "#ffffff",
 
@@ -586,7 +587,7 @@ module.exports = {
     "380": "380px",
     "400": "400px",
     "450": "450px",
-    "550": "550px",
+    "550": "550px",   
     "650": "650px",
     "1100": "1100px",
     imgCard: "90px",

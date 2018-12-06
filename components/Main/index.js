@@ -6,7 +6,8 @@ import {
   faMinus,
   faInfo,
   faSyncAlt,
-  faTimes
+  faTimes,
+  faCheckDouble
 } from "@fortawesome/free-solid-svg-icons";
 
 import moment from "moment";
@@ -51,12 +52,7 @@ const Main = props => {
                     : "login"
                 ]);
               }}
-              className={
-                props.misc.visibleScreen != "itemized"
-                  ? "text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new"
-                  : "opacity-25 text-white p-2 unselectable bg-semi-transparent font-bold uppercase px-4"
-              }
-            >
+              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new">
               Logout
             </a>
           </div>
@@ -74,8 +70,13 @@ const Main = props => {
         className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
       >        
 
+        {props.misc.visibleScreen == null || !props.misc.visibleScreen.includes("admin") 
+         ? 
+                
         <form 
-        onSubmit=""
+        onSubmit={()=>{
+          
+        }}
         >
             <div
               style={{
@@ -127,15 +128,7 @@ const Main = props => {
                 </div> 
               </div>
             </div>
-              
-
-            {/* <hr style={{
-              backgroundColor: "rgba(222, 222, 222, 0.18)",
-              height: "4px",
-              marginTop: "40px"
-            }} /> */}
-
-
+     
             <div
               style={{
                 borderTopLeftRadius: "10px",
@@ -149,6 +142,26 @@ const Main = props => {
               <div className="w-full text-center bg-grey-new uppercase p-2">
                 <h3>Report</h3>
               </div>
+
+              {props.misc.visibleScreen != null && props.misc.visibleScreen.includes("thanksMessage") ? 
+                  <div style={{zIndex: "9999", marginTop: "600px", boxShadow: "rgba(140, 140, 140, 0.42) 0px 0px 6px"}} className="absolute align-absolute pin-auto bg-grey-lighter w-400 h-300">
+                  <div 
+                  onClick={()=>{                  
+                      props.setVisibleScreen([                       
+                        props.misc.visibleScreen.includes(null)                     
+                      ]);
+                    }}
+                    className="w-10 h-10 mr-1 mt-1 pt-1 absolute text-grey cursor-pointer pin-t pin-r text-center bg-grey-light hover:text-white hover:bg-grey-new ">
+                  <FontAwesomeIcon icon={faTimes} className="fa-2x " /></div>
+                    <div className="mt-24 text-center"> 
+                      <FontAwesomeIcon icon={faCheckDouble} className="fa-3x text-grey-new" />
+                    </div>
+                    <div className="mt-12">                
+                      <h2 className="text-center text-grey-new">Thank you for your report!</h2>
+                    </div>
+                </div> 
+                : null }
+
               <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">Please, insert here your information:</p>
               <div className="w-full inline-flex  p-2 bg-white text-black pt-10">
                 <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
@@ -170,25 +183,25 @@ const Main = props => {
                   <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="Describe here what happened..." />
                 </div>
               </div>
-
+              
               <div className="w-full p-2 inline-flex mt-10 bg-white text-black ">
                   <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
                       <label className="mr-2">Report Parties:</label>
                       <input type="text" name="reportParties" id="reportParties" className="p-2 h-10 w-300" placeholder="Who was involved?" /> 
-                      <FontAwesomeIcon icon={faPlus} className="text-grey ml-2 fa-lg" />
+                      <FontAwesomeIcon icon={faPlus} className="cursor-pointer  text-grey ml-2 fa-lg hover:text-grey-new" />
                   </div>
                   <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
                       <label className="mr-2">Witnesses:</label>
                       <input type="text" name="witnesses" id="witnesses" className="p-2 h-10 w-300" placeholder="Enter here" /> 
-                      <FontAwesomeIcon icon={faPlus} className="text-grey ml-2 fa-lg" />
+                      <FontAwesomeIcon icon={faPlus} className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new" />
                   </div>
               </div>
               <div className="w-1/3 mb-2 ml-2 text-right">
-                <div className="w-300 p-2 bg-grey-light text-grey inline-flex mr-2">
+                <div className="w-300 p-2 bg-grey-light text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
                   <p className="w-full">Mitchel Eppich</p>
-                  <FontAwesomeIcon icon={faTimes} className="text-right text-red ml-2" />
-                </div>
-              </div>
+                  <FontAwesomeIcon icon={faTimes} className="text-right text-red ml-2" />                  
+                </div>                
+              </div>             
 
             </div>
 
@@ -224,7 +237,7 @@ const Main = props => {
                 border: "2px solid rgba(249, 249, 249, 0.96)",
                 boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
               }}
-              className="w-full mt-12"
+              className="w-full mt-12 relative"
             >
               <div className="w-full text-center bg-grey-new uppercase p-2">
                 <h3>Proposed Action</h3>
@@ -237,7 +250,7 @@ const Main = props => {
                 <div className="w-full pr-12">
                   <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="What do you propose?" />
                 </div>
-              </div>          
+              </div> 
             </div>
 
             <div
@@ -261,10 +274,29 @@ const Main = props => {
               </div>
             </div>
             <div className="w-full flex justify-end mt-4 mb-24">
-                <button className="bg-orange-new p-4 cursor-pointer w-300 text-center text-grey uppercase hover:bg-grey-new hover:text-white">Submit</button>
-            </div>        
-        </form>
+                
+                <div 
+                onClick={()=>{
+                  props.setVisibleScreen([
+                    props.misc.visibleScreen != null &&
+                    props.misc.visibleScreen.includes("thanksMessage")
+                      ? null
+                      : "thanksMessage"
+                  ]);
+                }}
+                className="bg-orange-new p-2 cursor-pointer w-300 text-center text-grey uppercase hover:bg-grey-new hover:text-white"><h3>Submit</h3></div>
+            </div>                  
+        </form> : null }
+
+        
+
+        {console.log(props.misc.visibleScreen)}
+
+         
+           
+        
       </div>
+      
       
     </div>
   );

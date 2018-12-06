@@ -11,9 +11,8 @@ import Login from "../components/Login";
 import Main from "../components/Main";
 import Screen from "../components/Main/Screen";
 import RegisterUser from "../components/Admin/RegisterUser";
-import Logs from "../components/Admin/Logs";
-import Users from "../components/Admin/Users";
-import Reports from "../components/Admin/Reports"
+
+
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
@@ -42,22 +41,9 @@ class Index extends Component {
         this.props.misc.visibleScreen.includes("login") ? (
           <Login {...this.props} />
         ) : null}
-        <Main {...this.props} />      
-
         
-
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("reports") ? (
-          <Reports {...this.props} />
-        ) : null}
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("users") ? (
-          <Users {...this.props} />
-        ) : null}
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("logs") ? (
-          <Logs {...this.props} />
-        ) : null}
+        <Main {...this.props} />   
+        
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("register") ? (
           <RegisterUser {...this.props} />
@@ -67,6 +53,7 @@ class Index extends Component {
         this.props.misc.visibleScreen.includes("admin") ? (
           <Screen {...this.props} />
         ) : null}
+
         <Subscription subscription={subscription.orderUpdate}>
           {({ data }) => {
             if (data != null) {
@@ -92,6 +79,7 @@ class Index extends Component {
             return <div />;
           }}
         </Subscription>
+
       </Layout>
     );
   }
