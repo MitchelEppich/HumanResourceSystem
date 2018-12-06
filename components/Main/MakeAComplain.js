@@ -1,0 +1,236 @@
+import React from "react"
+import ReactDOM from "react-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faMinus,
+  faInfo,
+  faSyncAlt,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
+
+
+const MakeAComplain = props => {
+    return (
+        <div
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: "0",
+          right: "0",
+          height: "800px"
+        }}
+        className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
+      >
+        <div
+          onClick={() => {
+            let company = props.nav.focusCompany;
+            if (company == null) return;
+            let updateIcon = document.querySelector("#update-icon");
+            updateIcon.classList.add("loader-icon");
+            props
+              .fetchOrderList({
+                url: company.url,
+                company: company,
+                orderCache: props.order.orderCache,
+                user: null
+              })
+              .then(res => {
+                updateIcon.classList.remove("loader-icon");
+              });
+          }}
+          className="p-2 justify-end w-full text-orange-new hover:text-blue cursor-pointer mb-2"
+        >
+          
+        </div>
+
+        <form 
+        onSubmit=""
+        >
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full justify-between"
+            >
+                <div className="w-full bg-grey-new text-center uppercase p-2">
+                  <h3>Context</h3>
+                </div>
+                <div className="w-full h-100 p-2 bg-white text-black">
+                  <p className="p-2">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                </div>
+              </div>
+
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full  justify-between mt-12"
+            >
+              <div className="w-full bg-grey-new text-center uppercase p-2">
+                <h3>Reporter</h3>
+              </div>
+              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">Please, insert here your information:</p>
+              <div className="w-full inline-flex h-100 p-2 bg-white text-black pt-10">
+                <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
+                  <label className="mr-2">First Name:</label><input type="text" name="firstName" id="firstName" placeholder="" className="p-2 w-300 h-10" />
+                </div>
+                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
+                  <label className="mr-2">Last Name:</label><input type="text" name="lastName" id="lastName" placeholder="" className="p-2 w-300 h-10" />
+                </div>
+                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
+                  <label className="mr-2">Email:</label><input type="email" name="email" id="email" placeholder="" className="p-2 w-300 h-10" />
+                </div>
+                
+              </div>
+              <div className="w-full inline-flex p-2 text-right flex justify-end bg-white text-black ">
+                <div className="w-1/3 h-10 inline-flex flex justify-end flex items-center text-right pr-16">
+                  <label className="mr-2">Anonymous:</label><input type="checkbox" name="anonymous" id="anonymous" className="p-2 checkbox h-10" />
+                </div> 
+              </div>
+            </div>
+
+
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full mt-12"
+            >
+              <div className="w-full text-center bg-grey-new uppercase p-2">
+                <h3>Report</h3>
+              </div>
+              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">Please, insert here your information:</p>
+              <div className="w-full inline-flex  p-2 bg-white text-black pt-10">
+                <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
+                  <label className="mr-2">Date:</label><input type="date" name="firstName" id="firstName" placeholder="" className="p-2 w-300 h-10" />
+                </div>
+                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
+                  <label className="mr-2">Hour:</label><input type="time" name="lastName" id="lastName" placeholder="" className="p-2 w-300 h-10" />
+                </div>
+                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
+                  <label className="mr-2">Location:</label><input type="email" name="email" id="email" placeholder="" className="p-2 w-300 h-10" />
+                </div>            
+              </div>
+
+              <div className="w-full inline-flex p-2 mt-10 text-right flex justify-end bg-white text-black ">
+                <div className="text-left h-10 mt-2 items-center">
+                  <label className="mr-2">Description:</label>  
+                </div> 
+                <div className="w-full pr-12">
+                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="Describe here what happened..." />
+                </div>
+              </div>
+
+              <div className="w-full p-2 inline-flex mt-10 bg-white text-black ">
+                  <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
+                      <label className="mr-2">Report Parties:</label>
+                      <input type="text" name="reportParties" id="reportParties" className="p-2 h-10 w-300" placeholder="Who was involved?" /> 
+                      <FontAwesomeIcon icon={faPlus} className="text-grey ml-2 fa-lg" />
+                  </div>
+                  <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
+                      <label className="mr-2">Witnesses:</label>
+                      <input type="text" name="witnesses" id="witnesses" className="p-2 h-10 w-300" placeholder="Enter here" /> 
+                      <FontAwesomeIcon icon={faPlus} className="text-grey ml-2 fa-lg" />
+                  </div>
+              </div>
+              <div className="w-1/3 mb-2 ml-2 text-right">
+                <div className="w-300 p-2 bg-grey-light text-grey inline-flex mr-2">
+                  <p className="w-full">Mitchel Eppich</p>
+                  <FontAwesomeIcon icon={faTimes} className="text-right text-red ml-2" />
+                </div>
+              </div>
+
+            </div>
+
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full mt-12"
+            >
+              <div className="w-full text-center bg-grey-new uppercase p-2">
+                <h3>Additional Information</h3>
+              </div>                
+
+              <div className="w-full inline-flex p-2 mt-8 text-right flex justify-end bg-white text-black ">
+                <div className="text-left h-10 mt-2 items-center">
+                  <label className="mr-2">Description:</label>  
+                </div> 
+                <div className="w-full pr-12">
+                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="If you have an extra information, please insert here..." />
+                </div>
+              </div>          
+            </div>
+
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full mt-12"
+            >
+              <div className="w-full text-center bg-grey-new uppercase p-2">
+                <h3>Proposed Action</h3>
+              </div>                
+
+              <div className="w-full inline-flex p-2 mt-8 text-right flex justify-end bg-white text-black ">
+                <div className="text-left h-10 mt-2 items-center">
+                  <label className="mr-2">Description:</label>  
+                </div> 
+                <div className="w-full pr-12">
+                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="What do you propose?" />
+                </div>
+              </div>          
+            </div>
+
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 249, 249, 0.96)",
+                boxShadow: "0px 0px 1px rgba(43, 43, 43, 0.05)"
+              }}
+              className="w-full justify-between mt-12"
+            >
+              <div className="w-full text-center bg-grey-new uppercase p-2">
+                <h3>Disclaimer</h3>
+              </div>
+              <div className="w-full p-2 bg-white text-black">
+                <p className="p-2">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                <div className="w-300 mt-4 mb-2 ml-2">
+                    <input type="checkbox" name="agreeCheckbox" id="agreeCheckbox" className="mr-2 checkbox"/><label>I Accept the Terms </label>
+                </div>
+              </div>
+            </div>
+            <div className="w-full flex justify-end mt-4 mb-24">
+                <button className="bg-orange-new p-4 cursor-pointer w-300 text-center text-grey uppercase hover:bg-grey-new hover:text-white">Submit</button>
+            </div>        
+        </form>
+      </div>
+    )
+}
+
+
+export default MakeAComplain

@@ -1,0 +1,161 @@
+/*******************************************/
+/*This is the main stylesheet***/
+/******************************************/
+
+@tailwind preflight;
+@tailwind utilities;
+
+/****SCROLLBAR*****/
+
+/******MIXINS*******/
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+// Block Element
+// @access public
+// @param {String} $element - Element's name
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+// Block Modifier
+// @access public
+// @param {String} $modifier - Modifier's name
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+/* CUSTOM FONTS */
+/*********************/
+
+@font-face {
+  font-family: "Novecentowide-DemiBold";
+  src: url("../static/fonts/Novecentowide/Novecentowide-DemiBold.woff")
+      format("woff"),
+    url("../static/fonts/Novecentowide/Novecentowide-DemiBold.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DINPro-Medium";
+  src: url("../static/fonts/DINPro-Medium/DINPro-Medium.woff") format("woff"),
+    url("../static/fonts/DINPro-Medium/DINPro-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM CSS */
+.body,
+html {
+  font-family: "DINPro-Medium", verdana;
+  color: #252525;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+  transition: all 0.5s cubic-bezier(0.87, 0.52, 0, 0.52);
+}
+
+input, textarea {
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.checkbox {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  background-color: #eee;
+  border-radius: 50%;
+  vertical-align: text-top;
+}
+
+.checkbox:checked {
+  background-color: #b8b8b8;
+}
+
+.example {
+  background-color: red;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.qtd-tag {
+  transform: scale(0.9);
+  border-radius: 50%;
+  padding: 5px 3px;
+  font-size: 12px;
+  height: 30px;
+  width: 30px;
+  background: white;
+  color: #424242;
+}
+
+.align-absolute {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0px;
+  right: 0px;
+}
+
+.align-elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scale-items {
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+.scale-items:hover {
+  transform: scale(1.08);
+  transition: all 0.2s ease;
+}
+
+.loader-icon {
+  -webkit-animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
