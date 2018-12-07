@@ -26,7 +26,9 @@ const Complaints = props => {
           </div>
           <div style={{ width: "45%" }} className="w-1/4 pl-24">
             {complaint.incidentDescription != null
-              ? complaint.incidentDescription.substring(0, 100)
+              ? `${complaint.incidentDescription.substring(0, 80)}${
+                  complaint.incidentDescription.length > 80 ? "..." : ""
+                }`
               : "NO DESCRIPTION"}
           </div>
           <div style={{ width: "15%" }} className="w-1/4">

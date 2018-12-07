@@ -1,6 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faTimes, faInfo, faUserLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMinus,
+  faTimes,
+  faInfo,
+  faUserLock
+} from "@fortawesome/free-solid-svg-icons";
 
 const Login = props => {
   return (
@@ -17,13 +22,14 @@ const Login = props => {
         }}
         className="align-absolute bg-white w-450 h-450 mt-64"
       >
-      <div 
-      onClick={()=>{
-        props.setVisibleScreen("admin");
-      }}
-      className="absolute pin-r pin-t cursor-pointer mr-2 mt-2 p-2 hover:bg-grey-light hover:text-grey">
+        <div
+          onClick={() => {
+            props.setVisibleScreen([]);
+          }}
+          className="absolute pin-r pin-t cursor-pointer mr-2 mt-2 p-2 hover:bg-grey-light hover:text-grey"
+        >
           <FontAwesomeIcon icon={faTimes} className="fa-2x" />
-      </div>
+        </div>
         <div className="text-center p-2">
           <FontAwesomeIcon
             icon={faUserLock}
@@ -45,6 +51,7 @@ const Login = props => {
             props.verifyCredentials({ username, badge }).then(res => {
               if (res == null) return;
               props.setVisibleScreen("admin");
+              props.fetchComplaints();
             });
           }}
         >

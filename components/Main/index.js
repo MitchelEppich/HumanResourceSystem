@@ -67,7 +67,6 @@ const Main = props => {
                     ? null
                     : "login"
                 ]);
-                props.fetchComplaints();
               }}
               className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
             >
@@ -108,7 +107,24 @@ const Main = props => {
         {props.misc.visibleScreen == null ||
         (!props.misc.visibleScreen.includes("admin") &&
           !props.misc.visibleScreen.includes("thanksMessage")) ? (
-          <form onSubmit={() => {}}>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              if (
+                props.nav.complaint.reportedNames == null ||
+                props.nav.complaint.reportedNames.length == 0
+              )
+                return;
+
+              props.setVisibleScreen([
+                props.misc.visibleScreen != null &&
+                props.misc.visibleScreen.includes("thanksMessage")
+                  ? null
+                  : "thanksMessage"
+              ]);
+              props.postComplaint(props.nav.complaint);
+            }}
+          >
             <div
               style={{
                 borderTopLeftRadius: "10px",
@@ -159,8 +175,22 @@ const Main = props => {
               <div className="w-full inline-flex h-100 p-2 bg-white text-black pt-10">
                 <div className="w-1/3 h-10  inline-flex  flex items-center">
                   <label className="mr-2">Name:</label>
-                  <select className="w-200 p-1 ml-4" required>
-                    <option value="">Select here...</option>
+                  <select
+                    className="w-200 p-1 ml-4"
+                    id="name"
+                    required
+                    onChange={e => {
+                      let _value = e.target.value;
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: _value
+                      });
+                    }}
+                  >
+                    <option value="" disabled selected>
+                      Select here...
+                    </option>
                     <option value="jeremias">Jeremias</option>
                     <option value="karl">Karl</option>
                     <option value="anthony">Anthony</option>
@@ -211,6 +241,7 @@ const Main = props => {
                     className="p-2 w-300 h-10"
                     name="incidentDate"
                     id="incidentDate"
+                    required
                     onChange={e => {
                       props.setComplaint({
                         complaint: props.nav.complaint,
@@ -226,6 +257,7 @@ const Main = props => {
                     type="time"
                     name="incidentTime"
                     id="incidentTime"
+                    required
                     onChange={e => {
                       props.setComplaint({
                         complaint: props.nav.complaint,
@@ -239,8 +271,21 @@ const Main = props => {
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Location:</label>
-                  <select className="w-250 p-1 ml-4">
-                    <option>Select here...</option>
+                  <select
+                    className="w-250 p-1 ml-4"
+                    id="incidentLocation"
+                    required
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                  >
+                    <option value="" disabled selected>
+                      Select here...
+                    </option>
                     <option value="Media Room">Media Room</option>
                     <option value="Production Room">Production Room</option>
                     <option value="CSR Room">CSR Room</option>
@@ -259,6 +304,7 @@ const Main = props => {
                   <textarea
                     cols="50"
                     rows="10"
+                    required
                     name="incidentDescription"
                     id="incidentDescription"
                     onChange={e => {
@@ -282,6 +328,7 @@ const Main = props => {
                       name="reportedNames"
                       className="w-250 p-1 ml-4"
                       id="reportedName"
+                      required
                       onChange={e => {
                         props.setComplaint({
                           complaint: props.nav.complaint,
@@ -290,7 +337,9 @@ const Main = props => {
                         });
                       }}
                     >
-                      <option>Select here...</option>
+                      <option value="" disabled selected>
+                        Select here...
+                      </option>
                       <option value="mitch">Mitchel Eppich</option>
                       <option value="chris">Chris</option>
                       <option value="karl">Karl with K</option>
@@ -334,7 +383,9 @@ const Main = props => {
                         });
                       }}
                     >
-                      <option>Select here...</option>
+                      <option value="" disabled selected>
+                        Select here...
+                      </option>
                       <option value="mitch">Mitchel Eppich</option>
                       <option value="chris">Chris</option>
                       <option value="karl">Karl with K</option>
@@ -480,6 +531,7 @@ const Main = props => {
                     type="checkbox"
                     name="acceptCheck"
                     id="acceptCheck"
+                    required
                     onChange={e => {
                       props.setComplaint({
                         complaint: props.nav.complaint,
@@ -494,16 +546,8 @@ const Main = props => {
               </div>
             </div>
             <div className="w-full flex justify-end mt-4 mb-24">
-              <div
-                onClick={() => {
-                  props.setVisibleScreen([
-                    props.misc.visibleScreen != null &&
-                    props.misc.visibleScreen.includes("thanksMessage")
-                      ? null
-                      : "thanksMessage"
-                  ]);
-                  props.postComplaint(props.nav.complaint);
-                }}
+              <button
+                type="submit"
                 className={`${
                   // Also check if others are filled in
                   props.nav.complaint["acceptCheck"]
@@ -511,8 +555,8 @@ const Main = props => {
                     : "opacity-50 pointer-events-none"
                 } bg-orange-new p-2 w-300 text-center text-grey uppercase`}
               >
-                <h3>Submit</h3>
-              </div>
+                Submit
+              </button>
             </div>
           </form>
         ) : null}

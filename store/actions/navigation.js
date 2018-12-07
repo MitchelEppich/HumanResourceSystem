@@ -112,11 +112,14 @@ const query = {
         fileDate
         closeDate
         incidentDate
+        incidentTime
         incidentLocation
         incidentDescription
         additionalInfo
         proposedAction
         anonymous
+        reportedNames
+        witnessNames
       }
     }
   `
@@ -129,6 +132,7 @@ const mutation = {
       $email: String
       $fileDate: String
       $incidentDate: String
+      $incidentTime: String
       $incidentLocation: String
       $incidentDescription: String
       $reportedNames: [String]
@@ -143,6 +147,7 @@ const mutation = {
           email: $email
           fileDate: $fileDate
           incidentDate: $incidentDate
+          incidentTime: $incidentTime
           incidentLocation: $incidentLocation
           incidentDescription: $incidentDescription
           reportedNames: $reportedNames
@@ -160,6 +165,7 @@ const mutation = {
         notes
         fileDate
         incidentDate
+        incidentTime
         incidentLocation
         incidentDescription
         additionalInfo
@@ -169,8 +175,20 @@ const mutation = {
     }
   `,
   updateComplaint: gql`
-    mutation($status: String, $adminResponse: String, $note: String, $_id: String) {
-      updateComplaint(input: { status: $status, adminResponse: $adminResponse, note: $note, _id: $_id}) {
+    mutation(
+      $status: String
+      $adminResponse: String
+      $note: String
+      $_id: String
+    ) {
+      updateComplaint(
+        input: {
+          status: $status
+          adminResponse: $adminResponse
+          note: $note
+          _id: $_id
+        }
+      ) {
         _id
         name
         email
@@ -180,6 +198,7 @@ const mutation = {
         fileDate
         closeDate
         incidentDate
+        incidentTime
         incidentLocation
         incidentDescription
         additionalInfo
