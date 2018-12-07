@@ -52,6 +52,7 @@ type Complaint {
   fileDate: String
   closeDate: String
   incidentDate : String
+  incidentTime : String
   incidentLocation : String
   incidentDescription : String
   reportedNames: [String]
@@ -71,6 +72,7 @@ input ComplaintInput {
   fileDate: String
   closeDate: String
   incidentDate : String
+  incidentTime : String
   incidentLocation : String
   incidentDescription : String
   reportedNames: [String]

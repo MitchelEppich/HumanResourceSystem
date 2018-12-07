@@ -7,10 +7,9 @@ import withData from "../lib/withData";
 import { connect } from "react-redux";
 import actions from "../store/actions";
 import Layout from "../HOC/Layout";
-import Login from "../components/Login";
+import Login from "../components/Admin/Login";
 import Main from "../components/Main";
-import Screen from "../components/Main/Screen";
-import RegisterUser from "../components/Admin/RegisterUser";
+import Complaints from "../components/Admin/Complaints";
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
@@ -37,19 +36,14 @@ class Index extends Component {
       <Layout>
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("login") ? (
-          <Login {...this.props} />
+        <Login {...this.props} />
         ) : null}
-
-        <Main {...this.props} />
-
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("register") ? (
-          <RegisterUser {...this.props} />
-        ) : null}
+        
+        <Main {...this.props} />    
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("admin") ? (
-          <Screen {...this.props} />
+          <Complaints {...this.props} />
         ) : null}
       </Layout>
     );
