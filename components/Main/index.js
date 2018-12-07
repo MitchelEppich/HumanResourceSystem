@@ -12,16 +12,14 @@ import {
 
 import moment from "moment";
 
-const Main = props => { 
+const Main = props => {
   return (
     <div className="w-full bg-grey-light overflow-x-hidden">
       <div className="bg-orange-new w-full mx-auto inline-flex justify-center text-grey">
         <div className="w-newScreen inline-flex ml-6 mt-4 flex justify-between mb-2">
           <div className="w-2/4 mt-2 pin-l text-left">
             <a href="./">
-              <h1 className="text-grey uppercase p-2">
-                HR System
-              </h1>
+              <h1 className="text-grey uppercase p-2">HR System</h1>
             </a>
             <p className="p-3 ">Welcome User, please fill the form below:</p>
           </div>
@@ -36,10 +34,11 @@ const Main = props => {
                 ]);
                 props.fetchUsers();
               }}
-              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2" >
+              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
+            >
               Admin Panel
             </a>
-            
+
             <a
               onClick={() => {
                 props.releaseCredentials({
@@ -52,7 +51,8 @@ const Main = props => {
                     : "login"
                 ]);
               }}
-              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new">
+              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new"
+            >
               Logout
             </a>
           </div>
@@ -68,16 +68,10 @@ const Main = props => {
           height: "800px"
         }}
         className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
-      >        
-
-        {props.misc.visibleScreen == null || !props.misc.visibleScreen.includes("admin") 
-         ? 
-                
-        <form 
-        onSubmit={()=>{
-          
-        }}
-        >
+      >
+        {props.misc.visibleScreen == null ||
+        !props.misc.visibleScreen.includes("admin") ? (
+          <form onSubmit={() => {}}>
             <div
               style={{
                 borderTopLeftRadius: "10px",
@@ -88,13 +82,26 @@ const Main = props => {
               }}
               className="w-full justify-between"
             >
-                <div className="w-full bg-grey-new text-center uppercase p-2">
-                  <h3>Context</h3>
-                </div>
-                <div className="w-full h-100 p-2 bg-white text-black">
-                  <p className="p-2">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-                </div>
+              <div className="w-full bg-grey-new text-center uppercase p-2">
+                <h3>Context</h3>
               </div>
+              <div className="w-full h-100 p-2 bg-white text-black">
+                <p className="p-2">
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                  blanditiis praesentium voluptatum deleniti atque corrupti quos
+                  dolores et quas molestias excepturi sint occaecati cupiditate
+                  non provident, similique sunt in culpa qui officia deserunt
+                  mollitia animi, id est laborum et dolorum fuga. Et harum
+                  quidem rerum facilis est et expedita distinctio. Nam libero
+                  tempore, cum soluta nobis est eligendi optio cumque nihil
+                  impedit quo minus id quod maxime placeat facere possimus,
+                  omnis voluptas assumenda est, omnis dolor repellendus.
+                  Temporibus autem quibusdam et aut officiis debitis aut rerum
+                  necessitatibus saepe eveniet ut et voluptates repudiandae sint
+                  et molestiae non recusandae.
+                </p>
+              </div>
+            </div>
 
             <div
               style={{
@@ -109,26 +116,82 @@ const Main = props => {
               <div className="w-full bg-grey-new text-center uppercase p-2">
                 <h3>Reporter</h3>
               </div>
-              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">Please, insert here your information:</p>
+              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">
+                Please, insert here your information:
+              </p>
               <div className="w-full inline-flex h-100 p-2 bg-white text-black pt-10">
                 <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
-                  <label className="mr-2">First Name:</label><input type="text" name="firstName" id="firstName" placeholder="" className="p-2 w-300 h-10" />
+                  <label className="mr-2">First Name:</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder=""
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 w-300 h-10"
+                  />
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Last Name:</label><input type="text" name="lastName" id="lastName" placeholder="" className="p-2 w-300 h-10" />
+                  <label className="mr-2">Last Name:</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder=""
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 w-300 h-10"
+                  />
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Email:</label><input type="email" name="email" id="email" placeholder="" className="p-2 w-300 h-10" />
+                  <label className="mr-2">Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder=""
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 w-300 h-10"
+                  />
                 </div>
-                
               </div>
               <div className="w-full inline-flex p-2 text-right flex justify-end bg-white text-black ">
                 <div className="w-1/3 h-10 inline-flex flex justify-end flex items-center text-right pr-16">
-                  <label className="mr-2">Anonymous:</label><input type="checkbox" name="anonymous" id="anonymous" className="p-2 checkbox h-10" />
-                </div> 
+                  <label className="mr-2">Anonymous:</label>
+                  <input
+                    type="checkbox"
+                    name="anonymous"
+                    id="anonymous"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.checked
+                      });
+                    }}
+                    className="p-2 checkbox h-10"
+                  />
+                </div>
               </div>
             </div>
-     
+
             <div
               style={{
                 borderTopLeftRadius: "10px",
@@ -143,66 +206,173 @@ const Main = props => {
                 <h3>Report</h3>
               </div>
 
-              {props.misc.visibleScreen != null && props.misc.visibleScreen.includes("thanksMessage") ? 
-                  <div style={{zIndex: "9999", marginTop: "600px", boxShadow: "rgba(140, 140, 140, 0.42) 0px 0px 6px"}} className="absolute align-absolute pin-auto bg-grey-lighter w-400 h-300">
-                  <div 
-                  onClick={()=>{                  
-                      props.setVisibleScreen([                       
-                        props.misc.visibleScreen.includes(null)                     
+              {props.misc.visibleScreen != null &&
+              props.misc.visibleScreen.includes("thanksMessage") ? (
+                <div
+                  style={{
+                    zIndex: "9999",
+                    marginTop: "600px",
+                    boxShadow: "rgba(140, 140, 140, 0.42) 0px 0px 6px"
+                  }}
+                  className="absolute align-absolute pin-auto bg-grey-lighter w-400 h-300"
+                >
+                  <div
+                    onClick={() => {
+                      props.setVisibleScreen([
+                        props.misc.visibleScreen.includes(null)
                       ]);
                     }}
-                    className="w-10 h-10 mr-1 mt-1 pt-1 absolute text-grey cursor-pointer pin-t pin-r text-center bg-grey-light hover:text-white hover:bg-grey-new ">
-                  <FontAwesomeIcon icon={faTimes} className="fa-2x " /></div>
-                    <div className="mt-24 text-center"> 
-                      <FontAwesomeIcon icon={faCheckDouble} className="fa-3x text-grey-new" />
-                    </div>
-                    <div className="mt-12">                
-                      <h2 className="text-center text-grey-new">Thank you for your report!</h2>
-                    </div>
-                </div> 
-                : null }
+                    className="w-10 h-10 mr-1 mt-1 pt-1 absolute text-grey cursor-pointer pin-t pin-r text-center bg-grey-light hover:text-white hover:bg-grey-new "
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="fa-2x " />
+                  </div>
+                  <div className="mt-24 text-center">
+                    <FontAwesomeIcon
+                      icon={faCheckDouble}
+                      className="fa-3x text-grey-new"
+                    />
+                  </div>
+                  <div className="mt-12">
+                    <h2 className="text-center text-grey-new">
+                      Thank you for your report!
+                    </h2>
+                  </div>
+                </div>
+              ) : null}
 
-              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">Please, insert here your information:</p>
+              <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">
+                Please, insert here your information:
+              </p>
               <div className="w-full inline-flex  p-2 bg-white text-black pt-10">
                 <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
-                  <label className="mr-2">Date:</label><input type="date" name="firstName" id="firstName" placeholder="" className="p-2 w-300 h-10" />
+                  <label className="mr-2">Date:</label>
+                  <input
+                    type="date"
+                    placeholder=""
+                    className="p-2 w-300 h-10"
+                    name="incidentDate"
+                    id="incidentDate"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                  />
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Hour:</label><input type="time" name="lastName" id="lastName" placeholder="" className="p-2 w-300 h-10" />
+                  <label className="mr-2">Time:</label>
+                  <input
+                    type="time"
+                    name="incidentTime"
+                    id="incidentTime"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    placeholder=""
+                    className="p-2 w-300 h-10"
+                  />
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Location:</label><input type="email" name="email" id="email" placeholder="" className="p-2 w-300 h-10" />
-                </div>            
+                  <label className="mr-2">Location:</label>
+                  <input
+                    type="text"
+                    name="incidentLocation"
+                    id="incidentLocation"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    placeholder=""
+                    className="p-2 w-300 h-10"
+                  />
+                </div>
               </div>
 
               <div className="w-full inline-flex p-2 mt-10 text-right flex justify-end bg-white text-black ">
                 <div className="text-left h-10 mt-2 items-center">
-                  <label className="mr-2">Description:</label>  
-                </div> 
+                  <label className="mr-2">Description:</label>
+                </div>
                 <div className="w-full pr-12">
-                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="Describe here what happened..." />
+                  <textarea
+                    cols="50"
+                    rows="10"
+                    name="incidentDescription"
+                    id="incidentDescription"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 h-10 w-full h-32"
+                    placeholder="Describe here what happened..."
+                  />
                 </div>
               </div>
-              
+
               <div className="w-full p-2 inline-flex mt-10 bg-white text-black ">
-                  <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
-                      <label className="mr-2">Report Parties:</label>
-                      <input type="text" name="reportParties" id="reportParties" className="p-2 h-10 w-300" placeholder="Who was involved?" /> 
-                      <FontAwesomeIcon icon={faPlus} className="cursor-pointer  text-grey ml-2 fa-lg hover:text-grey-new" />
-                  </div>
-                  <div className="w-1/2 text-left pr-4 inline-flex flex items-center"> 
-                      <label className="mr-2">Witnesses:</label>
-                      <input type="text" name="witnesses" id="witnesses" className="p-2 h-10 w-300" placeholder="Enter here" /> 
-                      <FontAwesomeIcon icon={faPlus} className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new" />
-                  </div>
+                <div className="w-1/2 text-left pr-4 inline-flex flex items-center">
+                  <label className="mr-2">Report Parties:</label>
+                  <input
+                    type="text"
+                    name="reportedNames"
+                    id="reportedNames"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 h-10 w-300"
+                    placeholder="Who was involved?"
+                  />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="cursor-pointer  text-grey ml-2 fa-lg hover:text-grey-new"
+                  />
+                </div>
+                <div className="w-1/2 text-left pr-4 inline-flex flex items-center">
+                  <label className="mr-2">Witnesses:</label>
+                  <input
+                    type="text"
+                    name="witnessNames"
+                    id="witnessNames"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 h-10 w-300"
+                    placeholder="Enter here"
+                  />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
+                  />
+                </div>
               </div>
               <div className="w-1/3 mb-2 ml-2 text-right">
                 <div className="w-300 p-2 bg-grey-light text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
                   <p className="w-full">Mitchel Eppich</p>
-                  <FontAwesomeIcon icon={faTimes} className="text-right text-red ml-2" />                  
-                </div>                
-              </div>             
-
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="text-right text-red ml-2"
+                  />
+                </div>
+              </div>
             </div>
 
             <div
@@ -217,16 +387,30 @@ const Main = props => {
             >
               <div className="w-full text-center bg-grey-new uppercase p-2">
                 <h3>Additional Information</h3>
-              </div>                
+              </div>
 
               <div className="w-full inline-flex p-2 mt-8 text-right flex justify-end bg-white text-black ">
                 <div className="text-left h-10 mt-2 items-center">
-                  <label className="mr-2">Description:</label>  
-                </div> 
-                <div className="w-full pr-12">
-                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="If you have an extra information, please insert here..." />
+                  <label className="mr-2">Description:</label>
                 </div>
-              </div>          
+                <div className="w-full pr-12">
+                  <textarea
+                    cols="50"
+                    rows="10"
+                    name="additionalInfo"
+                    id="additionalInfo"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 h-10 w-full h-32"
+                    placeholder="If you have an extra information, please insert here..."
+                  />
+                </div>
+              </div>
             </div>
 
             <div
@@ -241,16 +425,30 @@ const Main = props => {
             >
               <div className="w-full text-center bg-grey-new uppercase p-2">
                 <h3>Proposed Action</h3>
-              </div>                
+              </div>
 
               <div className="w-full inline-flex p-2 mt-8 text-right flex justify-end bg-white text-black ">
                 <div className="text-left h-10 mt-2 items-center">
-                  <label className="mr-2">Description:</label>  
-                </div> 
-                <div className="w-full pr-12">
-                  <textarea cols="50" rows="10" name="description" id="description" className="p-2 h-10 w-full h-32" placeholder="What do you propose?" />
+                  <label className="mr-2">Description:</label>
                 </div>
-              </div> 
+                <div className="w-full pr-12">
+                  <textarea
+                    cols="50"
+                    rows="10"
+                    name="proposedAction"
+                    id="proposedAction"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.value
+                      });
+                    }}
+                    className="p-2 h-10 w-full h-32"
+                    placeholder="What do you propose?"
+                  />
+                </div>
+              </div>
             </div>
 
             <div
@@ -267,16 +465,41 @@ const Main = props => {
                 <h3>Disclaimer</h3>
               </div>
               <div className="w-full p-2 bg-white text-black">
-                <p className="p-2">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                <p className="p-2">
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                  blanditiis praesentium voluptatum deleniti atque corrupti quos
+                  dolores et quas molestias excepturi sint occaecati cupiditate
+                  non provident, similique sunt in culpa qui officia deserunt
+                  mollitia animi, id est laborum et dolorum fuga. Et harum
+                  quidem rerum facilis est et expedita distinctio. Nam libero
+                  tempore, cum soluta nobis est eligendi optio cumque nihil
+                  impedit quo minus id quod maxime placeat facere possimus,
+                  omnis voluptas assumenda est, omnis dolor repellendus.
+                  Temporibus autem quibusdam et aut officiis debitis aut rerum
+                  necessitatibus saepe eveniet ut et voluptates repudiandae sint
+                  et molestiae non recusandae.
+                </p>
                 <div className="w-300 mt-4 mb-2 ml-2">
-                    <input type="checkbox" name="agreeCheckbox" id="agreeCheckbox" className="mr-2 checkbox"/><label>I Accept the Terms </label>
+                  <input
+                    type="checkbox"
+                    name="acceptCheck"
+                    id="acceptCheck"
+                    onChange={e => {
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: e.target.id,
+                        value: e.target.checked
+                      });
+                    }}
+                    className="mr-2 checkbox"
+                  />
+                  <label>I Accept the Terms </label>
                 </div>
               </div>
             </div>
             <div className="w-full flex justify-end mt-4 mb-24">
-                
-                <div 
-                onClick={()=>{
+              <div
+                onClick={() => {
                   props.setVisibleScreen([
                     props.misc.visibleScreen != null &&
                     props.misc.visibleScreen.includes("thanksMessage")
@@ -284,20 +507,19 @@ const Main = props => {
                       : "thanksMessage"
                   ]);
                 }}
-                className="bg-orange-new p-2 cursor-pointer w-300 text-center text-grey uppercase hover:bg-grey-new hover:text-white"><h3>Submit</h3></div>
-            </div>                  
-        </form> : null }
-
-        
-
-        {console.log(props.misc.visibleScreen)}
-
-         
-           
-        
+                className={`${
+                  // Also check if others are filled in
+                  props.nav.complaint["acceptCheck"]
+                    ? "cursor-pointer hover:bg-grey-new hover:text-white"
+                    : "opacity-50 pointer-events-none"
+                } bg-orange-new p-2 w-300 text-center text-grey uppercase`}
+              >
+                <h3>Submit</h3>
+              </div>
+            </div>
+          </form>
+        ) : null}
       </div>
-      
-      
     </div>
   );
 };

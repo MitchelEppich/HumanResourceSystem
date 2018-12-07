@@ -14,13 +14,17 @@ const userFilters = ({ OR = [], is_admin }) => {
   return filters;
 };
 
-// Log filters
-const logFilters = ({ OR = [] }) => {
-  const filter = {}; //is_admin ? {} : null;
+// Complaint filters
+const complaintFilters = ({ OR = [], status }) => {
+  const filter = status ? {} : null;
+
+  if (status) {
+    filter.status = status;
+  }
 
   let filters = filter ? [filter] : [];
   for (let i = 0; i < OR.length; i++) {
-    filters = filters.concat(userFilters(OR[i]));
+    filters = filters.concat(complaintFilters(OR[i]));
   }
 
   return filters;
@@ -28,5 +32,5 @@ const logFilters = ({ OR = [] }) => {
 
 module.exports = {
   userFilters,
-  logFilters
+  complaintFilters
 };

@@ -12,38 +12,36 @@ import Main from "../components/Main";
 import Screen from "../components/Main/Screen";
 import RegisterUser from "../components/Admin/RegisterUser";
 
-
-
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
 
 class Index extends Component {
   componentDidMount() {
-    this.props.fetchCredentials().then(res => {
-      if (res == null) return;
-      this.props.setVisibleScreen(null);
-    });
+    // this.props.fetchCredentials().then(res => {
+    //   if (res == null) return;
+    //   this.props.setVisibleScreen(null);
+    // });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.user.currentUser == null) {
-      this.props.fetchCredentials().then(res => {
-        if (res == null) return;
-        this.props.setVisibleScreen(null);
-      });
-    }
+    // if (this.props.user.currentUser == null) {
+    //   this.props.fetchCredentials().then(res => {
+    //     if (res == null) return;
+    //     this.props.setVisibleScreen(null);
+    //   });
+    // }
   }
 
   render() {
     return (
-      <Layout>        
-      {this.props.misc.visibleScreen != null &&
+      <Layout>
+        {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("login") ? (
           <Login {...this.props} />
         ) : null}
-        
-        <Main {...this.props} />   
-        
+
+        <Main {...this.props} />
+
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("register") ? (
           <RegisterUser {...this.props} />
@@ -53,33 +51,6 @@ class Index extends Component {
         this.props.misc.visibleScreen.includes("admin") ? (
           <Screen {...this.props} />
         ) : null}
-
-        <Subscription subscription={subscription.orderUpdate}>
-          {({ data }) => {
-            if (data != null) {
-              let _claimedOrders = this.props.order.claimedOrders;
-              let _order = data.orderUpdate;
-              _order = { ..._order, ...JSON.parse(_order.content) };
-
-              let _shouldAppend =
-                _order.claimed &&
-                !_claimedOrders.includes(_order.invoice_number);
-              let _shouldRemove =
-                !_order.claimed &&
-                _claimedOrders.includes(_order.invoice_number);
-
-              if (_shouldAppend | _shouldRemove)
-                this.props.modifyClaims({
-                  order: _order,
-                  claimedOrders: _claimedOrders,
-                  orderCache: this.props.order.orderCache,
-                  append: _shouldAppend
-                });
-            }
-            return <div />;
-          }}
-        </Subscription>
-
       </Layout>
     );
   }
@@ -88,23 +59,11 @@ class Index extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCredentials: () => dispatch(actions.fetchCredentials()),
-    fetchUsers: input => dispatch(actions.fetchUsers(input)),
     verifyCredentials: input => dispatch(actions.verifyCredentials(input)),
     registerCredentials: input => dispatch(actions.registerCredentials(input)),
     releaseCredentials: input => dispatch(actions.releaseCredentials(input)),
-    expandItem: input => dispatch(actions.expandItem(input)),
-    focusCompany: input => dispatch(actions.focusCompany(input)),
-    fetchOrder: input => dispatch(actions.fetchOrder(input)),
-    fetchOrderList: input => dispatch(actions.fetchOrderList(input)),
-    setMultiItemBase: input => dispatch(actions.setMutliItemBase(input)),
-    setItemValue: input => dispatch(actions.setItemValue(input)),
-    verifyItemList: input => dispatch(actions.verifyItemList(input)),
-    fetchLogs: input => dispatch(actions.fetchLogs(input)),
-    clearItem: () => dispatch(actions.clearItem()),
-    modifyClaims: input => dispatch(actions.modifyClaims(input)),
-    updateOrder: input => dispatch(actions.updateOrder(input)),
     modifyUser: input => dispatch(actions.modifyUser(input)),
-    modifyLogs: input => dispatch(actions.modifyLogs(input)),
+    setComplaint: input => dispatch(actions.setComplaint(input)),
     setVisibleScreen: input => dispatch(actions.setVisibleScreen(input))
   };
 };

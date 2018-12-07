@@ -5,19 +5,18 @@ const typeDefs = `
 type Query {
   user(input: UserInput!): User
   allUsers(filter: UserFilter): [User]!
-  log(input: LogInput!): Log
-  allLogs(filter: LogFilter): [Log]!
-  fetchOrderList(input: OrderListInput): String
-  fetchOrder(input: OrderInput): String
-}
-
-input OrderListInput {
-  url: String
+  complaint(input: ComplaintInput!): Complaint
+  allComplaints(filter: ComplaintFilter): [Complaint]!
 }
 
 input UserFilter {
   OR: [UserFilter!]
   is_admin: Boolean
+}
+
+input ComplaintFilter {
+  OR: [ComplaintFilter!]
+  status: String
 }
 
 type User {
@@ -45,44 +44,41 @@ input UserInput {
   lastAction: String
 }
 
-input LogFilter {
-  OR: [LogFilter!]
-}
-
-type Log {
+type Complaint {
   _id: String
-  who: String
-  task: String
-  createdAt: String
-}
-
-input LogInput {
-  who: String
-  task: String
-  createdAt: String
-}
-
-type Order {
-  _id: String
-  content: String
-  lastUpdate: String
+  name: String
+  email: String
   status: String
-  editBy: [String]
-  claimed: Boolean
+  fileDate: String
+  closeDate: String
+  incidentDate : String
+  incidentLocation : String
+  incidentDescription : String
+  reportedNames: [String]
+  witnessNames: [String]
+  additionalInfo: String
+  proposedAction: String
+  anonymous: Boolean
 }
 
-input OrderInput {
-  content: String
+input ComplaintInput {
+  name: String
+  email: String
   status: String
-  who: String
-  claimed: Boolean
-  invoiceId: String
+  fileDate: String
+  closeDate: String
+  incidentDate : String
+  incidentLocation : String
+  incidentDescription : String
+  reportedNames: [String]
+  witnessNames: [String]
+  additionalInfo: String
+  proposedAction: String
+  anonymous: Boolean
 }
 
 type Subscription {
-  orderUpdate(orderId: String): Order
   userUpdate: User
-  logUpdate: Log
 }
 
 type Mutation {
@@ -90,10 +86,7 @@ type Mutation {
   registerCredentials(input: UserInput!): User
   updateUser(input: UserInput!): User
 
-  updateOrder(input: OrderInput!): Order
-  cacheOrder(input: OrderInput!): Order
-
-  createActionLog(input: LogInput!): Log
+  createComplaint(input: ComplaintInput!): Complaint
 }
 
 `;

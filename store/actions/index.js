@@ -12,16 +12,12 @@ import fetch from "node-fetch";
 
 import User from "./user";
 import Nav from "./navigation";
-import Item from "./itemHandler";
-import Order from "./orderHandler";
 
 const uri = "http://localhost:3000/graphql";
 
 const imports = {
   ...User(uri),
-  ...Nav(uri),
-  ...Item(uri),
-  ...Order(uri)
+  ...Nav(uri)
 };
 
 const actionTypes = {
