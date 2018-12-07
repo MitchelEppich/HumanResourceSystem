@@ -64,23 +64,12 @@ const mapDispatchToProps = dispatch => {
     releaseCredentials: input => dispatch(actions.releaseCredentials(input)),
     modifyUser: input => dispatch(actions.modifyUser(input)),
     setComplaint: input => dispatch(actions.setComplaint(input)),
+    postComplaint: input => dispatch(actions.postComplaint(input)),
+    updateComplaint: input => dispatch(actions.updateComplaint(input)),
+    setFocusComplaint: input => dispatch(actions.setFocusComplaint(input)),
+    fetchComplaints: () => dispatch(actions.fetchComplaints()),
     setVisibleScreen: input => dispatch(actions.setVisibleScreen(input))
   };
-};
-
-const subscription = {
-  orderUpdate: gql`
-    subscription($orderId: String) {
-      orderUpdate(orderId: $orderId) {
-        _id
-        content
-        lastUpdate
-        status
-        claimed
-        editBy
-      }
-    }
-  `
 };
 
 export default connect(

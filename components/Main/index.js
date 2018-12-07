@@ -32,7 +32,7 @@ const Main = props => {
                     ? null
                     : "admin"
                 ]);
-                props.fetchUsers();
+                props.fetchComplaints();
               }}
               className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
             >
@@ -506,6 +506,7 @@ const Main = props => {
                       ? null
                       : "thanksMessage"
                   ]);
+                  props.postComplaint(props.nav.complaint);
                 }}
                 className={`${
                   // Also check if others are filled in

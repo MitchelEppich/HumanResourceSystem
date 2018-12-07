@@ -12,7 +12,10 @@ import moment from "moment";
 
 const actionTypes = {
   SET_COMPLAINT: "SET_COMPLAINT",
-  FETCH_COMPLAINTS: "FETCH_COMPLAINTS"
+  FETCH_COMPLAINTS: "FETCH_COMPLAINTS",
+  POST_COMPLAINT: "POST_COMPLAINT",
+  SET_FOCUS_COMPLAINT: "SET_FOCUS_COMPLAINT",
+  UPDATE_COMPLAINT: "UPDATE_COMPLAINT"
 };
 
 const getActions = uri => {
@@ -43,14 +46,149 @@ const getActions = uri => {
           })
           .catch(error => console.log(error));
       };
+    },
+    setFocusComplaint: input => {
+      return {
+        type: actionTypes.SET_FOCUS_COMPLAINT,
+        input: input.complaint
+      };
+    },
+    postComplaint: input => {
+      return dispatch => {
+        const link = new HttpLink({ uri, fetch: fetch });
+
+        const operation = {
+          query: mutation.createComplaint,
+          variables: { ...input }
+        };
+
+        return makePromise(execute(link, operation))
+          .then(data => {
+            let _complaint = data.data.createComplaint;
+            dispatch({
+              type: actionTypes.POST_COMPLAINT,
+              input: _complaint
+            });
+            return Promise.resolve(_complaint);
+          })
+          .catch(error => console.log(error));
+      };
+    },
+    updateComplaint: input => {
+      return dispatch => {
+        const link = new HttpLink({ uri, fetch: fetch });
+
+        const operation = {
+          query: mutation.updateComplaint,
+          variables: { ...input.adminComplaint, _id: input.focusComplaint._id }
+        };
+
+        return makePromise(execute(link, operation))
+          .then(data => {
+            let _complaint = data.data.updateComplaint;
+            dispatch({
+              type: actionTypes.UPDATE_COMPLAINT,
+              input: _complaint
+            });
+            return Promise.resolve(_complaint);
+          })
+          .catch(error => console.log(error));
+      };
     }
   };
 
   return { ...objects };
 };
-const query = {};
+const query = {
+  getComplaints: gql`
+    query {
+      allComplaints {
+        _id
+        name
+        email
+        status
+        adminResponse
+        notes
+        fileDate
+        closeDate
+        incidentDate
+        incidentLocation
+        incidentDescription
+        additionalInfo
+        proposedAction
+        anonymous
+      }
+    }
+  `
+};
 
-const mutation = {};
+const mutation = {
+  createComplaint: gql`
+    mutation(
+      $name: String
+      $email: String
+      $fileDate: String
+      $incidentDate: String
+      $incidentLocation: String
+      $incidentDescription: String
+      $reportedNames: [String]
+      $witnessNames: [String]
+      $additionalInfo: String
+      $proposedAction: String
+      $anonymous: Boolean
+    ) {
+      createComplaint(
+        input: {
+          name: $name
+          email: $email
+          fileDate: $fileDate
+          incidentDate: $incidentDate
+          incidentLocation: $incidentLocation
+          incidentDescription: $incidentDescription
+          reportedNames: $reportedNames
+          witnessNames: $witnessNames
+          additionalInfo: $additionalInfo
+          proposedAction: $proposedAction
+          anonymous: $anonymous
+        }
+      ) {
+        _id
+        name
+        email
+        status
+        adminResponse
+        notes
+        fileDate
+        incidentDate
+        incidentLocation
+        incidentDescription
+        additionalInfo
+        proposedAction
+        anonymous
+      }
+    }
+  `,
+  updateComplaint: gql`
+    mutation($status: String, $adminResponse: String, $note: String, $_id: String) {
+      updateComplaint(input: { status: $status, adminResponse: $adminResponse, note: $note, _id: $_id}) {
+        _id
+        name
+        email
+        status
+        adminResponse
+        notes
+        fileDate
+        closeDate
+        incidentDate
+        incidentLocation
+        incidentDescription
+        additionalInfo
+        proposedAction
+        anonymous
+      }
+    }
+  `
+};
 
 export default uri => {
   const actions = getActions(uri);

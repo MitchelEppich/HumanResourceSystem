@@ -21,12 +21,35 @@ const resolvers = {
   Mutation: {
     createComplaint: (_, { input }) => {
       let complaint = new Complaint({
-        ...input
+        ...input,
+        status: "Awaiting"
       });
 
       complaint.save();
 
       return complaint.toObject();
+    },
+    updateComplaint: async (_, { input }) => {
+      let complaint;
+      try {
+        let operation = {
+          $set: { ...input }
+        };
+
+        if (input.note != null) {
+          operation["$push"] = { notes: input.note };
+        }
+        complaint = await Complaint.findOneAndUpdate(
+          { $or: [{ _id: input._id }] },
+          operation,
+          { new: true }
+        );
+
+        return complaint.toObject();
+      } catch (error) {
+        console.log("No complaint was found -> ", input);
+        return null;
+      }
     }
   }
 };

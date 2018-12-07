@@ -58,10 +58,13 @@ type Complaint {
   witnessNames: [String]
   additionalInfo: String
   proposedAction: String
+  adminResponse: String
+  notes: [String]
   anonymous: Boolean
 }
 
 input ComplaintInput {
+  _id: String
   name: String
   email: String
   status: String
@@ -72,6 +75,9 @@ input ComplaintInput {
   incidentDescription : String
   reportedNames: [String]
   witnessNames: [String]
+  adminResponse: String
+  note: String
+  notes: [String]
   additionalInfo: String
   proposedAction: String
   anonymous: Boolean
@@ -87,6 +93,7 @@ type Mutation {
   updateUser(input: UserInput!): User
 
   createComplaint(input: ComplaintInput!): Complaint
+  updateComplaint(input: ComplaintInput!): Complaint
 }
 
 `;
