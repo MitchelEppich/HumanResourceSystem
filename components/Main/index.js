@@ -9,10 +9,39 @@ import {
   faTimes,
   faCheckDouble
 } from "@fortawesome/free-solid-svg-icons";
+import SuccessMessage from "../Main/SuccessMessage"
+import Login from "../Admin/Login"
 
 import moment from "moment";
 
 const Main = props => {
+
+  let showReportedNames = () => {
+    if (props.nav.complaint.reportedNames == null)  return 
+    let arr = []
+    for (let name of props.nav.complaint.reportedNames) {
+      arr.push (  
+        <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
+          <p className="w-full uppercase text-center">{name}</p> 
+          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg text-red ml-2" />
+        </div>
+      )
+    } return arr
+  }
+  let showWitnesses = () => {
+    if (props.nav.complaint.witnessNames == null)  return 
+    let arr = []
+    for (let name of props.nav.complaint.witnessNames) {
+      arr.push (  
+        <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
+          <p className="w-full uppercase text-center">{name}</p> 
+          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg text-red ml-2" />
+        </div>
+      )
+    } return arr
+  }
+
+
   return (
     <div className="w-full bg-grey-light overflow-x-hidden">
       <div className="bg-orange-new w-full mx-auto inline-flex justify-center text-grey">
@@ -28,17 +57,17 @@ const Main = props => {
               onClick={() => {
                 props.setVisibleScreen([
                   props.misc.visibleScreen != null &&
-                  props.misc.visibleScreen.includes("admin")
+                  props.misc.visibleScreen.includes("login")
                     ? null
-                    : "admin"
+                    : "login"
                 ]);
-                props.fetchUsers();
+                
               }}
               className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
             >
               Admin Panel
             </a>
-
+            {props.user.currentUser != null ?
             <a
               onClick={() => {
                 props.releaseCredentials({
@@ -54,7 +83,7 @@ const Main = props => {
               className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new"
             >
               Logout
-            </a>
+            </a> : null }
           </div>
         </div>
       </div>
@@ -65,12 +94,12 @@ const Main = props => {
           marginRight: "auto",
           left: "0",
           right: "0",
-          height: "800px"
+          height: "785px"
         }}
         className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
       >
         {props.misc.visibleScreen == null ||
-        !props.misc.visibleScreen.includes("admin") ? (
+        !props.misc.visibleScreen.includes("admin") && !props.misc.visibleScreen.includes("thanksMessage") ? (
           <form onSubmit={() => {}}>
             <div
               style={{
@@ -85,7 +114,7 @@ const Main = props => {
               <div className="w-full bg-grey-new text-center uppercase p-2">
                 <h3>Context</h3>
               </div>
-              <div className="w-full h-100 p-2 bg-white text-black">
+              <div className="w-full p-2 bg-white text-black">
                 <p className="p-2">
                   At vero eos et accusamus et iusto odio dignissimos ducimus qui
                   blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -120,60 +149,17 @@ const Main = props => {
                 Please, insert here your information:
               </p>
               <div className="w-full inline-flex h-100 p-2 bg-white text-black pt-10">
-                <div className="w-1/3 h-10 mx-auto inline-flex  flex items-center">
-                  <label className="mr-2">First Name:</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder=""
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                    className="p-2 w-300 h-10"
-                  />
-                </div>
-                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Last Name:</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder=""
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                    className="p-2 w-300 h-10"
-                  />
-                </div>
-                <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
-                  <label className="mr-2">Email:</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder=""
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                    className="p-2 w-300 h-10"
-                  />
-                </div>
-              </div>
-              <div className="w-full inline-flex p-2 text-right flex justify-end bg-white text-black ">
-                <div className="w-1/3 h-10 inline-flex flex justify-end flex items-center text-right pr-16">
+                <div className="w-1/3 h-10  inline-flex  flex items-center">
+                  <label className="mr-2">Name:</label>
+                  <select className="w-200 p-1 ml-4" required>
+                      <option value="">Select here...</option>
+                      <option value="jeremias">Jeremias</option>
+                      <option value="karl">Karl</option>
+                      <option value="anthony">Anthony</option>
+                  </select>                  
+                </div>               
+                
+                <div className="w-1/3 h-10 inline-flex flex items-center">
                   <label className="mr-2">Anonymous:</label>
                   <input
                     type="checkbox"
@@ -189,7 +175,7 @@ const Main = props => {
                     className="p-2 checkbox h-10"
                   />
                 </div>
-              </div>
+              </div>  
             </div>
 
             <div
@@ -205,41 +191,6 @@ const Main = props => {
               <div className="w-full text-center bg-grey-new uppercase p-2">
                 <h3>Report</h3>
               </div>
-
-              {props.misc.visibleScreen != null &&
-              props.misc.visibleScreen.includes("thanksMessage") ? (
-                <div
-                  style={{
-                    zIndex: "9999",
-                    marginTop: "600px",
-                    boxShadow: "rgba(140, 140, 140, 0.42) 0px 0px 6px"
-                  }}
-                  className="absolute align-absolute pin-auto bg-grey-lighter w-400 h-300"
-                >
-                  <div
-                    onClick={() => {
-                      props.setVisibleScreen([
-                        props.misc.visibleScreen.includes(null)
-                      ]);
-                    }}
-                    className="w-10 h-10 mr-1 mt-1 pt-1 absolute text-grey cursor-pointer pin-t pin-r text-center bg-grey-light hover:text-white hover:bg-grey-new "
-                  >
-                    <FontAwesomeIcon icon={faTimes} className="fa-2x " />
-                  </div>
-                  <div className="mt-24 text-center">
-                    <FontAwesomeIcon
-                      icon={faCheckDouble}
-                      className="fa-3x text-grey-new"
-                    />
-                  </div>
-                  <div className="mt-12">
-                    <h2 className="text-center text-grey-new">
-                      Thank you for your report!
-                    </h2>
-                  </div>
-                </div>
-              ) : null}
-
               <p className="text-center text-grey p-2 bg-grey-light uppercase text-sm">
                 Please, insert here your information:
               </p>
@@ -280,20 +231,15 @@ const Main = props => {
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Location:</label>
-                  <input
-                    type="text"
-                    name="incidentLocation"
-                    id="incidentLocation"
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                    placeholder=""
-                    className="p-2 w-300 h-10"
-                  />
+                  <select className="w-250 p-1 ml-4">
+                      <option>Select here...</option>
+                      <option value="Media Room">Media Room</option>
+                      <option value="Production Room">Production Room</option>
+                      <option value="CSR Room">CSR Room</option>
+                      <option value="Packaging Center">Packaging Center</option>
+                      <option value="Loading Dock">Loading Dock</option>
+                      <option value="Online">Online</option>
+                  </select>  
                 </div>
               </div>
 
@@ -321,56 +267,81 @@ const Main = props => {
               </div>
 
               <div className="w-full p-2 inline-flex mt-10 bg-white text-black ">
-                <div className="w-1/2 text-left pr-4 inline-flex flex items-center">
+                <div className="w-450 text-left pr-4">
+                  <div className="w-full inline-flex flex items-center">
                   <label className="mr-2">Report Parties:</label>
-                  <input
-                    type="text"
-                    name="reportedNames"
-                    id="reportedNames"
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                    className="p-2 h-10 w-300"
-                    placeholder="Who was involved?"
-                  />
+                  <select name="reportedNames" className="w-250 p-1 ml-4" id="reportedName"
+                  onChange={e=>{
+                    props.setComplaint({
+                      complaint: props.nav.complaint,
+                      key: e.target.id,
+                      value: e.target.value                    
+                    })
+                    }}>
+                      <option>Select here...</option>
+                      <option value="mitch">Mitchel Eppich</option>
+                      <option value="chris">Chris</option>
+                      <option value="karl">Karl with K</option>                     
+                  </select>  
                   <FontAwesomeIcon
-                    icon={faPlus}
-                    className="cursor-pointer  text-grey ml-2 fa-lg hover:text-grey-new"
-                  />
-                </div>
-                <div className="w-1/2 text-left pr-4 inline-flex flex items-center">
-                  <label className="mr-2">Witnesses:</label>
-                  <input
-                    type="text"
-                    name="witnessNames"
-                    id="witnessNames"
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
+                  onClick={()=>{
+                    let reportedNames = props.nav.complaint.reportedNames || []
+                    let _new = props.nav.complaint.reportedName
+                    if (reportedNames.includes(_new) || _new == null) return;
+                    props.setComplaint({
+                      complaint: props.nav.complaint,
+                      key: "reportedNames",
+                      value: [...reportedNames, _new]                   
+                    })                 
                     }}
-                    className="p-2 h-10 w-300"
-                    placeholder="Enter here"
-                  />
-                  <FontAwesomeIcon
                     icon={faPlus}
                     className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
                   />
+                  </div>
+                  <div style={{paddingRight: "69px"}} className="w-450 mb-2 text-right">
+                    {showReportedNames()}
+                  </div>
+                </div>
+                <div className="w-1/2 text-left pr-4">
+                <div className="w-full inline-flex flex items-center">
+                  <label className="mr-2">Witnesses:</label>
+                  <select name="witnessNames" id="witnessName" className="w-250 p-1 ml-4" onChange={e=>{
+                    props.setComplaint({
+                      complaint: props.nav.complaint,
+                      key: e.target.id,
+                      value: e.target.value                    
+                    })
+                    }}>
+                      <option>Select here...</option>
+                      <option value="mitch">Mitchel Eppich</option>
+                      <option value="chris">Chris</option>
+                      <option value="karl">Karl with K</option>                     
+                  </select>  
+                  <FontAwesomeIcon
+                        onClick={()=>{
+                          let witnessNames = props.nav.complaint.witnessNames || []
+                          let _new = props.nav.complaint.witnessName
+
+                          if (witnessNames.includes(_new) || _new == null) return;
+                          props.setComplaint({
+                            complaint: props.nav.complaint,
+                            key: "witnessNames",
+                            value: [...witnessNames, _new]                   
+                          })                 
+                        }                        
+                        }
+                    icon={faPlus}
+                    className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
+                  /></div>
+                  <div style={{paddingRight: "97px"}} className="w-450 mb-2 text-right">
+                    {showWitnesses()}
+                  </div>
                 </div>
               </div>
-              <div className="w-1/3 mb-2 ml-2 text-right">
-                <div className="w-300 p-2 bg-grey-light text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
-                  <p className="w-full">Mitchel Eppich</p>
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    className="text-right text-red ml-2"
-                  />
+              <div className="w-full inline-flex">
+                
+                <div className="w-1/2 mb-2 ml-2 pr-10 text-right">
+                {/* {showWitnesses()} */}
                 </div>
               </div>
             </div>
@@ -519,6 +490,11 @@ const Main = props => {
             </div>
           </form>
         ) : null}
+
+        {props.misc.visibleScreen.includes("thanksMessage") ? 
+
+        <SuccessMessage {...props} /> : null }
+
       </div>
     </div>
   );

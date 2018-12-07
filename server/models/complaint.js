@@ -8,6 +8,7 @@ const ComplaintSchema = Schema({
   fileDate: { type: Date, default: new Date() },
   closeDate: Date,
   incidentDate: Date,
+  incidentTime: String,
   incidentLocation: String,
   incidentDescription: String,
   reportedNames: [String],
