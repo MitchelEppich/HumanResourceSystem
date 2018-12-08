@@ -15,7 +15,9 @@ const actionTypes = {
   FETCH_COMPLAINTS: "FETCH_COMPLAINTS",
   POST_COMPLAINT: "POST_COMPLAINT",
   SET_FOCUS_COMPLAINT: "SET_FOCUS_COMPLAINT",
-  UPDATE_COMPLAINT: "UPDATE_COMPLAINT"
+  UPDATE_COMPLAINT: "UPDATE_COMPLAINT",
+  MODIFY_COMPLAINT: "MODIFY_COMPLAINT",
+  DELETE_COMPLAINT: "DELETE_COMPLAINT"
 };
 
 const getActions = uri => {
@@ -23,10 +25,39 @@ const getActions = uri => {
     setComplaint: input => {
       let _complaint = input.complaint;
       _complaint[input.key] = input.value;
-      console.log(_complaint);
+      // console.log(_complaint);
       return {
         type: actionTypes.SET_COMPLAINT,
         input: _complaint
+      };
+    },
+    modifyComplaint: input => {
+      return dispatch => {
+        console.log(input);
+        let _complaint = input.complaint;
+        let _promptComplaints = input.promptComplaints;
+
+        let _focusComplaint = input.focusComplaint;
+        if (_focusComplaint != null && _focusComplaint._id == _complaint._id) {
+          dispatch(objects.setFocusComplaint({ complaint: _complaint }));
+        }
+
+        let _index = 0;
+        _promptComplaints.map(a => {
+          if (a._id == _complaint._id) {
+            _promptComplaints[_index] = _complaint;
+            _index = -1;
+            return;
+          }
+          _index++;
+        });
+
+        if (_index != -1) _promptComplaints.push(_complaint);
+
+        dispatch({
+          type: actionTypes.MODIFY_COMPLAINT,
+          input: _promptComplaints
+        });
       };
     },
     fetchComplaints: input => {
@@ -43,6 +74,29 @@ const getActions = uri => {
               input: _complaints
             });
             return Promise.resolve(_complaints);
+          })
+          .catch(error => console.log(error));
+      };
+    },
+    deleteComplaint: input => {
+      return dispatch => {
+        const link = new HttpLink({ uri, fetch: fetch });
+
+        const operation = {
+          query: mutation.deleteComplaint,
+          variables: { ...input }
+        };
+
+        makePromise(execute(link, operation))
+          .then(data => {
+            let _promptComplaints = input.promptComplaints.filter(a => {
+              if (a._id == input._id) return false;
+              return true;
+            });
+            dispatch({
+              type: actionTypes.DELETE_COMPLAINT,
+              input: _promptComplaints
+            });
           })
           .catch(error => console.log(error));
       };
@@ -78,9 +132,15 @@ const getActions = uri => {
       return dispatch => {
         const link = new HttpLink({ uri, fetch: fetch });
 
+        let _variables = { _id: input.focusComplaint._id };
+        if (input.adminComplaint != null)
+          _variables = { ..._variables, ...input.adminComplaint };
+        if (input.note != null)
+          _variables = { ..._variables, note: input.note };
+
         const operation = {
           query: mutation.updateComplaint,
-          variables: { ...input.adminComplaint, _id: input.focusComplaint._id }
+          variables: _variables
         };
 
         return makePromise(execute(link, operation))
@@ -171,6 +231,13 @@ const mutation = {
         additionalInfo
         proposedAction
         anonymous
+      }
+    }
+  `,
+  deleteComplaint: gql`
+    mutation($_id: String) {
+      deleteComplaint(input: { _id: $_id }) {
+        _id
       }
     }
   `,

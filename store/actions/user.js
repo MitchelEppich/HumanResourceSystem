@@ -22,7 +22,11 @@ const getActions = uri => {
       return dispatch => {
         sessionStorage.setItem("token", "");
         dispatch(
-          objects.updateUser({ username: input.username, online: false })
+          objects.updateUser({
+            username: input.username,
+            online: false,
+            update: false
+          })
         );
         dispatch({ type: actionTypes.RELEASE_CREDENTIALS });
       };
@@ -118,7 +122,7 @@ const getActions = uri => {
           let user = data.data.updateUser;
           dispatch({
             type: actionTypes.UPDATE_USER,
-            user: user
+            user: input.update ? user : undefined
           });
           return Promise.resolve(user);
         });

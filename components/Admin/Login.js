@@ -35,7 +35,7 @@ const Login = props => {
             icon={faUserLock}
             className="fa-7x mt-12 mb-6 text-almost-transparent"
           />
-          <h2 className="p-2">HR System</h2>
+          <h2 className="p-2">Human Resource System</h2>
           <p>Please, enter with your login and password</p>
         </div>
         <form

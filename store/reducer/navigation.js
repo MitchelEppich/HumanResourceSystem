@@ -15,6 +15,10 @@ export default (state = initialState, action) => {
       return updateObject(state, { focusComplaint: action.input });
     case actionTypes.FETCH_COMPLAINTS:
       return updateObject(state, { promptComplaints: action.input });
+    case actionTypes.MODIFY_COMPLAINT:
+      return updateObject(state, { promptComplaints: action.input });
+    case actionTypes.DELETE_COMPLAINT:
+      return updateObject(state, { promptComplaints: action.input });
     case actionTypes.POST_COMPLAINT:
       return updateObject(state, {});
     default:

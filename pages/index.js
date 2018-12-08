@@ -36,10 +36,10 @@ class Index extends Component {
       <Layout>
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("login") ? (
-        <Login {...this.props} />
+          <Login {...this.props} />
         ) : null}
-        
-        <Main {...this.props} />    
+
+        <Main {...this.props} />
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("admin") ? (
@@ -57,12 +57,14 @@ const mapDispatchToProps = dispatch => {
     registerCredentials: input => dispatch(actions.registerCredentials(input)),
     releaseCredentials: input => dispatch(actions.releaseCredentials(input)),
     modifyUser: input => dispatch(actions.modifyUser(input)),
+    modifyComplaint: input => dispatch(actions.modifyComplaint(input)),
     setComplaint: input => dispatch(actions.setComplaint(input)),
     postComplaint: input => dispatch(actions.postComplaint(input)),
     updateComplaint: input => dispatch(actions.updateComplaint(input)),
     setFocusComplaint: input => dispatch(actions.setFocusComplaint(input)),
     fetchComplaints: () => dispatch(actions.fetchComplaints()),
-    setVisibleScreen: input => dispatch(actions.setVisibleScreen(input))
+    setVisibleScreen: input => dispatch(actions.setVisibleScreen(input)),
+    deleteComplaint: input => dispatch(actions.deleteComplaint(input))
   };
 };
 

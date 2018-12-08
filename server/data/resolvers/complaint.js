@@ -17,7 +17,17 @@ const resolvers = {
     }
   },
   Complaint: {},
-  Subscription: {},
+  Subscription: {
+    complaintUpdate: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator("complaintUpdate"),
+        (payload, variables) => {
+          console.log(payload, variables);
+          return true;
+        }
+      )
+    }
+  },
   Mutation: {
     createComplaint: (_, { input }) => {
       let complaint = new Complaint({
@@ -26,6 +36,12 @@ const resolvers = {
       });
 
       complaint.save();
+
+      pubsub.publish("complaintUpdate", {
+        complaintUpdate: {
+          ...complaint.toObject()
+        }
+      });
 
       return complaint.toObject();
     },
@@ -45,10 +61,25 @@ const resolvers = {
           { new: true }
         );
 
+        pubsub.publish("complaintUpdate", {
+          complaintUpdate: {
+            ...complaint.toObject()
+          }
+        });
+
         return complaint.toObject();
       } catch (error) {
         console.log("No complaint was found -> ", input);
         return null;
+      }
+    },
+    deleteComplaint: async (_, { input }) => {
+      try {
+        let _complaint = await Complaint.findOne({ _id: input._id });
+        _complaint.remove();
+        return _complaint.toObject();
+      } catch (e) {
+        console.log("No complaint found => ", input);
       }
     }
   }

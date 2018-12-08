@@ -9,10 +9,32 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Notes from "../Admin/Notes";
 
+import moment from "moment";
+
 const ComplaintFile = props => {
   let showComplaint = () => {
     let _complaint = props.nav.focusComplaint;
     if (_complaint == null) return <div />;
+
+    let showNotes = () => {
+      let arr = [];
+      let _notes = props.nav.focusComplaint.notes;
+      if (_notes == null) return null;
+      for (let note of _notes) {
+        let _content = note.split("//&");
+        arr.push(
+          <div className="inline-flex w-full p-2 bg-grey-light">
+            <div className="w-1/5 text-left pl-6">{_content[0]}</div>
+            <div className="w-3/5 text-left">{_content[1]}</div>
+            <div className="w-1/5 text-left pl-6">
+              {moment(_content[2]).format("DD-MM-YYYY hh:mm:ss")}
+            </div>
+          </div>
+        );
+      }
+
+      return arr;
+    };
 
     return (
       <div
@@ -139,15 +161,7 @@ const ComplaintFile = props => {
                     <div className="w-1/5 text-center">Date</div>
                   </div>
 
-                  <div className="w-full mt-1">
-                    <div className="inline-flex w-full flex py-3 bg-grey-light">
-                      <div className="w-1/5 text-left pl-6">Mitch</div>
-                      <div className="w-3/5 text-left">
-                        Please, verify this order.
-                      </div>
-                      <div className="w-1/5 text-left pl-2">04/12 - 14:02</div>
-                    </div>
-                  </div>
+                  <div className="w-full mt-1">{showNotes()}</div>
                 </div>
                 <div className="w-full h-200 mt-4 p-2">
                   <div className="w-full px-8">
@@ -156,9 +170,23 @@ const ComplaintFile = props => {
                       rows="5"
                       cols="40"
                       className="w-full mr-2"
+                      id="noteEntry"
                     />
                   </div>
-                  <div className="w-full px-8">
+                  <div
+                    className="w-full px-8"
+                    onClick={() => {
+                      let _noteEntry = document.querySelector("#noteEntry")
+                        .value;
+                      document.querySelector("#noteEntry").value = "";
+                      props.updateComplaint({
+                        note: `${
+                          props.user.currentUser.username
+                        }//&${_noteEntry}//&${new Date()}`,
+                        focusComplaint: _complaint
+                      });
+                    }}
+                  >
                     <div className="bg-grey-new cursor-pointer p-2 text-white text-center uppercase hover:bg-orange-new hover:text-grey">
                       Send
                     </div>

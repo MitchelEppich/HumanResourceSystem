@@ -9,6 +9,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ComplaintFile from "../Admin/ComplaintFile";
 
+import { Subscription } from "react-apollo";
+import gql from "graphql-tag";
+
 const Complaints = props => {
   let showComplaints = () => {
     let _complaints = props.nav.promptComplaints;
@@ -51,9 +54,20 @@ const Complaints = props => {
             >
               <FontAwesomeIcon icon={faEye} className="fa-lg " />
             </div>
-            <div className="w-10 h-10 bg-semi-transparent p-2 cursor-pointer hover:bg-grey-new hover:text-white">
-              <FontAwesomeIcon icon={faTimes} className="fa-lg " />
-            </div>
+            {complaint.status == "Closed" ? (
+              <div
+                className="w-10 h-10 bg-semi-transparent p-2 cursor-pointer hover:bg-grey-new hover:text-white"
+                onClick={() => {
+                  let _promptComplaints = props.nav.promptComplaints;
+                  props.deleteComplaint({
+                    _id: complaint._id,
+                    promptComplaints: _promptComplaints
+                  });
+                }}
+              >
+                <FontAwesomeIcon icon={faTimes} className="fa-lg " />
+              </div>
+            ) : null}
           </div>
         </div>
       );
@@ -113,8 +127,57 @@ const Complaints = props => {
           </div>
         </div>
       </div>
+      <Subscription subscription={subscription.complaintUpdate}>
+        {({ data }) => {
+          if (data != null) {
+            let _promptComplaints = props.nav.promptComplaints;
+            let _complaint = data.complaintUpdate;
+            let _focusComplaint = props.nav.focusComplaint;
+
+            console.log("SUB", _complaint);
+            if (
+              !JSON.stringify(_promptComplaints).includes(
+                JSON.stringify(_complaint)
+              )
+            ) {
+              props.modifyComplaint({
+                complaint: _complaint,
+                promptComplaints: _promptComplaints,
+                focusComplaint: _focusComplaint
+              });
+            }
+          }
+          return <div />;
+        }}
+      </Subscription>
     </div>
   );
+};
+
+const subscription = {
+  complaintUpdate: gql`
+    subscription {
+      complaintUpdate {
+        _id
+        name
+        email
+        status
+        fileDate
+        closeDate
+        incidentDate
+        incidentTime
+        incidentLocation
+        incidentDescription
+        additionalInfo
+        proposedAction
+        adminResponse
+        anonymous
+        witnessNames
+        reportedNames
+        notes
+      }
+    }
+  `
 };
 
 export default Complaints;

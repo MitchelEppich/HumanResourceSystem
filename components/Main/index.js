@@ -54,36 +54,31 @@ const Main = props => {
         <div className="w-newScreen inline-flex ml-6 mt-4 flex justify-between mb-2">
           <div className="w-2/4 mt-2 pin-l text-left">
             <a href="./">
-              <h1 className="text-grey uppercase p-2">HR System</h1>
+              <h1 className="text-grey uppercase p-2">Human Resource System</h1>
             </a>
             <p className="p-3 ">Welcome User, please fill the form below:</p>
           </div>
           <div className="w-2/4 mt-6 text-right mr-4">
-            <a
-              onClick={() => {
-                props.setVisibleScreen([
-                  props.misc.visibleScreen != null &&
-                  props.misc.visibleScreen.includes("login")
-                    ? null
-                    : "login"
-                ]);
-              }}
-              className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
-            >
-              Admin Panel
-            </a>
+            {props.misc.visibleScreen != null &&
+            !props.misc.visibleScreen.includes("admin") ? (
+              <a
+                onClick={() => {
+                  props.setVisibleScreen([
+                    props.user.currentUser == null ? "login" : "admin"
+                  ]);
+                }}
+                className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2"
+              >
+                Admin Panel
+              </a>
+            ) : null}
             {props.user.currentUser != null ? (
               <a
                 onClick={() => {
                   props.releaseCredentials({
                     username: props.user.currentUser.username
                   });
-                  props.setVisibleScreen([
-                    props.misc.visibleScreen != null &&
-                    props.misc.visibleScreen.includes("login")
-                      ? null
-                      : "login"
-                  ]);
+                  props.setVisibleScreen([]);
                 }}
                 className="text-white p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new"
               >

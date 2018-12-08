@@ -87,6 +87,7 @@ input ComplaintInput {
 
 type Subscription {
   userUpdate: User
+  complaintUpdate: Complaint
 }
 
 type Mutation {
@@ -96,6 +97,7 @@ type Mutation {
 
   createComplaint(input: ComplaintInput!): Complaint
   updateComplaint(input: ComplaintInput!): Complaint
+  deleteComplaint(input: ComplaintInput!): Complaint
 }
 
 `;
