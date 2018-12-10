@@ -21,21 +21,22 @@ const Complaints = props => {
     let arr = [];
     for (let complaint of _complaints) {
       arr.push(
-        <div className="inline-flex w-full p-1 bg-grey-light text-grey mt-1 flex items-center ">
-          <div style={{ width: "17%" }} className="w-1/4 pl-4">
+        <div key={arr} className="inline-flex w-full p-1 bg-grey-light text-grey mt-1 flex items-center ">
+          <div style={{ width: "15%" }} className=" pl-4 uppercase">
             {complaint.name || "NO NAME"}
           </div>
-          <div style={{ width: "13%" }} className="w-1/4 text-center">
-            {complaint.incidentDate || "Not defined"}
+          <div style={{ width: "15%" }} className=" text-center uppercase">
+          
+          {moment(complaint.incidentDate).format("DD/MM/YY - HH:MM") || "Not defined"}
           </div>
-          <div style={{ width: "45%" }} className="w-1/4 pl-24">
+          <div style={{ width: "45%" }} className=" pl-12 uppercase">
             {complaint.incidentDescription != null
               ? `${complaint.incidentDescription.substring(0, 80)}${
                   complaint.incidentDescription.length > 80 ? "..." : ""
                 }`
               : "NO DESCRIPTION"}
           </div>
-          <div style={{ width: "15%" }} className="w-1/4">
+          <div style={{ width: "15%" }} className="uppercase">
             <p className="text-center">{complaint.status || "NO STATUS"}</p>
           </div>
           <div
@@ -51,13 +52,13 @@ const Complaints = props => {
                 );
                 props.setFocusComplaint({ complaint });
               }}
-              className="w-10 h-10 bg-semi-transparent p-2 mr-2 cursor-pointer hover:bg-grey-new hover:text-white"
+              className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
             >
               <FontAwesomeIcon icon={faEye} className="fa-lg " />
             </div>
             {complaint.status == "Closed" ? (
               <div
-                className="w-10 h-10 bg-semi-transparent p-2 cursor-pointer hover:bg-grey-new hover:text-white"
+                className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
                 onClick={() => {
                   let _promptComplaints = props.nav.promptComplaints;
                   props.deleteComplaint({
@@ -94,9 +95,9 @@ const Complaints = props => {
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
           overflow: "hidden",
-          background: "whitesmoke"
+          // background: "whitesmoke"
         }}
-        className="w-newScreen bg-white z-50 h-650 mt-16 align-absolute"
+        className="w-newScreen bg-white z-50 h-newScreen mt-16 align-absolute"
       >
         <div className="w-full bg-grey-new text-center uppercase text-white p-2">
           <h3>All Complaints</h3>
@@ -106,16 +107,16 @@ const Complaints = props => {
             style={{ marginTop: "35px" }}
             className="inline-flex w-full absolute pin-l pin-t p-1 bg-orange-new uppercase text-white text-sm"
           >
-            <div style={{ width: "17%" }} className="pl-8">
+            <div style={{ width: "15%" }} className="pl-6">
               Author
             </div>
-            <div style={{ width: "13%" }} className="text-center">
+            <div style={{ width: "15%" }} className="text-center">
               Date
             </div>
             <div style={{ width: "45%" }} className="pl-16">
               Preview Message
             </div>
-            <div style={{ width: "15%" }} className="text-center">
+            <div style={{ width: "15%" }} className="pl-16">
               Status
             </div>
             <div style={{ width: "10%" }} className="pl-8">

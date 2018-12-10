@@ -12,35 +12,65 @@ import {
 
 const Permissions = props => {
     return (
-        <div className="w-550 h-400 align-absolute bg-grey-lighter text-center pin-auto">
-            <div className="inline-flex w-full bg-orange-new">
+        <div style={{
+            boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+            borderRadius: "10px",
+            overflow: "hidden",
+            top: "60px"
+            }} 
+            className="w-newScreen h-400 align-absolute bg-white text-center pin-auto">
+            <div className="inline-flex w-full bg-grey-new relative">
                 <div
                 onClick={() => {
-                    props.setVisibleScreen("viewUser");                    
+                    props.setVisibleScreen("userViewer");                    
                 }}
-                className="w-100 h-10 inline-flex"
+                className="w-100 h-full inline-flex absolute"
                 >
-                <h4 className="p-2 text-white uppercase text-lg bg-grey-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer">
+                <h4 className="p-2 text-white uppercase text-lg bg-orange-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer">
                     <FontAwesomeIcon icon={faAngleLeft} className="fa-2x mr-4" />
                     Back
                 </h4>
                 </div>
-                <div className="w-2/3 ">
+                <div className="w-full ">
                     <h3 className="p-2 text-white uppercase">Permissions</h3>
                 </div>                
             </div>
-            <div className="inline-flex w-full bg-grey-new text-white p-1">
+            <div className="inline-flex w-full bg-orange-new text-white p-1">
                 <div className="w-3/5 uppercase text-sm">Software</div>
                 <div className="w-1/5 uppercase text-sm">Access</div>
                 <div className="w-1/5 uppercase text-sm">Admin</div>
             </div>
-            <div className="inline-flex w-full bg-white text-grey p-1 flex items-center">
-                <div className="w-3/5 uppercase">Package Fulfillment System</div>
-                <div className="w-12 h-10 p-1 text-center bg-grey-lighter text-grey justify-center mx-auto align-center cursor-pointer hover:bg-grey-light hover:text-black">
+            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                <div className="w-3/5 text-left pl-4 uppercase">
+                    <h4>Package Fulfillment System</h4>
+                </div>
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
                     <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
                 </div>
-                <div className="w-12 h-10 p-1 text-center bg-grey-lighter text-grey justify-center mx-auto align-center cursor-pointer hover:bg-grey-light hover:text-black">
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
                     <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                </div>
+            </div>
+            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                <div className="w-3/5 text-left pl-4 uppercase">
+                    <h4>Human Resources System</h4>
+                </div>
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                </div>
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                </div>
+            </div>
+            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                <div className="w-3/5 text-left pl-4 uppercase">
+                    <h4>Time Keeping System</h4>
+                </div>
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                </div>
+                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                    <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
                 </div>
             </div>
         </div>

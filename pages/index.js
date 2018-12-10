@@ -12,6 +12,8 @@ import Main from "../components/Main";
 import Complaints from "../components/Admin/Complaints";
 import UserViewer from "../components/Admin/UserViewer";
 
+import Navbar from "../components/Navbar"
+
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -36,11 +38,16 @@ class Index extends Component {
     return (
       <Layout>
         {this.props.misc.visibleScreen != null &&
+        !this.props.misc.visibleScreen.includes("login") ? (
+        <Navbar {...this.props} /> ) : null }
+
+        {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("login") ? (
           <Login {...this.props} />
         ) : null}
 
-        <Main {...this.props} />
+        {this.props.misc.visibleScreen == null || this.props.misc.visibleScreen.includes("home") || this.props.misc.visibleScreen.length == 0 ? (
+          <Main {...this.props} /> ): null}
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("userViewer") ? (

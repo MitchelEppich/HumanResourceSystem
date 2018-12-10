@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Notes from "../Admin/Notes";
 
+import moment from "moment"
+
 const ComplaintFile = props => {
   let showComplaint = () => {
     let _complaint = props.nav.focusComplaint;
@@ -22,9 +24,10 @@ const ComplaintFile = props => {
         <div
           style={{
             borderRadius: "10px",
-            height: "116vh",
+            height: "120vh",
             zIndex: "100",
-            border: "2px solid #f1f1f1"
+            boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+           
           }}
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto h-full"
         >
@@ -77,8 +80,8 @@ const ComplaintFile = props => {
             <div className="w-full mt-4 py-1 px-6 overflow-y-auto">
               <div
                 style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px"
+                  // borderTopLeftRadius: "10px",
+                  // borderTopRightRadius: "10px"
                 }}
                 className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2"
               >
@@ -90,7 +93,7 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4 ">
                   <p className="uppercase font-bold">
                     Name:{" "}
-                    <span className="pl-2 font-normal"> {_complaint.name}</span>
+                    <span className="pl-2 font-normal uppercase"> {_complaint.name}</span>
                   </p>
                 </div>
                 <div className="w-1/3 text-left pl-4">
@@ -107,7 +110,7 @@ const ComplaintFile = props => {
                     Submitted on:{" "}
                     <span className="pl-2 font-normal">
                       {" "}
-                      {_complaint.fileDate}
+                      {moment(_complaint.fileDate).format("DD/MM/YYYY - HH:MM:MM")}
                     </span>
                   </p>
                 </div>
@@ -120,8 +123,8 @@ const ComplaintFile = props => {
             <div className="w-full mt-4 py-2 px-6 overflow-y-auto">
               <div
                 style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px"
+                  // borderTopLeftRadius: "10px",
+                  // borderTopRightRadius: "10px"
                 }}
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
@@ -134,15 +137,15 @@ const ComplaintFile = props => {
                       Date:{" "}
                       <span className="pl-2 font-normal">
                         {" "}
-                        {_complaint.incidentDate}
+                        {moment(_complaint.incidentDate).format("DD/MM/YYYY")}
                       </span>
                     </p>
                   </div>
                   <div className="w-1/3 text-left pl-4">
                     <p className="uppercase font-bold">
                       Hour:{" "}
-                      <span className="pl-2 font-normal">
-                        {_complaint.incidentTime}
+                      <span className="pl-2 font-normal uppercase">
+                      {moment(_complaint.incidentTime).format("HH:MM:SS") || "Not informed"}
                       </span>
                     </p>
                   </div>
@@ -189,7 +192,7 @@ const ComplaintFile = props => {
                       style={{ height: "110px" }}
                       className="w-full  overflow-y-auto"
                     >
-                      <p className="font-normal text-justify px-4">
+                      <p className="font-normal text-justify px-4 uppercase">
                         {_complaint.incidentDescription}
                       </p>
                     </div>
@@ -201,8 +204,8 @@ const ComplaintFile = props => {
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
                 style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px"
+                  // borderTopLeftRadius: "10px",
+                  // borderTopRightRadius: "10px"
                 }}
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
@@ -217,7 +220,7 @@ const ComplaintFile = props => {
                     style={{ height: "110px" }}
                     className="w-full overflow-y-auto"
                   >
-                    <p className="font-normal text-justify px-4">
+                    <p className="font-normal text-justify px-4 uppercase">
                       {_complaint.additionalInfo}
                     </p>
                   </div>
@@ -227,8 +230,8 @@ const ComplaintFile = props => {
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
                 style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px"
+                  // borderTopLeftRadius: "10px",
+                  // borderTopRightRadius: "10px"
                 }}
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
@@ -243,7 +246,7 @@ const ComplaintFile = props => {
                     style={{ height: "110px" }}
                     className="w-full overflow-y-auto"
                   >
-                    <p className="font-normal text-justify px-4">
+                    <p className="font-normal text-justify px-4 uppercase">
                       {_complaint.proposedAction}
                     </p>
                   </div>
@@ -254,8 +257,8 @@ const ComplaintFile = props => {
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
                 style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px"
+                  // borderTopLeftRadius: "10px",
+                  // borderTopRightRadius: "10px"
                 }}
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >

@@ -13,11 +13,11 @@ const Notes = props => {
     for (let note of _notes) {
       let _content = note.split("//&");
       arr.push(
-        <div className="inline-flex w-full p-2 bg-grey-light">
-          <div className="w-1/5 text-left pl-6">{_content[0]}</div>
-          <div className="w-3/5 text-left">{_content[1]}</div>
-          <div className="w-1/5 text-left pl-6">
-            {moment(_content[2]).format("DD-MM-YYYY hh:mm:ss")}
+        <div className="inline-flex w-full p-2 bg-grey-light flex items-center mt-1">
+          <div className="w-1/5 text-left pl-2 uppercase">{_content[0]}</div>
+          <div className="w-3/5 text-left capitalize">{_content[1]}</div>
+          <div className="w-1/5 text-left pl-0 text-sm">
+            {moment(_content[2]).format("DD/MM/YY - hh:mm")}
           </div>
         </div>
       );
@@ -32,7 +32,8 @@ const Notes = props => {
         borderRadius: "10px",
         overflow: "hidden",
         zIndex: "100",
-        marginRight: "5px"
+        marginRight: "5px",
+        boxShadow: "0px 1px 4px rgb(187, 187, 187)",
       }}
       className="absolute bg-white pin-r pin-t w-550 h-550 mt-10"
     >
