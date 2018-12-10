@@ -11,6 +11,7 @@ import ComplaintFile from "../Admin/ComplaintFile";
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
+import moment from "moment";
 
 const Complaints = props => {
   let showComplaints = () => {
@@ -25,7 +26,7 @@ const Complaints = props => {
             {complaint.name || "NO NAME"}
           </div>
           <div style={{ width: "13%" }} className="w-1/4 text-center">
-            {complaint.incidentDate || "NO DATE"}
+            {complaint.incidentDate || "Not defined"}
           </div>
           <div style={{ width: "45%" }} className="w-1/4 pl-24">
             {complaint.incidentDescription != null
