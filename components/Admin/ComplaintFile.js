@@ -9,8 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Notes from "../Admin/Notes";
 
-import moment from "moment";
-
 const ComplaintFile = props => {
   let showComplaint = () => {
     let _complaint = props.nav.focusComplaint;
@@ -116,7 +114,7 @@ const ComplaintFile = props => {
               </div>
             </div>
             {props.misc.visibleScreen.includes("noteBy") ? (
-              <Notes {...props} />
+              <Notes {...props} complaint={_complaint} />
             ) : null}
 
             <div className="w-full mt-4 py-2 px-6 overflow-y-auto">

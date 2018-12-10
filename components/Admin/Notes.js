@@ -1,6 +1,11 @@
 import React from "react";
 
+import moment from "moment";
+
 const Notes = props => {
+  let _complaint = props.complaint;
+  if (_complaint == null) return null;
+
   let showNotes = () => {
     let arr = [];
     let _notes = props.nav.focusComplaint.notes;
@@ -53,9 +58,22 @@ const Notes = props => {
             rows="5"
             cols="40"
             className="w-full mr-2"
+            id="noteEntry"
           />
         </div>
-        <div className="w-full px-8">
+        <div
+          className="w-full px-8"
+          onClick={() => {
+            let _noteEntry = document.querySelector("#noteEntry").value;
+            document.querySelector("#noteEntry").value = "";
+            props.updateComplaint({
+              note: `${
+                props.user.currentUser.username
+              }//&${_noteEntry}//&${new Date()}`,
+              focusComplaint: _complaint
+            });
+          }}
+        >
           <div className="bg-grey-new cursor-pointer p-2 text-white text-center uppercase hover:bg-orange-new hover:text-grey">
             Send
           </div>
