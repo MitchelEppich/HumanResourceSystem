@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SuccessMessage from "../Main/SuccessMessage";
 import Login from "../Admin/Login";
+import UserViewer from "../Admin/UserViewer"
 
 import moment from "moment";
 
@@ -73,6 +74,20 @@ const Main = props => {
               Admin Panel
             </a>
             {props.user.currentUser != null ? (
+              <span>
+              <a
+                onClick={() => {                  
+                  props.setVisibleScreen([
+                    props.misc.visibleScreen != null &&
+                    props.misc.visibleScreen.includes("userViewer")
+                      ? null
+                      : "userViewer"
+                  ]);
+                }}
+                className="text-white mr-2 p-2 bg-grey-new unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new"
+              >
+                Users
+              </a>
               <a
                 onClick={() => {
                   props.releaseCredentials({
@@ -89,7 +104,7 @@ const Main = props => {
               >
                 Logout
               </a>
-            ) : null}
+              </span>) : null}
           </div>
         </div>
       </div>
@@ -527,7 +542,7 @@ const Main = props => {
                   et molestiae non recusandae.
                 </p>
                 <div className="w-300 mt-4 mb-2 ml-2">
-                  <input
+                <label><input
                     type="checkbox"
                     name="acceptCheck"
                     id="acceptCheck"
@@ -541,7 +556,7 @@ const Main = props => {
                     }}
                     className="mr-2 checkbox"
                   />
-                  <label>I Accept the Terms </label>
+                  I Accept the Terms </label>
                 </div>
               </div>
             </div>

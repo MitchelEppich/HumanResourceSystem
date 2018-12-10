@@ -10,6 +10,7 @@ import Layout from "../HOC/Layout";
 import Login from "../components/Admin/Login";
 import Main from "../components/Main";
 import Complaints from "../components/Admin/Complaints";
+import UserViewer from "../components/Admin/UserViewer";
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
@@ -39,7 +40,14 @@ class Index extends Component {
         <Login {...this.props} />
         ) : null}
         
+        
+
         <Main {...this.props} />    
+
+        {this.props.misc.visibleScreen != null &&
+        this.props.misc.visibleScreen.includes("userViewer") ? (
+        <UserViewer {...this.props} />
+        ) : null }
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("admin") ? (

@@ -26,8 +26,7 @@ const ComplaintFile = props => {
               height: "116vh",
               zIndex: "100",
               border: "2px solid #f1f1f1"
-            }
-            // boxShadow: "rgba(45, 45, 45, 0.19) 0px 2px 5px",
+            }            
           }
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto h-full"
         >
@@ -77,16 +76,18 @@ const ComplaintFile = props => {
             </div>
           </div>
           <div className="w-full mt-4 py-2 px-6 overflow-y-auto">
-            <div
-              style={{
-                borderTopLeftRadius: "10px",
-                borderTopRightRadius: "10px"
-              }}
-              className="w-full bg-grey-new-light uppercase text-white text-center p-2"
-            >
-              <h4>Reporter by:</h4>
+            <div className="w-full mt-4 py-1 px-6 overflow-y-auto">
+              <div
+                style={{
+                  borderTopLeftRadius: "10px",
+                  borderTopRightRadius: "10px"
+                }}
+                className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2"
+              >
+                <h4>Reporter by:</h4>
+              </div>
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full px-6">
               <div className="inline-flex w-full mt-1 flex py-3 bg-grey-lighter">
                 <div className="w-1/3 text-left pl-4 ">
                   <p className="uppercase font-bold">
@@ -115,56 +116,7 @@ const ComplaintFile = props => {
               </div>
             </div>
             {props.misc.visibleScreen.includes("noteBy") ? (
-              <div
-                style={
-                  {
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                    zIndex: "100",
-                    marginRight: "5px"
-                  } //   boxShadow: "rgba(45, 45, 45, 0.19) 0px 2px 5px",
-                }
-                className="absolute bg-white pin-r pin-t w-550 h-550 mt-10"
-              >
-                <div className="text-white p-2 text-center uppercase bg-orange-new">
-                  <h3>Notes</h3>
-                </div>
-                <div className="w-full mt-6 py-2 h-300 overflow-y-auto">
-                  <div
-                    style={{ marginTop: "35px" }}
-                    className="inline-flex w-full absolute pin-l pin-t p-1 bg-grey-new uppercase text-white text-sm"
-                  >
-                    <div className="w-1/5 pl-8 text-left">User</div>
-                    <div className="w-3/5 text-left">Message</div>
-                    <div className="w-1/5 text-center">Date</div>
-                  </div>
-
-                  <div className="w-full mt-1">
-                    <div className="inline-flex w-full flex py-3 bg-grey-light">
-                      <div className="w-1/5 text-left pl-6">Mitch</div>
-                      <div className="w-3/5 text-left">
-                        Please, verify this order.
-                      </div>
-                      <div className="w-1/5 text-left pl-2">04/12 - 14:02</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full h-200 mt-4 p-2">
-                  <div className="w-full px-8">
-                    <textarea
-                      style={{ border: "2px solid #cecece" }}
-                      rows="5"
-                      cols="40"
-                      className="w-full mr-2"
-                    />
-                  </div>
-                  <div className="w-full px-8">
-                    <div className="bg-grey-new cursor-pointer p-2 text-white text-center uppercase hover:bg-orange-new hover:text-grey">
-                      Send
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Notes {...props} />
             ) : null}
 
             <div className="w-full mt-4 py-2 px-6 overflow-y-auto">
