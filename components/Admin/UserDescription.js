@@ -73,7 +73,7 @@ const UserDescription = props => {
                 
                 </div>
                 <div className="w-full mt-2 p-1 pb-2 bg-grey-lighter">
-                    <div className="w-full pl-6 mt-2 inline-flex flex items-center">
+                <div className="w-2/4 pl-6 mt-2 inline-flex flex items-center">
                         <div style={{width: "135px"}} className="text-left">
                             <label className="font-bold pr-2 text-left uppercase">Job Title:</label>
                         </div>
@@ -82,30 +82,30 @@ const UserDescription = props => {
                             
                             <div className="w-10 h-10 flex items-center">
                                 <FontAwesomeIcon
-                                onClick={() => {
-                                let reportedNames =
-                                props.nav.complaint.reportedNames || [];
-                                let _new = props.nav.complaint.reportedName;
-                                if (reportedNames.includes(_new) || _new == null)
-                                return;
-                                props.setComplaint({
-                                complaint: props.nav.complaint,
-                                key: "reportedNames",
-                                value: [...reportedNames, _new]
-                                });
-                            }}
+                            //     onClick={() => {
+                            //     let reportedNames =
+                            //     props.nav.complaint.reportedNames || [];
+                            //     let _new = props.nav.complaint.reportedName;
+                            //     if (reportedNames.includes(_new) || _new == null)
+                            //     return;
+                            //     props.setComplaint({
+                            //     complaint: props.nav.complaint,
+                            //     key: "reportedNames",
+                            //     value: [...reportedNames, _new]
+                            //     });
+                            // }}
                             icon={faPlus}
                             className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
                             />
                             </div>
-                        </div>
+                        </div>                        
                     </div>
-                    <div style={{marginLeft: "150px"}} className="w-300 mt-1">
-                        <div className="p-2 bg-grey-light text-grey uppercase mt-1 w-full inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer">
+                    <div className="w-2/4 mt-1 inline-flex ">
+                        <div className="p-2 bg-grey-light text-grey uppercase mt-1 w-250 inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2">
                             <h4 className="px-4">Web Developer</h4>
                             <FontAwesomeIcon icon={faTimes} className="fa-lg cursor-pointer" />
                         </div>
-                        <div className="p-2 bg-grey-light text-grey uppercase mt-1 w-full inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer">
+                        <div className="p-2 bg-grey-light text-grey uppercase mt-1 w-250 inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2">
                             <h4 className="px-4">Coffee Maker</h4>
                             <FontAwesomeIcon icon={faTimes} className="fa-lg cursor-pointer" />
                         </div>

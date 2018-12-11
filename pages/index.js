@@ -11,6 +11,7 @@ import Login from "../components/Admin/Login";
 import Main from "../components/Main";
 import Complaints from "../components/Admin/Complaints";
 import UserViewer from "../components/Admin/UserViewer";
+import RegisterUser from "../components/Admin/RegisterUser"
 
 import Navbar from "../components/Navbar"
 
@@ -52,6 +53,11 @@ class Index extends Component {
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("userViewer") ? (
           <UserViewer {...this.props} />
+        ) : null}
+
+        {this.props.misc.visibleScreen != null &&
+        this.props.misc.visibleScreen.includes("RegisterUser") ? (
+          <RegisterUser {...this.props} />
         ) : null}
 
         {this.props.misc.visibleScreen != null &&
