@@ -68,8 +68,8 @@ const resolvers = {
     },
     registerCredentials: async (_, { input }) => {
       let name = input.name;
-      input = name.toLowerCase().split(" ");
-      let username = input[0][0] + input[1];
+      let _break = name.toLowerCase().split(" ");
+      let username = _break[0][0] + _break[1];
       let badge;
       let user;
       do {
@@ -82,7 +82,7 @@ const resolvers = {
 
       user = new User({
         username: username,
-        name: name,
+        ...input,
         badge: badge
       });
 

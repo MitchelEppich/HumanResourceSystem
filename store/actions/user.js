@@ -13,11 +13,19 @@ const actionTypes = {
   FETCH_CREDENTIALS: "FETCH_CREDENTIALS",
   RELEASE_CREDENTIALS: "RELEASE_CREDENTIALS",
   REGISTER_CREDENTIALS: "REGISTER_CREDENTIALS",
-  UPDATE_USER: "UPDATE_USER"
+  UPDATE_USER: "UPDATE_USER",
+  SET_USER_DATA: "SET_USER_DATA",
+  FETCH_USERS: "FETCH_USERS"
 };
 
 const getActions = uri => {
   const objects = {
+    setUserData: input => {
+      let _userData = input.userData;
+      _userData[input.key] = input.value;
+      // console.log(_complaint);
+      return { type: actionTypes.SET_USER_DATA, input: _userData };
+    },
     releaseCredentials: input => {
       return dispatch => {
         sessionStorage.setItem("token", "");
@@ -79,6 +87,27 @@ const getActions = uri => {
         });
       };
     },
+    fetchUsers: () => {
+      return dispatch => {
+        const link = new HttpLink({ uri, fetch: fetch });
+
+        const operation = {
+          query: query.getUsers
+        };
+
+        return makePromise(execute(link, operation))
+          .then(data => {
+            let users = data.data.allUsers;
+            console.log(users);
+            dispatch({
+              type: actionTypes.FETCH_USERS,
+              users: users
+            });
+            return Promise.resolve(users);
+          })
+          .catch(error => console.log(error));
+      };
+    },
     registerCredentials: input => {
       return dispatch => {
         const link = new HttpLink({
@@ -88,10 +117,10 @@ const getActions = uri => {
         const operation = {
           query: mutation.registerCredentials,
           variables: {
-            name: input.name,
-            admin: input.admin
+            ...input
           }
         };
+
         return makePromise(execute(link, operation)).then(data => {
           let user = data.data.registerCredentials;
           dispatch({
@@ -111,11 +140,7 @@ const getActions = uri => {
         const operation = {
           query: mutation.updateUser,
           variables: {
-            username: input.username,
-            locked: input.locked,
-            admin: input.admin,
-            lastAction: input.lastAction,
-            online: input.online
+            ...input
           }
         };
         return makePromise(execute(link, operation)).then(data => {
@@ -133,6 +158,28 @@ const getActions = uri => {
   return { ...objects };
 };
 const query = {
+  getUsers: gql`
+    query {
+      allUsers {
+        username
+        badge
+        name
+        jobTitle
+        permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
+        token
+        createdAt
+        online
+        lastAction
+      }
+    }
+  `,
   getCredentials: gql`
     query($token: String) {
       user(input: { token: $token }) {
@@ -181,8 +228,30 @@ const mutation = {
     }
   `,
   registerCredentials: gql`
-    mutation($name: String, $admin: Boolean) {
-      registerCredentials(input: { name: $name, admin: $admin }) {
+    mutation(
+      $name: String
+      $reportsTo: String
+      $jobTitle: [String]
+      $startingDate: String
+      $endingDate: String
+      $phone: String
+      $email: String
+      $jobDescription: String
+      $adminNotes: String
+    ) {
+      registerCredentials(
+        input: {
+          name: $name
+          reportsTo: $reportsTo
+          jobTitle: $jobTitle
+          startingDate: $startingDate
+          endingDate: $endingDate
+          phone: $phone
+          email: $email
+          jobDescription: $jobDescription
+          adminNotes: $adminNotes
+        }
+      ) {
         username
         badge
         name
@@ -204,19 +273,33 @@ const mutation = {
   `,
   updateUser: gql`
     mutation(
-      $locked: Boolean
-      $admin: Boolean
-      $lastAction: String
+      $name: String
+      $reportsTo: String
+      $jobTitle: [String]
+      $startingDate: String
+      $endingDate: String
+      $phone: String
+      $email: String
+      $jobDescription: String
+      $adminNotes: [String]
+      $permissions: [String]
       $online: Boolean
-      $username: String
+      $lastAction: String
     ) {
       updateUser(
         input: {
-          username: $username
-          locked: $locked
-          lastAction: $lastAction
-          admin: $admin
+          name: $name
+          reportsTo: $reportsTo
+          jobTitle: $jobTitle
+          startingDate: $startingDate
+          endingDate: $endingDate
+          phone: $phone
+          email: $email
+          jobDescription: $jobDescription
+          adminNotes: $adminNotes
+          permissions: $permissions
           online: $online
+          lastAction: $lastAction
         }
       ) {
         username

@@ -17,7 +17,8 @@ const actionTypes = {
   SET_FOCUS_COMPLAINT: "SET_FOCUS_COMPLAINT",
   UPDATE_COMPLAINT: "UPDATE_COMPLAINT",
   MODIFY_COMPLAINT: "MODIFY_COMPLAINT",
-  DELETE_COMPLAINT: "DELETE_COMPLAINT"
+  DELETE_COMPLAINT: "DELETE_COMPLAINT",
+  SET_FOCUS_USER: "SET_FOCUS_USER"
 };
 
 const getActions = uri => {
@@ -30,6 +31,9 @@ const getActions = uri => {
         type: actionTypes.SET_COMPLAINT,
         input: _complaint
       };
+    },
+    setFocusUser: input => {
+      return { type: actionTypes.SET_FOCUS_USER, input: input.user };
     },
     modifyComplaint: input => {
       return dispatch => {

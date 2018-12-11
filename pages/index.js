@@ -11,9 +11,9 @@ import Login from "../components/Admin/Login";
 import Main from "../components/Main";
 import Complaints from "../components/Admin/Complaints";
 import UserViewer from "../components/Admin/UserViewer";
-import RegisterUser from "../components/Admin/RegisterUser"
+import RegisterUser from "../components/Admin/RegisterUser";
 
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
@@ -40,15 +40,19 @@ class Index extends Component {
       <Layout>
         {this.props.misc.visibleScreen != null &&
         !this.props.misc.visibleScreen.includes("login") ? (
-        <Navbar {...this.props} /> ) : null }
+          <Navbar {...this.props} />
+        ) : null}
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("login") ? (
           <Login {...this.props} />
         ) : null}
 
-        {this.props.misc.visibleScreen == null || this.props.misc.visibleScreen.includes("home") || this.props.misc.visibleScreen.length == 0 ? (
-          <Main {...this.props} /> ): null}
+        {this.props.misc.visibleScreen == null ||
+        this.props.misc.visibleScreen.includes("home") ||
+        this.props.misc.visibleScreen.length == 0 ? (
+          <Main {...this.props} />
+        ) : null}
 
         {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("userViewer") ? (
@@ -78,10 +82,13 @@ const mapDispatchToProps = dispatch => {
     modifyUser: input => dispatch(actions.modifyUser(input)),
     modifyComplaint: input => dispatch(actions.modifyComplaint(input)),
     setComplaint: input => dispatch(actions.setComplaint(input)),
+    setFocusUser: input => dispatch(actions.setFocusUser(input)),
+    setUserData: input => dispatch(actions.setUserData(input)),
     postComplaint: input => dispatch(actions.postComplaint(input)),
     updateComplaint: input => dispatch(actions.updateComplaint(input)),
     setFocusComplaint: input => dispatch(actions.setFocusComplaint(input)),
     fetchComplaints: () => dispatch(actions.fetchComplaints()),
+    fetchUsers: () => dispatch(actions.fetchUsers()),
     setVisibleScreen: input => dispatch(actions.setVisibleScreen(input)),
     deleteComplaint: input => dispatch(actions.deleteComplaint(input))
   };
