@@ -26,14 +26,14 @@ const UserViewer = props => {
     let arr = [];
     for (let user of props.user.promptUsers) {
       arr.push(
-        <div className="inline-flex w-full flex items-center overflow-y-auto bg-grey-light p-1 mt-1 uppercase">
-          <div style={{ width: "10%" }} className="pl-8">
-            {user.badge}
-          </div>
-          <div style={{ width: "20%" }} className="">
+        <div key={arr} className="inline-flex w-full flex items-center overflow-y-auto bg-grey-lighter p-1 mt-1 capitalize">
+          <div style={{ width: "20%" }} className="pl-8">
             {user.name}
           </div>
-          <div style={{ width: "30%" }} className="">
+          <div style={{ width: "10%" }} className="lowercase">
+            {user.badge}
+          </div>
+          <div style={{ width: "30%" }} className="lowercase">
             {user.email}
           </div>
           <div style={{ width: "15%" }} className="text-center inline-flex">
@@ -55,9 +55,9 @@ const UserViewer = props => {
               onClick={e => {
                 e.preventDefault();
                 props.setVisibleScreen(
-                  props.misc.visibleScreen.includes("userDescription")
+                  props.misc.visibleScreen.includes("RegisterUser")
                     ? ["userViewer"]
-                    : ["userDescription", "userViewer"]
+                    : ["RegisterUser"]
                 );
               }}
               className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
@@ -84,7 +84,15 @@ const UserViewer = props => {
             <div className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
               <FontAwesomeIcon icon={faLock} className="fa-lg" />
             </div>
-            <div className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+            <div
+            onClick={() => {
+              props.deleteUser({
+                username: user.username,
+                promptUsers: props.user.promptUsers
+              });
+            }}
+            
+            className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
               <FontAwesomeIcon icon={faTimes} className="fa-lg text-center" />
             </div>
           </div>
@@ -145,13 +153,13 @@ const UserViewer = props => {
             style={{ marginTop: "35px" }}
             className="inline-flex w-full absolute pin-l pin-t p-1 bg-orange-new uppercase text-white text-sm"
           >
-            <div style={{ width: "10%" }} className="pl-8">
-              BADGE
-            </div>
-            <div style={{ width: "20%" }} className="">
+            <div style={{ width: "20%" }} className="pl-10">
               Name
             </div>
-            <div style={{ width: "30%" }} className="">
+            <div style={{ width: "10%" }} className="">
+              Badge
+            </div>
+            <div style={{ width: "30%" }} className="pl-16">
               Email
             </div>
             <div style={{ width: "15%" }} className="pl-2 text-center">

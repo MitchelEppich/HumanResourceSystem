@@ -109,6 +109,7 @@ type Mutation {
   verifyCredentials(input: UserInput!): User
   registerCredentials(input: UserInput!): User
   updateUser(input: UserInput!): User
+  deleteUser(input: UserInput!): User
 
   createComplaint(input: ComplaintInput!): Complaint
   updateComplaint(input: ComplaintInput!): Complaint

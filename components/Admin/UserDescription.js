@@ -215,7 +215,7 @@ const UserDescription = props => {
                   type="text"
                   id="phone"
                   placeholder="Optional"
-                  value=""
+                  // value=""
                   className="p-2 w-300"
                   onChange={e => {
                     let _value = e.target.value;
@@ -237,7 +237,7 @@ const UserDescription = props => {
                   type="text"
                   id="email"
                   placeholder="Required"
-                  value=""
+                  // value=""
                   className="p-2 w-300"
                   onChange={e => {
                     let _value = e.target.value;

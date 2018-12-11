@@ -23,7 +23,7 @@ const getActions = uri => {
     setUserData: input => {
       let _userData = input.userData;
       _userData[input.key] = input.value;
-      // console.log(_complaint);
+      console.log(_userData);
       return { type: actionTypes.SET_USER_DATA, input: _userData };
     },
     releaseCredentials: input => {
@@ -129,6 +129,30 @@ const getActions = uri => {
           });
           return Promise.resolve(user);
         });
+      };
+    },
+    deleteUser: input => {
+      return dispatch => {
+        const link = new HttpLink({ uri, fetch: fetch });
+
+        const operation = {
+          query: mutation.deleteUser,
+          variables: { username: input.username }
+        };
+
+        makePromise(execute(link, operation))
+          .then(data => {
+            let _promptUsers = input.promptUsers.filter(a => {
+              if (a.username == input.username) return false;
+              return true;
+            });
+
+            dispatch({
+              type: actionTypes.DELETE_USER,
+              input: _promptUsers
+            });
+          })
+          .catch(error => console.log(error));
       };
     },
     updateUser: input => {
@@ -271,6 +295,13 @@ const mutation = {
       }
     }
   `,
+  deleteUser: gql`
+      mutation($username: String) {
+        deleteUser(input: { username: $username }) {
+          username
+        }
+      }
+    `,
   updateUser: gql`
     mutation(
       $name: String

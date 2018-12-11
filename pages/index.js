@@ -12,11 +12,12 @@ import Main from "../components/Main";
 import Complaints from "../components/Admin/Complaints";
 import UserViewer from "../components/Admin/UserViewer";
 import RegisterUser from "../components/Admin/RegisterUser";
-
 import Navbar from "../components/Navbar";
+
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
+
 
 class Index extends Component {
   componentDidMount() {
@@ -90,7 +91,8 @@ const mapDispatchToProps = dispatch => {
     fetchComplaints: () => dispatch(actions.fetchComplaints()),
     fetchUsers: () => dispatch(actions.fetchUsers()),
     setVisibleScreen: input => dispatch(actions.setVisibleScreen(input)),
-    deleteComplaint: input => dispatch(actions.deleteComplaint(input))
+    deleteComplaint: input => dispatch(actions.deleteComplaint(input)),
+    deleteUser: input => dispatch(actions.deleteUser(input)),
   };
 };
 

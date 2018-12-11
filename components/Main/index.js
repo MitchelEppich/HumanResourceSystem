@@ -22,10 +22,10 @@ const Main = props => {
     for (let name of props.nav.complaint.reportedNames) {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
-          <p className="w-full uppercase text-center">{name}</p>
+          <p className="w-full capitalize text-center">{name}</p>
           <FontAwesomeIcon
             icon={faTimes}
-            className="text-right fa-lg text-red ml-2"
+            className="text-right fa-lg ml-2"
           />
         </div>
       );
@@ -38,10 +38,10 @@ const Main = props => {
     for (let name of props.nav.complaint.witnessNames) {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
-          <p className="w-full uppercase text-center">{name}</p>
+          <p className="w-full capitalize text-center">{name}</p>
           <FontAwesomeIcon
             icon={faTimes}
-            className="text-right fa-lg text-red ml-2"
+            className="text-right fa-lg ml-2"
           />
         </div>
       );
@@ -299,9 +299,9 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="mitch">Mitchel Eppich</option>
-                      <option value="chris">Chris</option>
-                      <option value="karl">Karl with K</option>
+                      <option value="Mitchel Eppich">Mitchel Eppich</option>
+                      <option value="Chris Eppich">Chris Eppich</option>
+                      <option value="Karl with K">Karl with K</option>
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {
@@ -345,9 +345,9 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="mitch">Mitchel Eppich</option>
-                      <option value="chris">Chris</option>
-                      <option value="karl">Karl with K</option>
+                      <option value="Mitchel Eppich">Mitchel Eppich</option>
+                      <option value="Chris Eppich">Chris Eppich</option>
+                      <option value="Karl with K">Karl with K</option>
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {

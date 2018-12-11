@@ -16,6 +16,8 @@ let print = () => {
   window.print();
 };
 
+import moment from "moment"
+
 const ViewUserDescription = props => {
   // let viewUserFile = document.querySelector("#viewUser")
   // console.log(viewUserFile)
@@ -84,14 +86,14 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Name User:</label>
               </div>
               <div className="w-300">
-                <p className="p-2">{_user.name}</p>
+                <p className="p-2 capitalize">{_user.name}</p>
               </div>
             </div>
           </div>
           <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
               <label className="font-bold pr-2">Reports to:</label>
-              <p className="p-2">{_user.reportsTo}</p>
+              <p className="p-2 capitalize">{_user.reportsTo}</p>
             </div>
           </div>
         </div>
@@ -102,8 +104,8 @@ const ViewUserDescription = props => {
                 Job Title:
               </label>
             </div>
-            <div className="w-300 inline-flex flex items-center">
-              <p className="p-2 uppercase">
+            <div className="w-550 inline-flex flex items-center">
+              <p className="p-2 capitalize">
                 {_user.jobTitle ? _user.jobTitle.toString() : "No Title"}
               </p>
             </div>
@@ -116,7 +118,7 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Starting Date:</label>
               </div>
               <div className="w-300">
-                <p className="p-2 uppercase">{_user.startingDate}</p>
+                <p className="p-2 uppercase">{moment(_user.startingDate).format("DD/MM/YYYY")}</p>
               </div>
             </div>
             <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
@@ -124,8 +126,8 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Ending Date:</label>
               </div>
               <div className="w-300">
-                <p className="p-2 uppercase">
-                  {_user.endingDate || "Still Working"}
+                <p className="p-2 capitalize">
+                  {moment(_user.startingDate).format("DD/MM/YYYY") || "Still Working"}
                 </p>
               </div>
             </div>
@@ -136,7 +138,7 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Phone #:</label>
               </div>
               <div className="w-300">
-                <p className="p-2 uppercase">{_user.phone}</p>
+                <p className="p-2 capitalize">{_user.phone}</p>
               </div>
             </div>
             <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
@@ -144,7 +146,7 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Email:</label>
               </div>
               <div className="w-300">
-                <p className="p-2 uppercase">{_user.email}</p>
+                <p className="p-2 lowercase">{_user.email}</p>
               </div>
             </div>
           </div>
@@ -155,7 +157,11 @@ const ViewUserDescription = props => {
               Job Description:
             </label>
           </div>
-          <p className="p-2 uppercase text-left w-750">
+          <p style={{
+                width: "900px",
+                textAlign: "justify",
+
+          }} className="p-2 text-left w-750">
             {_user.jobDescription || "No Description"}
           </p>
         </div>
@@ -165,8 +171,12 @@ const ViewUserDescription = props => {
               Admin Notes:
             </label>
           </div>
-          <p className="p-2 uppercase text-left w-750">
-            {_user.adminNotes ? _user.adminNotes.toString() : "No Notes"}
+          <p style={{
+                width: "900px",
+                textAlign: "justify",
+          }} className="p-2 text-left w-750">
+            {/* {_user.adminNotes ? _user.adminNotes.toString() : "No Notes"} */}
+            {props.user.userData._adminNote ? props.user.userData._adminNote.toString() : "No Notes"}
           </p>
         </div>
       </div>
