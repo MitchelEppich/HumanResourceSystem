@@ -94,8 +94,7 @@ const Complaints = props => {
         style={{
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
-          overflow: "hidden",
-          // background: "whitesmoke"
+          overflow: "hidden",         
         }}
         className="w-newScreen bg-white z-50 h-newScreen mt-16 align-absolute"
       >

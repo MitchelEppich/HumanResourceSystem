@@ -60,6 +60,20 @@ return (
       All Complaints
         </a>
 
+        <a
+        onClick={() => {   
+          props.setVisibleScreen([
+            props.misc.visibleScreen != null &&
+            props.misc.visibleScreen.includes("RegisterUser")
+              ? "RegisterUser"
+              : "RegisterUser"
+          ]);
+        }}
+        className={`p-2  unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2 ${!props.misc.visibleScreen.includes("RegisterUser") ? "bg-grey-new text-white" : "bg-white text-grey-new" } `}
+      >
+        Register New User
+      </a>
+
       <a
         onClick={() => {   
           props.setVisibleScreen([
@@ -72,7 +86,7 @@ return (
         className={`p-2  unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2 ${!props.misc.visibleScreen.includes("userViewer") ? "bg-grey-new text-white" : "bg-white text-grey-new" } `}
       >
         Users
-      </a>
+      </a>      
      
       <a
         onClick={() => {
