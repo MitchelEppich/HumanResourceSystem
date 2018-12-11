@@ -22,25 +22,40 @@ input ComplaintFilter {
 type User {
   _id: String
   username: String
-  name: String
   badge: String
-  locked: Boolean
+  name: String
+  jobTitle: [String]
+  permissions: [String]
+  reportsTo: String
+  startingDate: String
+  endingDate: String
+  phone: String
+  email: String
+  jobDescription: String
+  adminNotes: String
   token: String
-  admin: Boolean
-  online: Boolean
   createdAt: String
+  online: String
   lastAction: String
 }
 
 input UserInput {
-  id: String
+  _id: String
   username: String
-  name: String
   badge: String
-  locked: Boolean
+  name: String
+  jobTitle: [String]
+  permissions: [String]
+  reportsTo: String
+  startingDate: String
+  endingDate: String
+  phone: String
+  email: String
+  jobDescription: String
+  adminNotes: String
   token: String
-  admin: Boolean
-  online: Boolean
+  createdAt: String
+  online: String
   lastAction: String
 }
 

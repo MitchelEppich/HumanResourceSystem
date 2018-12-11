@@ -137,13 +137,21 @@ const query = {
     query($token: String) {
       user(input: { token: $token }) {
         username
-        name
         badge
-        locked
+        name
+        jobTitle
+        permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
         token
-        admin
         createdAt
         online
+        lastAction
       }
     }
   `
@@ -154,12 +162,21 @@ const mutation = {
     mutation($username: String, $badge: String) {
       verifyCredentials(input: { username: $username, badge: $badge }) {
         username
-        name
         badge
-        locked
+        name
+        jobTitle
+        permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
         token
-        admin
         createdAt
+        online
+        lastAction
       }
     }
   `,
@@ -167,12 +184,21 @@ const mutation = {
     mutation($name: String, $admin: Boolean) {
       registerCredentials(input: { name: $name, admin: $admin }) {
         username
-        name
         badge
-        locked
+        name
+        jobTitle
+        permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
         token
-        admin
         createdAt
+        online
+        lastAction
       }
     }
   `,
@@ -194,10 +220,19 @@ const mutation = {
         }
       ) {
         username
-        name
         badge
-        locked
-        admin
+        name
+        jobTitle
+        permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
+        token
+        createdAt
         online
         lastAction
       }
