@@ -26,7 +26,10 @@ const UserViewer = props => {
     let arr = [];
     for (let user of props.user.promptUsers) {
       arr.push(
-        <div key={arr} className="inline-flex w-full flex items-center overflow-y-auto bg-grey-lighter p-1 mt-1 capitalize">
+        <div
+          key={arr}
+          className="inline-flex w-full flex items-center overflow-y-auto bg-grey-lighter p-1 mt-1 capitalize"
+        >
           <div style={{ width: "20%" }} className="pl-8">
             {user.name}
           </div>
@@ -85,14 +88,14 @@ const UserViewer = props => {
               <FontAwesomeIcon icon={faLock} className="fa-lg" />
             </div>
             <div
-            onClick={() => {
-              props.deleteUser({
-                username: user.username,
-                promptUsers: props.user.promptUsers
-              });
-            }}
-            
-            className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+              onClick={() => {
+                props.deleteUser({
+                  username: user.username,
+                  promptUsers: props.user.promptUsers
+                });
+              }}
+              className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
+            >
               <FontAwesomeIcon icon={faTimes} className="fa-lg text-center" />
             </div>
           </div>
@@ -178,8 +181,37 @@ const UserViewer = props => {
           </div>
         </div>
       </div>
+      <Subscription subscription={subscription.userUpdate}>
+        {({ data }) => {
+          if (data != null) {
+            let _user = data.userUpdate;
+            let _promptUsers = props.user.promptUsers;
+            if (!JSON.stringify(_promptUsers).includes(JSON.stringify(_user))) {
+              props.modifyUser({
+                user: _user,
+                promptUsers: _promptUsers
+              });
+            }
+          }
+          return <div />;
+        }}
+      </Subscription>
     </div>
   );
+};
+
+const subscription = {
+  userUpdate: gql`
+    subscription {
+      userUpdate {
+        username
+        badge
+        permissions
+        online
+        lastAction
+      }
+    }
+  `
 };
 
 export default UserViewer;

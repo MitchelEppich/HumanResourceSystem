@@ -8,6 +8,8 @@ const { execute, subscribe } = require("graphql");
 const { createServer } = require("http");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 
+const routers = require("./routes/api/");
+
 require("dotenv").config();
 
 // our packages
@@ -47,6 +49,9 @@ app
     // server.get("/watch/:_id", (req, res) => {
     //   app.render(req, res, "/", {});
     // });
+    server.use(bodyParser.json()); // support json encoded bodies
+    server.use(bodyParser.urlencoded({ extended: true }));
+    server.use("/api", routers);
 
     server.use(
       "/graphql",

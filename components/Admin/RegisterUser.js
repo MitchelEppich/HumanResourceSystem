@@ -11,9 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterUser = props => {
-
   // console.log(props)
-
 
   let showJobTitles = () => {
     if (props.user.userData.jobTitle == null) return;
@@ -21,12 +19,9 @@ const RegisterUser = props => {
     for (let title of props.user.userData.jobTitle) {
       arr.push(
         <div className="p-2 bg-grey-light text-grey uppercase mt-1 inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2">
-              <h4 className="px-4 capitalize">{title}</h4>
-              <FontAwesomeIcon
-                icon={faTimes}
-                className="fa-lg cursor-pointer"
-              />
-            </div>
+          <h4 className="px-4 capitalize">{title}</h4>
+          <FontAwesomeIcon icon={faTimes} className="fa-lg cursor-pointer" />
+        </div>
       );
     }
     return arr;
@@ -38,20 +33,21 @@ const RegisterUser = props => {
     for (let note of props.user.userData.adminNotes) {
       arr.push(
         <div className="w-full p-2 mt-2 bg-grey-lighter">
-          <div style={{width: "50%"}} className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify  hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2">
-                <p className="px-4 text-left">{note}</p>
-                <FontAwesomeIcon
-                  icon={faTimes}
-                  className="fa-lg cursor-pointer justify-end"
-                />
-            </div>
+          <div
+            style={{ width: "50%" }}
+            className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify  hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2"
+          >
+            <p className="px-4 text-left">{note}</p>
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="fa-lg cursor-pointer justify-end"
+            />
           </div>
+        </div>
       );
     }
     return arr;
   };
-
-
 
   return (
     <div
@@ -86,7 +82,7 @@ const RegisterUser = props => {
           <h3 className="p-2 text-center text-white uppercase">
             Register New User{" "}
           </h3>
-        </div>        
+        </div>
       </div>
 
       <div className="w-full h-600 overflow-y-auto">
@@ -182,9 +178,7 @@ const RegisterUser = props => {
               </div>
             </div>
           </div>
-          <div className="w-2/4 mt-1 inline-flex ">
-          {showJobTitles()}   
-          </div>
+          <div className="w-2/4 mt-1 inline-flex ">{showJobTitles()}</div>
         </div>
         <div className="inline-flex w-full bg-grey-lighter text-grey p-1 mt-2 flex items-center">
           <div className="w-2/4 uppercase pt-2 pb-2">
@@ -327,7 +321,7 @@ const RegisterUser = props => {
             <FontAwesomeIcon
               onClick={() => {
                 let adminNotes = props.user.userData.adminNotes || [];
-                let _new = props.user.userData._adminNote;               
+                let _new = props.user.userData._adminNote;
                 if (adminNotes.includes(_new) || _new == null) return;
 
                 props.setUserData({
@@ -340,13 +334,14 @@ const RegisterUser = props => {
               className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
             />
           </div>
-        </div>        
-              {showNotes()}
-       
+        </div>
+        {showNotes()}
+
         <div
           className="w-full mt-2 bg-grey-lighter h-16 relative"
           onClick={() => {
             props.registerCredentials(props.user.userData);
+            props.setVisibleScreen("userViewer");
           }}
         >
           <div className="w-200 mr-4 mb-2 h-10 p-2 pt-2 bg-orange-new text-white uppercase absolute pin-r pin-b cursor-pointer hover:bg-grey-light hover:text-black">
