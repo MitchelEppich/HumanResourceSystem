@@ -113,7 +113,7 @@ const UserViewer = props => {
     >
       {props.misc.visibleScreen.includes("permissions") ? (
         <div
-          style={{ zIndex: "99999" }}
+          style={{ zIndex: "99999", background: "white" }}
           className="w-full h-full absolute justify-end"
         >
           <Permissions {...props} />
@@ -122,7 +122,7 @@ const UserViewer = props => {
 
       {props.misc.visibleScreen.includes("userDescription") ? (
         <div
-          style={{ zIndex: "99999" }}
+          style={{ zIndex: "99999", background: "white" }}
           className="w-full h-full absolute justify-end"
         >
           <UserDescription {...props} />
@@ -131,7 +131,7 @@ const UserViewer = props => {
 
       {props.misc.visibleScreen.includes("viewUserDescription") ? (
         <div
-          style={{ zIndex: "99999" }}
+          style={{ zIndex: "99999", background: "white" }}
           className="w-full h-full absolute justify-end"
         >
           <ViewUserDescription {...props} />
@@ -173,7 +173,7 @@ const UserViewer = props => {
             </div>
           </div>
           <div style={{ marginTop: "25px" }} className="w-full" />
-          <div style={{ height: "590px" }} className="w-full">
+          <div style={{ height: "590px" }} className="w-full overflow-y-auto">
             {showUsers()}
           </div>
         </div>
