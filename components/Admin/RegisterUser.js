@@ -32,7 +32,7 @@ const RegisterUser = props => {
     let arr = [];
     for (let note of props.user.userData.adminNotes) {
       arr.push(
-        <div className="w-full p-2 mt-2 bg-grey-lighter">
+        <div className="w-full p-2 mt-2 bg-white">
           <div
             style={{ width: "50%" }}
             className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify  hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2"
@@ -52,18 +52,24 @@ const RegisterUser = props => {
   return (
     <div
       style={{
-        boxShadow: "0px 1px 4px rgb(187, 187, 187)",
-        borderRadius: "10px",
+        position: "absolute",
+        height: "820px",
+        width: "99vw"
+      }}
+    >
+    <div
+      style={{
+        // boxShadow: "0 0 4px rgba(220, 220, 220, 0.4)",
+        borderTopLeftRadius: "10px",
+        borderTopRightRadius: "10px",
         overflow: "hidden",
-        top: "180px"
+        top: "60px"
       }}
       className="w-newScreen align-absolute bg-white text-center pin-auto"
     >
       <div
         style={{
-          overflow: "hidden",
-          borderTopLeftRadius: "11px",
-          borderTopRightRadius: "11px"
+          overflow: "hidden",         
         }}
         className="inline-flex w-full bg-grey-new relative"
       >
@@ -91,9 +97,9 @@ const RegisterUser = props => {
           
         }}
       >
-      <div className="w-full h-650 bg-grey-lighter overflow-y-auto">
+      <div className="w-full h-650 bg-white overflow-y-auto">
       
-        <div className="inline-flex w-full bg-grey-lighter py-2 text-grey p-1 mt-4 flex items-center">
+        <div className="inline-flex w-full bg-grey-lighter py-2 text-grey p-1 mt-2 flex items-center">
           <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
               <div style={{ width: "135px" }} className="text-left">
@@ -122,7 +128,7 @@ const RegisterUser = props => {
             <div className="w-full pl-6 text-left inline-flex flex items-center">
               <label className="font-bold pr-2">Reports to:</label>
               <select
-                className="w-300 p-1 pt-2 "
+                className="w-300 p-1 flex items-center"
                 id="reportsTo"
                 onChange={e => {
                   let _value = e.target.value;
@@ -134,7 +140,7 @@ const RegisterUser = props => {
                 }}
               >
                 <option value="" disabled selected>
-                  Select here...
+                  Select an option...
                 </option>
                 <option value="Kyle">Kyle</option>
                 <option value="James">James</option>
@@ -155,7 +161,7 @@ const RegisterUser = props => {
               <input
                 type="text"
                 id="_title"
-                placeholder="Add here.."
+                placeholder="Add here..."
                 className="p-2 w-300"
                 onChange={e => {
                   let _value = e.target.value;
@@ -210,8 +216,35 @@ const RegisterUser = props => {
                   }}
                 />
               </div>
-            </div>
-            <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
+            </div>            
+          </div>
+          <div className="w-2/4 uppercase">
+            <div className="w-full pl-6 text-left inline-flex flex items-center">
+              <div style={{ width: "100px" }} className="text-left">
+                <label className="font-bold pr-2">Phone #:</label>
+              </div>
+              <div className="w-300">
+                <input
+                  type="text"
+                  id="phone"
+                  placeholder=""
+                  className="p-2 w-300"
+                  onChange={e => {
+                    let _value = e.target.value;
+                    props.setUserData({
+                      userData: props.user.userData,
+                      key: e.target.id,
+                      value: _value
+                    });
+                  }}
+                />
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div className="inline-flex w-full bg-grey-lighter text-grey p-1 mt-2 flex items-center">
+          <div className="w-2/4 uppercase">            
+            <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "135px" }} className="text-left">
                 <label className="font-bold pr-2">Ending Date:</label>
               </div>
@@ -233,29 +266,8 @@ const RegisterUser = props => {
               </div>
             </div>
           </div>
-          <div className="w-2/4 uppercase">
-            <div className="w-full pl-6 text-left inline-flex flex items-center">
-              <div style={{ width: "100px" }} className="text-left">
-                <label className="font-bold pr-2">Phone #:</label>
-              </div>
-              <div className="w-300">
-                <input
-                  type="text"
-                  id="phone"
-                  placeholder="Optional"
-                  className="p-2 w-300"
-                  onChange={e => {
-                    let _value = e.target.value;
-                    props.setUserData({
-                      userData: props.user.userData,
-                      key: e.target.id,
-                      value: _value
-                    });
-                  }}
-                />
-              </div>
-            </div>
-            <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
+          <div className="w-2/4 uppercase">            
+            <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "100px" }} className="text-left">
                 <label className="font-bold pr-2">Email:</label>
               </div>
@@ -290,7 +302,7 @@ const RegisterUser = props => {
               cols="80"
               rows="6"
               className="pt-2 pl-2"
-              placeholder="Optional"
+              placeholder=""
               id="jobDescription"
               onChange={e => {
                 let _value = e.target.value;
@@ -347,7 +359,7 @@ const RegisterUser = props => {
               {showNotes()}
        
         <div           
-          className="w-full mt-2 bg-grey-lighter h-24 relative"
+          className="w-full mt-2 bg-white h-24 relative"
           
         >
           <button 
@@ -358,6 +370,7 @@ const RegisterUser = props => {
         </div>
       </div>
       </form>
+    </div>
     </div>
   );
 };

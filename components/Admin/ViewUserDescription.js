@@ -27,8 +27,9 @@ const ViewUserDescription = props => {
     <div
       id="viewUser"
       style={{
-        boxShadow: "0px 1px 4px rgb(187, 187, 187)",
-        borderRadius: "10px",
+        // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+        borderTopLeftRadius: "10px",
+        borderTopRightRadius: "10px",
         overflow: "hidden",
         top: "60px"
       }}
@@ -37,8 +38,8 @@ const ViewUserDescription = props => {
       <div
         style={{
           overflow: "hidden",
-          borderTopLeftRadius: "10px",
-          borderTopRightRadius: "10px"
+          // borderTopLeftRadius: "10px",
+          // borderTopRightRadius: "10px"
         }}
         className="inline-flex w-full bg-grey-new relative"
       >
@@ -78,7 +79,7 @@ const ViewUserDescription = props => {
         </div>
       </div>
 
-      <div className="w-full overflow-y-auto">
+      <div className="w-full h-650 overflow-y-auto">
         <div className="inline-flex w-full bg-grey-lighter py-2 text-grey p-1 mt-4 flex items-center">
           <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
@@ -120,8 +121,22 @@ const ViewUserDescription = props => {
               <div className="w-300">
                 <p className="p-2 uppercase">{moment(_user.startingDate).format("DD/MM/YYYY")}</p>
               </div>
-            </div>
-            <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
+            </div>            
+          </div>
+          <div className="w-2/4 uppercase">
+            <div className="w-full pl-6 text-left inline-flex flex items-center">
+              <div style={{ width: "100px" }} className="text-left">
+                <label className="font-bold pr-2">Phone #:</label>
+              </div>
+              <div className="w-300">
+                <p className="p-2 capitalize">{_user.phone}</p>
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div className="inline-flex w-full bg-grey-lighter text-grey p-1 mt-2 flex items-center">
+          <div className="w-2/4 uppercase">            
+            <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "135px" }} className="text-left">
                 <label className="font-bold pr-2">Ending Date:</label>
               </div>
@@ -132,16 +147,8 @@ const ViewUserDescription = props => {
               </div>
             </div>
           </div>
-          <div className="w-2/4 uppercase">
-            <div className="w-full pl-6 text-left inline-flex flex items-center">
-              <div style={{ width: "100px" }} className="text-left">
-                <label className="font-bold pr-2">Phone #:</label>
-              </div>
-              <div className="w-300">
-                <p className="p-2 capitalize">{_user.phone}</p>
-              </div>
-            </div>
-            <div className="w-full pl-6 text-left mt-4 inline-flex flex items-center">
+          <div className="w-2/4 uppercase">            
+            <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "100px" }} className="text-left">
                 <label className="font-bold pr-2">Email:</label>
               </div>

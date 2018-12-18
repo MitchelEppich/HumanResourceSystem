@@ -13,12 +13,13 @@ import {
 const Permissions = props => {
     return (
         <div style={{
-            boxShadow: "0px 1px 4px rgb(187, 187, 187)",
-            borderRadius: "10px",
+            // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
             overflow: "hidden",
             top: "60px"
             }} 
-            className="w-newScreen h-400 align-absolute bg-white text-center pin-auto">
+            className="w-newScreen align-absolute bg-white text-center pin-auto">
             <div className="inline-flex w-full bg-grey-new relative">
                 <div
                 onClick={() => {
@@ -40,37 +41,105 @@ const Permissions = props => {
                 <div className="w-1/5 uppercase text-sm">Access</div>
                 <div className="w-1/5 uppercase text-sm">Admin</div>
             </div>
-            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
-                <div className="w-3/5 text-left pl-4 uppercase">
-                    <h4>Package Fulfillment System</h4>
+            <div className="w-full h-650 overflow-y-auto">
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-            </div>
-            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
-                <div className="w-3/5 text-left pl-4 uppercase">
-                    <h4>Human Resources System</h4>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-            </div>
-            <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
-                <div className="w-3/5 text-left pl-4 uppercase">
-                    <h4>Time Keeping System</h4>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Package Fulfillment System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Human Resources System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
                 </div>
-                <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                    <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+                    <div className="w-3/5 text-left pl-4 uppercase">
+                        <h4>Time Keeping System</h4>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOn} className="fa-2x"/>
+                    </div>
+                    <div className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
+                        <FontAwesomeIcon icon={faToggleOff} className="fa-2x"/>
+                    </div>
                 </div>
             </div>
         </div>

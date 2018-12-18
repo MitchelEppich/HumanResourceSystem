@@ -21,7 +21,7 @@ import gql from "graphql-tag";
 
 const UserViewer = props => {
   let showUsers = () => {
-    console.log(props);
+    // console.log(props);
     if (props.user.promptUsers == null) return;
     let arr = [];
     for (let user of props.user.promptUsers) {
@@ -176,7 +176,7 @@ const UserViewer = props => {
             </div>
           </div>
           <div style={{ marginTop: "25px" }} className="w-full" />
-          <div style={{ height: "590px" }} className="w-full overflow-y-auto">
+          <div className="w-full h-650 overflow-y-auto">
             {showUsers()}
           </div>
         </div>
