@@ -22,14 +22,14 @@ const Complaints = props => {
     for (let complaint of _complaints) {
       arr.push(
         <div key={arr} className="inline-flex w-full p-1 bg-grey-light text-grey mt-1 flex items-center ">
-          <div style={{ width: "15%" }} className=" pl-4 uppercase">
+          <div style={{ width: "15%" }} className=" text-center capitalize">
             {complaint.name || "NO NAME"}
           </div>
-          <div style={{ width: "15%" }} className=" text-center uppercase">
+          <div style={{ width: "15%" }} className=" text-center capitalize">
           
-          {moment(complaint.incidentDate).format("DD/MM/YY - HH:MM") || "Not defined"}
+          {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") || "Not defined"}
           </div>
-          <div style={{ width: "45%" }} className=" pl-12 uppercase">
+          <div style={{ width: "45%" }} className=" pl-12 capitalize">
             {complaint.incidentDescription != null
               ? `${complaint.incidentDescription.substring(0, 80)}${
                   complaint.incidentDescription.length > 80 ? "..." : ""
@@ -106,7 +106,7 @@ const Complaints = props => {
             style={{ marginTop: "35px" }}
             className="inline-flex w-full absolute pin-l pin-t p-1 bg-orange-new uppercase text-white text-sm"
           >
-            <div style={{ width: "15%" }} className="pl-6">
+            <div style={{ width: "15%" }} className="text-center">
               Author
             </div>
             <div style={{ width: "15%" }} className="text-center">
@@ -115,10 +115,10 @@ const Complaints = props => {
             <div style={{ width: "45%" }} className="pl-16">
               Preview Message
             </div>
-            <div style={{ width: "15%" }} className="pl-16">
+            <div style={{ width: "15%" }} className="text-center">
               Status
             </div>
-            <div style={{ width: "10%" }} className="pl-8">
+            <div style={{ width: "10%" }} className="text-center">
               Action
             </div>
           </div>

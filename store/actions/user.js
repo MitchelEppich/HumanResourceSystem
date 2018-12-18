@@ -89,7 +89,7 @@ const getActions = uri => {
         return makePromise(execute(link, operation))
           .then(data => {
             let users = data.data.allUsers;
-            console.log(users);
+            // console.log(users);
             dispatch({ type: actionTypes.FETCH_USERS, users: users });
             return Promise.resolve(users);
           })
