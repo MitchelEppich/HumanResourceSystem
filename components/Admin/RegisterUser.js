@@ -84,8 +84,15 @@ const RegisterUser = props => {
           </h3>
         </div>
       </div>
-
-      <div className="w-full h-600 overflow-y-auto">
+      <form 
+        onSubmit={() => {
+          props.registerCredentials(props.user.userData);
+          
+          
+        }}
+      >
+      <div className="w-full h-650 bg-grey-lighter overflow-y-auto">
+      
         <div className="inline-flex w-full bg-grey-lighter py-2 text-grey p-1 mt-4 flex items-center">
           <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
@@ -95,6 +102,7 @@ const RegisterUser = props => {
               <div className="w-300">
                 <input
                   type="text"
+                  required
                   placeholder="Required"
                   className="p-2 w-300"
                   id="name"
@@ -255,6 +263,7 @@ const RegisterUser = props => {
                 <input
                   type="text"
                   id="email"
+                  required
                   placeholder="Required"
                   className="p-2 w-300"
                   onChange={e => {
@@ -334,21 +343,21 @@ const RegisterUser = props => {
               className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
             />
           </div>
-        </div>
-        {showNotes()}
-
-        <div
-          className="w-full mt-2 bg-grey-lighter h-16 relative"
-          onClick={() => {
-            props.registerCredentials(props.user.userData);
-            props.setVisibleScreen("userViewer");
-          }}
+        </div>        
+              {showNotes()}
+       
+        <div           
+          className="w-full mt-2 bg-grey-lighter h-24 relative"
+          
         >
-          <div className="w-200 mr-4 mb-2 h-10 p-2 pt-2 bg-orange-new text-white uppercase absolute pin-r pin-b cursor-pointer hover:bg-grey-light hover:text-black">
+          <button 
+          type="submit"
+          className="w-200 mr-4 mb-2 h-10 p-2 pt-2 bg-orange-new text-white uppercase absolute pin-r pin-b cursor-pointer hover:bg-grey-light hover:text-black">
             <h3>Save</h3>
-          </div>
+          </button>
         </div>
       </div>
+      </form>
     </div>
   );
 };
