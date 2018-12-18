@@ -109,7 +109,6 @@ const resolvers = {
     },
     updateUser: async (_, { input }) => {
       let user;
-
       if (input.admin != null || input.locked != null) {
         user = await User.findOne({ username: input.username });
         input = modifyPermissions(user, input);
@@ -126,11 +125,10 @@ const resolvers = {
           { new: true }
         );
 
-        console.log(
-          pubsub.publish("userUpdate", {
-            userUpdate: { ...user.toObject() }
-          })
-        );
+        pubsub.publish("userUpdate", {
+          userUpdate: { ...user.toObject() }
+        });
+
         postUserUpdate(user.toObject());
 
         return user.toObject();
@@ -151,24 +149,24 @@ function modifyPermissions(user, input) {
     _index++;
   }
   let _permissions = user.permissions;
+
   let _permBreak = _permissions[_index].split(":");
 
   _permissions[_index] = `${input.CLIENT_ACR}:${
-    input.admin != null ? (input.admin ? 0 : 1) : _permBreak[1]
-  }:${input.locked != null ? (input.locked ? 0 : 1) : _permBreak[2]}`;
+    input.admin != null ? (input.admin == "true" ? 1 : 0) : _permBreak[1]
+  }:${input.locked != null ? (input.locked == "true" ? 1 : 0) : _permBreak[2]}`;
 
   return { permissions: _permissions, ...input };
 }
 
 const postUserUpdate = user => {
-  console.log("POST DATA", user);
   let config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   };
 
-  let body = toUrlEncoded({ userUpdate: user });
+  let body = toUrlEncoded({ userUpdate: JSON.stringify(user) });
 
   axios.post("http://localhost:3001/user/update", body, config).then(res => {
     console.log("Successfully updated client...");
