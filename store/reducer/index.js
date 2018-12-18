@@ -13,7 +13,13 @@ import userReducer from "./user";
 import navReducer from "./navigation";
 
 const initialState = {
-  visibleScreen: [] // When null show main screen
+  visibleScreen: [], // When null show main screen
+  clientSystems: {
+    'PFS' : "Package Fulfillment System",
+    'HRS' : "Human Resources System",
+    'TMS' : "Time Management System",
+    'IMS' : "Inventory Management System"
+  }
 };
 
 const indexReducer = (state = initialState, action) => {

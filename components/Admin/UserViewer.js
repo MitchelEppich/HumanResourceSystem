@@ -21,7 +21,6 @@ import gql from "graphql-tag";
 
 const UserViewer = props => {
   let showUsers = () => {
-    console.log(props);
     if (props.user.promptUsers == null) return;
     let arr = [];
     for (let user of props.user.promptUsers) {
@@ -77,6 +76,7 @@ const UserViewer = props => {
                     ? ["userViewer"]
                     : ["permissions", "userViewer"]
                 );
+                props.setFocusUser({ user });
               }}
               className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
             >
@@ -189,7 +189,8 @@ const UserViewer = props => {
             if (!JSON.stringify(_promptUsers).includes(JSON.stringify(_user))) {
               props.modifyUser({
                 user: _user,
-                promptUsers: _promptUsers
+                promptUsers: _promptUsers,
+                focusUser: props.nav.focusUser
               });
             }
           }
@@ -206,7 +207,18 @@ const subscription = {
       userUpdate {
         username
         badge
+        name
+        jobTitle
         permissions
+        reportsTo
+        startingDate
+        endingDate
+        phone
+        email
+        jobDescription
+        adminNotes
+        token
+        createdAt
         online
         lastAction
       }

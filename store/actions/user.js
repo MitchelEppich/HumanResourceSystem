@@ -7,6 +7,7 @@ import gql from "graphql-tag";
 import { makePromise, execute } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import fetch from "node-fetch";
+import Navigation from "./navigation";
 
 const actionTypes = {
   VERIFY_CREDENTIALS: "VERIFY_CREDENTIALS",
@@ -25,7 +26,6 @@ const getActions = uri => {
     setUserData: input => {
       let _userData = input.userData;
       _userData[input.key] = input.value;
-      console.log(_userData);
       return { type: actionTypes.SET_USER_DATA, input: _userData };
     },
     releaseCredentials: input => {
@@ -150,8 +150,19 @@ const getActions = uri => {
       };
     },
     modifyUser: input => {
+      return dispatch => {
       let _promptUsers = input.promptUsers;
       let _user = input.user;
+      let _focusUser = input.focusUser
+      console.log(_user != null &&
+          _user.username == _focusUser.username)
+        if (
+          _user != null &&
+          _user.username == _focusUser.username
+        ) {
+          let NavActions = Navigation(uri);
+          dispatch(NavActions.setFocusUser({ user: _user }));
+        }
 
       let _index = 0;
       for (let _u of _promptUsers) {
@@ -162,8 +173,8 @@ const getActions = uri => {
         _index++;
       }
 
-      return { type: actionTypes.MODIFY_USER, input: _promptUsers };
-    }
+      dispatch( { type: actionTypes.MODIFY_USER, input: _promptUsers })
+    }}
   };
 
   return { ...objects };
@@ -291,6 +302,7 @@ const mutation = {
   `,
   updateUser: gql`
     mutation(
+      $username: String
       $name: String
       $reportsTo: String
       $jobTitle: [String]
@@ -299,13 +311,14 @@ const mutation = {
       $phone: String
       $email: String
       $jobDescription: String
-      $adminNotes: [String]
+      $adminNote: String
       $permissions: [String]
       $online: Boolean
       $lastAction: String
     ) {
       updateUser(
         input: {
+          username: $username
           name: $name
           reportsTo: $reportsTo
           jobTitle: $jobTitle
@@ -314,7 +327,7 @@ const mutation = {
           phone: $phone
           email: $email
           jobDescription: $jobDescription
-          adminNotes: $adminNotes
+          adminNote: $adminNote
           permissions: $permissions
           online: $online
           lastAction: $lastAction

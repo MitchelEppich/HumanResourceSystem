@@ -32,10 +32,10 @@ type User {
   phone: String
   email: String
   jobDescription: String
-  adminNotes: String
+  adminNotes: [String]
   token: String
   createdAt: String
-  online: String
+  online: Boolean
   lastAction: String
 }
 
@@ -52,10 +52,10 @@ input UserInput {
   phone: String
   email: String
   jobDescription: String
-  adminNotes: String
+  adminNote: String
   token: String
   createdAt: String
-  online: String
+  online: Boolean
   lastAction: String
 }
 
