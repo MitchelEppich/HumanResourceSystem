@@ -15,7 +15,9 @@ const actionTypes = {
   REGISTER_CREDENTIALS: "REGISTER_CREDENTIALS",
   UPDATE_USER: "UPDATE_USER",
   SET_USER_DATA: "SET_USER_DATA",
-  FETCH_USERS: "FETCH_USERS"
+  FETCH_USERS: "FETCH_USERS",
+  MODIFY_USER: "MODIFY_USER",
+  DELETE_USER: "DELETE_USER"
 };
 
 const getActions = uri => {
@@ -52,10 +54,7 @@ const getActions = uri => {
             let user = data.data.user;
             if (user == null) return;
             sessionStorage.setItem("token", user.token);
-            dispatch({
-              type: actionTypes.FETCH_CREDENTIALS,
-              user: user
-            });
+            dispatch({ type: actionTypes.FETCH_CREDENTIALS, user: user });
             return Promise.resolve(user);
           })
           .catch(error => console.log(error));
@@ -63,10 +62,7 @@ const getActions = uri => {
     },
     verifyCredentials: input => {
       return dispatch => {
-        const link = new HttpLink({
-          uri,
-          fetch: fetch
-        });
+        const link = new HttpLink({ uri, fetch: fetch });
         const operation = {
           query: mutation.verifyCredentials,
           variables: {
@@ -79,10 +75,7 @@ const getActions = uri => {
           let user = data.data.verifyCredentials;
           if (user == null) return;
           sessionStorage.setItem("token", user.token);
-          dispatch({
-            type: actionTypes.VERIFY_CREDENTIALS,
-            user: user
-          });
+          dispatch({ type: actionTypes.VERIFY_CREDENTIALS, user: user });
           return Promise.resolve(user);
         });
       };
@@ -91,18 +84,13 @@ const getActions = uri => {
       return dispatch => {
         const link = new HttpLink({ uri, fetch: fetch });
 
-        const operation = {
-          query: query.getUsers
-        };
+        const operation = { query: query.getUsers };
 
         return makePromise(execute(link, operation))
           .then(data => {
             let users = data.data.allUsers;
             console.log(users);
-            dispatch({
-              type: actionTypes.FETCH_USERS,
-              users: users
-            });
+            dispatch({ type: actionTypes.FETCH_USERS, users: users });
             return Promise.resolve(users);
           })
           .catch(error => console.log(error));
@@ -110,23 +98,15 @@ const getActions = uri => {
     },
     registerCredentials: input => {
       return dispatch => {
-        const link = new HttpLink({
-          uri,
-          fetch: fetch
-        });
+        const link = new HttpLink({ uri, fetch: fetch });
         const operation = {
           query: mutation.registerCredentials,
-          variables: {
-            ...input
-          }
+          variables: { ...input }
         };
 
         return makePromise(execute(link, operation)).then(data => {
           let user = data.data.registerCredentials;
-          dispatch({
-            type: actionTypes.REGISTER_CREDENTIALS,
-            user: user
-          });
+          dispatch({ type: actionTypes.REGISTER_CREDENTIALS, user: user });
           return Promise.resolve(user);
         });
       };
@@ -147,25 +127,17 @@ const getActions = uri => {
               return true;
             });
 
-            dispatch({
-              type: actionTypes.DELETE_USER,
-              input: _promptUsers
-            });
+            dispatch({ type: actionTypes.DELETE_USER, input: _promptUsers });
           })
           .catch(error => console.log(error));
       };
     },
     updateUser: input => {
       return dispatch => {
-        const link = new HttpLink({
-          uri,
-          fetch: fetch
-        });
+        const link = new HttpLink({ uri, fetch: fetch });
         const operation = {
           query: mutation.updateUser,
-          variables: {
-            ...input
-          }
+          variables: { ...input }
         };
         return makePromise(execute(link, operation)).then(data => {
           let user = data.data.updateUser;
@@ -176,6 +148,21 @@ const getActions = uri => {
           return Promise.resolve(user);
         });
       };
+    },
+    modifyUser: input => {
+      let _promptUsers = input.promptUsers;
+      let _user = input.user;
+
+      let _index = 0;
+      for (let _u of _promptUsers) {
+        if (_u.username == _user.username) {
+          _promptUsers[_index] = _user;
+          break;
+        }
+        _index++;
+      }
+
+      return { type: actionTypes.MODIFY_USER, input: _promptUsers };
     }
   };
 
@@ -296,12 +283,12 @@ const mutation = {
     }
   `,
   deleteUser: gql`
-      mutation($username: String) {
-        deleteUser(input: { username: $username }) {
-          username
-        }
+    mutation($username: String) {
+      deleteUser(input: { username: $username }) {
+        username
       }
-    `,
+    }
+  `,
   updateUser: gql`
     mutation(
       $name: String

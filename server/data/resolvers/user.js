@@ -6,6 +6,8 @@ const { PubSub, withFilter } = require("graphql-subscriptions");
 
 const pubsub = new PubSub();
 
+const axios = require("axios");
+
 const resolvers = {
   Query: {
     user: async (_, { input }) => {
@@ -38,7 +40,7 @@ const resolvers = {
       subscribe: withFilter(
         () => pubsub.asyncIterator("userUpdate"),
         (payload, variables) => {
-          // console.log(payload, variables);
+          console.log(payload, variables);
           return true;
         }
       )
@@ -46,6 +48,7 @@ const resolvers = {
   },
   Mutation: {
     verifyCredentials: async (_, { input }) => {
+      // console.log(input);
       let user = await User.findOne({
         badge: input.badge
       });
@@ -106,6 +109,12 @@ const resolvers = {
     },
     updateUser: async (_, { input }) => {
       let user;
+
+      if (input.admin != null || input.locked != null) {
+        user = await User.findOne({ username: input.username });
+        input = modifyPermissions(user, input);
+      }
+
       try {
         let operation = {
           $set: { ...input }
@@ -117,9 +126,12 @@ const resolvers = {
           { new: true }
         );
 
-        pubsub.publish("userUpdate", {
-          userUpdate: { ...user.toObject() }
-        });
+        console.log(
+          pubsub.publish("userUpdate", {
+            userUpdate: { ...user.toObject() }
+          })
+        );
+        postUserUpdate(user.toObject());
 
         return user.toObject();
       } catch (error) {
@@ -129,5 +141,43 @@ const resolvers = {
     }
   }
 };
+
+function modifyPermissions(user, input) {
+  let _index = 0;
+  for (let perm of user.permissions) {
+    if (perm.includes(input.CLIENT_ACR)) {
+      break;
+    }
+    _index++;
+  }
+  let _permissions = user.permissions;
+  let _permBreak = _permissions[_index].split(":");
+
+  _permissions[_index] = `${input.CLIENT_ACR}:${
+    input.admin != null ? (input.admin ? 0 : 1) : _permBreak[1]
+  }:${input.locked != null ? (input.locked ? 0 : 1) : _permBreak[2]}`;
+
+  return { permissions: _permissions, ...input };
+}
+
+const postUserUpdate = user => {
+  console.log("POST DATA", user);
+  let config = {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  };
+
+  let body = toUrlEncoded({ userUpdate: user });
+
+  axios.post("http://localhost:3001/user/update", body, config).then(res => {
+    console.log("Successfully updated client...");
+  });
+};
+
+const toUrlEncoded = obj =>
+  Object.keys(obj)
+    .map(k => encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]))
+    .join("&");
 
 module.exports = resolvers;

@@ -228,6 +228,7 @@ const Main = props => {
                     className="p-2 w-300 h-10"
                   />
                 </div>
+                
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Location:</label>
                   <select
