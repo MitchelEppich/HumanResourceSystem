@@ -69,7 +69,10 @@ const RegisterUser = props => {
             }}
             className="w-100 h-full inline-flex absolute"
           >
-            <h4 className="p-2 text-white uppercase text-lg bg-orange-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer" onClick={props.clearUserData}>
+            <h4
+              className="p-2 text-white uppercase text-lg bg-orange-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer"
+              onClick={props.clearUserData}
+            >
               <FontAwesomeIcon icon={faAngleLeft} className="fa-2x mr-4" />
               Back
             </h4>

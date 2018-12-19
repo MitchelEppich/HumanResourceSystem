@@ -24,6 +24,7 @@ const Permissions = props => {
       return arr;
     })();
 
+    
     // Display System
     let arr = [];
     for (let _client in props.misc.clientSystems) {
@@ -34,7 +35,7 @@ const Permissions = props => {
         _index = _permissions.length;
         _permissions.push(perm);
       }
-
+      
       let _break = perm.split(":");
       let _admin = _break[1] == "1";
       let _locked = _break[2] == "1";
@@ -53,12 +54,21 @@ const Permissions = props => {
                 permissions: _permissions
               });
             }}
-          >
+          >         
             <FontAwesomeIcon
-              icon={_locked ? faToggleOn : faToggleOff}
-              className="fa-2x"
-            />
+            icon={_locked ? faToggleOn : faToggleOff}
+            className="fa-2x"
+            />     
           </div>
+          {_user.username == props.user.currentUser.username && props.misc.clientSystems[_break[0]] == props.misc.clientSystems.HRS ? // Exclude lock button to HRS only for current user
+
+          ( 
+          <div className="w-10 h-10 justify-center mx-auto align-center">
+            {' '}
+          </div> 
+
+          ) : (
+
           <div
             className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
             onClick={() => {
@@ -69,12 +79,13 @@ const Permissions = props => {
                 permissions: _permissions
               });
             }}
-          >
+          >   
             <FontAwesomeIcon
               icon={_admin ? faToggleOn : faToggleOff}
               className="fa-2x"
-            />
-          </div>
+            />                                 
+        </div>   
+          )} 
         </div>
       );
     }
@@ -109,7 +120,7 @@ const Permissions = props => {
         </div>
       </div>
       <div className="inline-flex w-full bg-orange-new text-white p-1">
-        <div className="w-3/5 uppercase text-sm">Software</div>
+        <div className="w-3/5 text-left pl-24 uppercase text-sm">Software</div>
         <div className="w-1/5 uppercase text-sm">Access</div>
         <div className="w-1/5 uppercase text-sm">Admin</div>
       </div>
