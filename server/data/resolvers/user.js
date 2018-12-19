@@ -11,6 +11,7 @@ const axios = require("axios");
 const resolvers = {
   Query: {
     user: async (_, { input }) => {
+      if (input == null) return null;
       let _user = await User.findOne(input);
       if (_user == null) return null;
       if (_user["online"] == null) _user["online"] = true;

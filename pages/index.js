@@ -19,8 +19,9 @@ import gql from "graphql-tag";
 
 class Index extends Component {
   componentDidMount() {
+    this.props.fetchUsers()
     this.props.fetchCredentials().then(res => {
-      if (res == null) return;
+      if (res.username == null) return;
       this.props.setVisibleScreen([]);
     });
   }
@@ -28,7 +29,7 @@ class Index extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.user.currentUser == null) {
       this.props.fetchCredentials().then(res => {
-        if (res == null) return;
+        if (res.username == null) return;
         this.props.setVisibleScreen([]);
       });
     }

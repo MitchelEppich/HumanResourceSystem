@@ -16,12 +16,23 @@ import UserViewer from "../Admin/UserViewer"
 
 
 const Main = props => {
-  console.log(props)
 
+
+  let showNames = () => {   
+    if (props.user.promptUsers == null ) return;
+      let arr = []
+      let names = props.user.promptUsers.map(user=>{
+        return user.name;
+      })
+
+      for (let name of names) {
+        arr.push(
+          <option key={arr} value={name}>{name}</option>
+        )
+      }
+      return arr
+    }
   
-
-
-
   
   let showReportedNames = () => {
     if (props.nav.complaint.reportedNames == null) return;
@@ -157,9 +168,7 @@ const Main = props => {
                     <option value="" disabled selected>
                       Select here...
                     </option>
-                    <option value="jeremias">Jeremias</option>
-                    <option value="karl">Karl</option>
-                    <option value="anthony">Anthony</option>
+                    {showNames()}
                   </select>
                 </div>
 
@@ -307,9 +316,7 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="Mitchel Eppich">Mitchel Eppich</option>
-                      <option value="Chris Eppich">Chris Eppich</option>
-                      <option value="Karl with K">Karl with K</option>
+                      {showNames()}
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {
@@ -353,9 +360,7 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="Mitchel Eppich">Mitchel Eppich</option>
-                      <option value="Chris Eppich">Chris Eppich</option>
-                      <option value="Karl with K">Karl with K</option>
+                      {showNames()}
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {
