@@ -30,7 +30,6 @@ const Navbar = props => {
           {props.user.currentUser == null ? (
             <a
               onClick={() => {
-                console.log(props.user);
                 props.setVisibleScreen([
                   props.misc.visibleScreen != null &&
                   props.misc.visibleScreen.includes("login")

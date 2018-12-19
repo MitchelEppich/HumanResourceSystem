@@ -135,7 +135,6 @@ const Complaints = props => {
             let _complaint = data.complaintUpdate;
             let _focusComplaint = props.nav.focusComplaint;
 
-            console.log("SUB", _complaint);
             if (
               !JSON.stringify(_promptComplaints).includes(
                 JSON.stringify(_complaint)

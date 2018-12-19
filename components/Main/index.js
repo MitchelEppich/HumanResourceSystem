@@ -15,14 +15,7 @@ import UserViewer from "../Admin/UserViewer"
 
 
 
-const Main = props => {
-  console.log(props)
-
-  
-
-
-
-  
+const Main = props => {  
   let showReportedNames = () => {
     if (props.nav.complaint.reportedNames == null) return;
     let arr = [];
