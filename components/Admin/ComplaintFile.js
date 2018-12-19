@@ -41,7 +41,7 @@ const ComplaintFile = props => {
             <div
               onClick={() => {
                 props.setVisibleScreen("admin");
-                props.clearItem();
+                props.clearUserData();
               }}
               className="w-1/3 h-10 inline-flex bg-grey-new"
             >

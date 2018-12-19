@@ -7,6 +7,7 @@ import {
   faUserLock
 } from "@fortawesome/free-solid-svg-icons";
 
+
 const Login = props => {
   return (
     <div
@@ -32,10 +33,14 @@ const Login = props => {
         </div>
         <div className="text-center p-2">
           <FontAwesomeIcon
+            style={{
+              transform: "scale(7)",
+              marginTop: "90px",
+              }}
             icon={faUserLock}
-            className="fa-7x mt-12 mb-6 text-almost-transparent"
+            className="mb-6 text-almost-transparent"
           />
-          <h2 className="p-2">Human Resource System</h2>
+          <h2 className="p-2 mt-12">Human Resource System</h2>
           <p>Please, enter with your login and password</p>
         </div>
         <form

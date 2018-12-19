@@ -11,11 +11,26 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SuccessMessage from "../Main/SuccessMessage";
 import Login from "../Admin/Login";
-import UserViewer from "../Admin/UserViewer"
+import UserViewer from "../Admin/UserViewer";
 
+const Main = props => {
+  let showNames = () => {
+    if (props.user.promptUsers == null) return;
+    let arr = [];
+    let names = props.user.promptUsers.map(user => {
+      return user.name;
+    });
 
+    for (let name of names) {
+      arr.push(
+        <option key={arr} value={name}>
+          {name}
+        </option>
+      );
+    }
+    return arr;
+  };
 
-const Main = props => {  
   let showReportedNames = () => {
     if (props.nav.complaint.reportedNames == null) return;
     let arr = [];
@@ -23,10 +38,7 @@ const Main = props => {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
           <p className="w-full capitalize text-center">{name}</p>
-          <FontAwesomeIcon
-            icon={faTimes}
-            className="text-right fa-lg ml-2"
-          />
+          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg ml-2" />
         </div>
       );
     }
@@ -39,10 +51,7 @@ const Main = props => {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
           <p className="w-full capitalize text-center">{name}</p>
-          <FontAwesomeIcon
-            icon={faTimes}
-            className="text-right fa-lg ml-2"
-          />
+          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg ml-2" />
         </div>
       );
     }
@@ -51,7 +60,6 @@ const Main = props => {
 
   return (
     <div className="w-full bg-grey-light overflow-x-hidden">
-
       <div
         style={{
           position: "absolute",
@@ -113,7 +121,7 @@ const Main = props => {
                   et molestiae non recusandae.
                 </p>
               </div>
-            </div>            
+            </div>
 
             <div
               style={{
@@ -150,9 +158,7 @@ const Main = props => {
                     <option value="" disabled selected>
                       Select here...
                     </option>
-                    <option value="jeremias">Jeremias</option>
-                    <option value="karl">Karl</option>
-                    <option value="anthony">Anthony</option>
+                    {showNames()}
                   </select>
                 </div>
 
@@ -228,7 +234,7 @@ const Main = props => {
                     className="p-2 w-300 h-10"
                   />
                 </div>
-                
+
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Location:</label>
                   <select
@@ -300,9 +306,7 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="Mitchel Eppich">Mitchel Eppich</option>
-                      <option value="Chris Eppich">Chris Eppich</option>
-                      <option value="Karl with K">Karl with K</option>
+                      {showNames()}
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {
@@ -346,9 +350,7 @@ const Main = props => {
                       <option value="" disabled selected>
                         Select here...
                       </option>
-                      <option value="Mitchel Eppich">Mitchel Eppich</option>
-                      <option value="Chris Eppich">Chris Eppich</option>
-                      <option value="Karl with K">Karl with K</option>
+                      {showNames()}
                     </select>
                     <FontAwesomeIcon
                       onClick={() => {
@@ -487,21 +489,23 @@ const Main = props => {
                   et molestiae non recusandae.
                 </p>
                 <div className="w-300 mt-4 mb-2 ml-2">
-                <label><input
-                    type="checkbox"
-                    name="acceptCheck"
-                    id="acceptCheck"
-                    required
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.checked
-                      });
-                    }}
-                    className="mr-2 checkbox"
-                  />
-                  I Accept the Terms </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="acceptCheck"
+                      id="acceptCheck"
+                      required
+                      onChange={e => {
+                        props.setComplaint({
+                          complaint: props.nav.complaint,
+                          key: e.target.id,
+                          value: e.target.checked
+                        });
+                      }}
+                      className="mr-2 checkbox"
+                    />
+                    I Accept the Terms{" "}
+                  </label>
                 </div>
               </div>
             </div>
@@ -525,12 +529,8 @@ const Main = props => {
           <SuccessMessage {...props} />
         ) : null}
       </div>
-      
-
     </div>
   );
 };
-
-
 
 export default Main;

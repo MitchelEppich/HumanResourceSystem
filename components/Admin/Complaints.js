@@ -17,6 +17,7 @@ const Complaints = props => {
   let showComplaints = () => {
     let _complaints = props.nav.promptComplaints;
     if (_complaints == null) return <div />;
+    props.fetchComplaints()
 
     let arr = [];
     for (let complaint of _complaints) {
