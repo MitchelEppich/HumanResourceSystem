@@ -195,7 +195,7 @@ const RegisterUser = props => {
           <div className="w-2/4 mt-1 inline-flex ">{showJobTitles()}</div>
         </div>
         <div className="inline-flex w-full bg-grey-lighter text-grey p-1 mt-2 flex items-center">
-          <div className="w-2/4 uppercase pt-2 pb-2">
+          <div className="w-2/4 uppercase pt-1 pb-1">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
               <div style={{ width: "135px" }} className="text-left">
                 <label className="font-bold pr-2">Starting Date:</label>

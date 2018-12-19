@@ -13,9 +13,16 @@ import SuccessMessage from "../Main/SuccessMessage";
 import Login from "../Admin/Login";
 import UserViewer from "../Admin/UserViewer"
 
-import moment from "moment";
+
 
 const Main = props => {
+  console.log(props)
+
+  
+
+
+
+  
   let showReportedNames = () => {
     if (props.nav.complaint.reportedNames == null) return;
     let arr = [];
@@ -113,7 +120,7 @@ const Main = props => {
                   et molestiae non recusandae.
                 </p>
               </div>
-            </div>
+            </div>            
 
             <div
               style={{
@@ -525,8 +532,12 @@ const Main = props => {
           <SuccessMessage {...props} />
         ) : null}
       </div>
+      
+
     </div>
   );
 };
+
+
 
 export default Main;
