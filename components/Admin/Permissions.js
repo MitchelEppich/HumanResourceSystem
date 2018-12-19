@@ -56,7 +56,7 @@ const Permissions = props => {
             }}
           >         
             <FontAwesomeIcon
-            icon={_locked ? faToggleOn : faToggleOff}
+            icon={_locked ? faToggleOff : faToggleOn}
             className="fa-2x"
             />     
           </div>

@@ -168,8 +168,8 @@ const getActions = uri => {
         let _promptUsers = input.promptUsers;
         let _user = input.user;
         let _focusUser = input.focusUser;
-        console.log(_user != null && _user.username == _focusUser.username);
-        if (_user != null && _user.username == _focusUser.username) {
+
+        if (_focusUser != null && _user != null && _user.username == _focusUser.username) {
           let NavActions = Navigation(uri);
           dispatch(NavActions.setFocusUser({ user: _user }));
         }

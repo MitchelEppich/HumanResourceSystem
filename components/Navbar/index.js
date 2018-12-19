@@ -67,6 +67,7 @@ const Navbar = props => {
                       ? "admin"
                       : "admin"
                   ]);
+                  props.fetchComplaints();
                 }}
                 className={`p-2  unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2 ${
                   !props.misc.visibleScreen.includes("admin")

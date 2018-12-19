@@ -10,7 +10,8 @@ import {
   faUnlockAlt,
   faEdit,
   faUserAltSlash,
-  faInfoCircle
+  faInfoCircle,
+  faUnlock
 } from "@fortawesome/free-solid-svg-icons";
 import Permissions from "../Admin/Permissions";
 import ViewUserDescription from "./ViewUserDescription";
@@ -23,13 +24,31 @@ const UserViewer = props => {
     // console.log(props.user);
     // console.log(props);
     if (props.user.promptUsers == null) return;
-    let arr = [];    
+    let arr = [];
     // let usersFiltered = props.user.promptUsers.filter(username => {
     //   if (username.username == props.user.currentUser.username) return false;
     //   return true })
-    
-      
+
     for (let user of props.user.promptUsers) {
+      let totalLock = (() => {
+        if (user.permissions == null || user.permissions.length == 0) {
+          props.updateUser({
+            username: user.username,
+            permissions: (() => {
+              let arr = [];
+              for (let _client in props.misc.clientSystems) {
+                arr.push(`${_client}:0:1`);
+              }
+              return arr;
+            })()
+          });
+          return true;
+        }
+        for (let perm of user.permissions) {
+          if (perm.split(":")[2] == "0") return false;
+        }
+        return true;
+      })();
       arr.push(
         <div
           key={arr}
@@ -93,14 +112,24 @@ const UserViewer = props => {
               <FontAwesomeIcon icon={faGlobe} className="fa-lg" />
             </div>
           </div>
-          <div style={{ width: "10%" }} className="pl-0 inline-flex">  
-          {/* Exclude lock button for current user */}
-          {user.username == props.user.currentUser.username 
-            ? 
-              <div className="w-10 h-10 p-2 mx-auto align-center ">{" "}</div>
-            : (
-              <div className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new">
-                <FontAwesomeIcon icon={faLock} className="fa-lg" />
+          <div style={{ width: "10%" }} className="pl-0 inline-flex">
+            {/* Exclude lock button for current user */}
+            {props.user.currentUser != null &&
+            props.user.currentUser.username == user.username ? (
+              <div className="w-10 h-10 p-2 mx-auto align-center "> </div>
+            ) : (
+              <div className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new" onClick={() => {
+                let arr = [];
+                for (let _perm of user.permissions) { 
+                let _break = _perm.split(":")
+                arr.push(`${_break[0]}:${_break[1]}:${!totalLock ? 1 : 0}`);
+              }
+                props.updateUser({username: user.username, permissions: arr})
+              }}>
+                <FontAwesomeIcon
+                  icon={totalLock ? faLock : faUnlock}
+                  className="fa-lg"
+                />
               </div>
             )}
             <div

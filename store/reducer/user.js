@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     case actionTypes.FETCH_CREDENTIALS:
       return updateObject(state, { currentUser: action.user });
     case actionTypes.UPDATE_USER:
-      return updateObject(state, { currentUser: action.user, userData: {} });
+      return updateObject(state, { currentUser: action.user == null ? state.currentUser : action.user, userData: {} });
     case actionTypes.RELEASE_CREDENTIALS:
       return updateObject(state, { currentUser: null });
     case actionTypes.REGISTER_CREDENTIALS:
