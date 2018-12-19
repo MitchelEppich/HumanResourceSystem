@@ -16,7 +16,7 @@ let print = () => {
   window.print();
 };
 
-import moment from "moment"
+import moment from "moment";
 
 const ViewUserDescription = props => {
   // let viewUserFile = document.querySelector("#viewUser")
@@ -37,7 +37,7 @@ const ViewUserDescription = props => {
     >
       <div
         style={{
-          overflow: "hidden",
+          overflow: "hidden"
           // borderTopLeftRadius: "10px",
           // borderTopRightRadius: "10px"
         }}
@@ -119,9 +119,11 @@ const ViewUserDescription = props => {
                 <label className="font-bold pr-2">Starting Date:</label>
               </div>
               <div className="w-300">
-                <p className="p-2 uppercase">{moment(_user.startingDate).format("DD/MM/YYYY")}</p>
+                <p className="p-2 uppercase">
+                  {moment(_user.startingDate).format("DD/MM/YYYY")}
+                </p>
               </div>
-            </div>            
+            </div>
           </div>
           <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left inline-flex flex items-center">
@@ -131,23 +133,24 @@ const ViewUserDescription = props => {
               <div className="w-300">
                 <p className="p-2 capitalize">{_user.phone}</p>
               </div>
-            </div>            
+            </div>
           </div>
         </div>
         <div className="inline-flex w-full bg-grey-lighter text-grey p-1 mt-2 flex items-center">
-          <div className="w-2/4 uppercase">            
+          <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "135px" }} className="text-left">
                 <label className="font-bold pr-2">Ending Date:</label>
               </div>
               <div className="w-300">
                 <p className="p-2 capitalize">
-                  {moment(_user.startingDate).format("DD/MM/YYYY") || "Still Working"}
+                  {moment(_user.endingDate).format("DD/MM/YYYY") ||
+                    "Still Working"}
                 </p>
               </div>
             </div>
           </div>
-          <div className="w-2/4 uppercase">            
+          <div className="w-2/4 uppercase">
             <div className="w-full pl-6 text-left mt-1 inline-flex flex items-center">
               <div style={{ width: "100px" }} className="text-left">
                 <label className="font-bold pr-2">Email:</label>
@@ -164,11 +167,13 @@ const ViewUserDescription = props => {
               Job Description:
             </label>
           </div>
-          <p style={{
-                width: "900px",
-                textAlign: "justify",
-
-          }} className="p-2 text-left w-750">
+          <p
+            style={{
+              width: "900px",
+              textAlign: "justify"
+            }}
+            className="p-2 text-left w-750"
+          >
             {_user.jobDescription || "No Description"}
           </p>
         </div>
@@ -178,12 +183,17 @@ const ViewUserDescription = props => {
               Admin Notes:
             </label>
           </div>
-          <p style={{
-                width: "900px",
-                textAlign: "justify",
-          }} className="p-2 text-left w-750">
+          <p
+            style={{
+              width: "900px",
+              textAlign: "justify"
+            }}
+            className="p-2 text-left w-750"
+          >
             {/* {_user.adminNotes ? _user.adminNotes.toString() : "No Notes"} */}
-            {props.user.userData._adminNote ? props.user.userData._adminNote.toString() : "No Notes"}
+            {props.user.userData._adminNote
+              ? props.user.userData._adminNote.toString()
+              : "No Notes"}
           </p>
         </div>
       </div>

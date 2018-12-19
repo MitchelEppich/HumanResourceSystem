@@ -14,26 +14,24 @@ import UserViewer from "../components/Admin/UserViewer";
 import RegisterUser from "../components/Admin/RegisterUser";
 import Navbar from "../components/Navbar";
 
-
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
 
-
 class Index extends Component {
   componentDidMount() {
-    // this.props.fetchCredentials().then(res => {
-    //   if (res == null) return;
-    //   this.props.setVisibleScreen(null);
-    // });
+    this.props.fetchCredentials().then(res => {
+      if (res == null) return;
+      this.props.setVisibleScreen([]);
+    });
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.user.currentUser == null) {
-    //   this.props.fetchCredentials().then(res => {
-    //     if (res == null) return;
-    //     this.props.setVisibleScreen(null);
-    //   });
-    // }
+    if (this.props.user.currentUser == null) {
+      this.props.fetchCredentials().then(res => {
+        if (res == null) return;
+        this.props.setVisibleScreen([]);
+      });
+    }
   }
 
   render() {
@@ -60,8 +58,9 @@ class Index extends Component {
           <UserViewer {...this.props} />
         ) : null}
 
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("RegisterUser") ? (
+        {(this.props.misc.visibleScreen != null &&
+          this.props.misc.visibleScreen.includes("RegisterUser")) ||
+        this.props.misc.visibleScreen.includes("UpdateUser") ? (
           <RegisterUser {...this.props} />
         ) : null}
 
@@ -85,6 +84,7 @@ const mapDispatchToProps = dispatch => {
     setComplaint: input => dispatch(actions.setComplaint(input)),
     setFocusUser: input => dispatch(actions.setFocusUser(input)),
     setUserData: input => dispatch(actions.setUserData(input)),
+    setAllUserData: input => dispatch(actions.setAllUserData(input)),
     postComplaint: input => dispatch(actions.postComplaint(input)),
     updateComplaint: input => dispatch(actions.updateComplaint(input)),
     setFocusComplaint: input => dispatch(actions.setFocusComplaint(input)),
@@ -93,7 +93,8 @@ const mapDispatchToProps = dispatch => {
     setVisibleScreen: input => dispatch(actions.setVisibleScreen(input)),
     deleteComplaint: input => dispatch(actions.deleteComplaint(input)),
     deleteUser: input => dispatch(actions.deleteUser(input)),
-    updateUser: input => dispatch(actions.updateUser(input))
+    updateUser: input => dispatch(actions.updateUser(input)),
+    clearUserData: () => dispatch(actions.clearUserData())
   };
 };
 

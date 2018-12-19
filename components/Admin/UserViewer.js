@@ -13,7 +13,6 @@ import {
   faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 import Permissions from "../Admin/Permissions";
-import UserDescription from "./UserDescription";
 import ViewUserDescription from "./ViewUserDescription";
 
 import { Subscription } from "react-apollo";
@@ -21,6 +20,7 @@ import gql from "graphql-tag";
 
 const UserViewer = props => {
   let showUsers = () => {
+    // console.log(props.user);
     // console.log(props);
     if (props.user.promptUsers == null) return;
     let arr = [];
@@ -58,10 +58,14 @@ const UserViewer = props => {
               onClick={e => {
                 e.preventDefault();
                 props.setVisibleScreen(
-                  props.misc.visibleScreen.includes("RegisterUser")
+                  props.misc.visibleScreen.includes("UpdateUser")
                     ? ["userViewer"]
-                    : ["RegisterUser"]
+                    : ["UpdateUser"]
                 );
+                props.setFocusUser({ user });
+                props.setAllUserData({
+                  focusUser: user
+                });
               }}
               className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
             >

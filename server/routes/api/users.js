@@ -5,8 +5,15 @@ let resolvers = require("../../data/resolvers");
 let router = express.Router();
 
 router.get("/", getUsers);
+router.post("/", getUser);
 router.post("/verify", verifyUser);
 router.post("/update", updateUser);
+
+async function getUser(req, res) {
+  let _post = req.body;
+  let _user = await resolvers.Query.user(null, { ..._post });
+  res.send(_user);
+}
 
 async function getUsers(req, res) {
   let _users = await resolvers.Query.allUsers(null, {});

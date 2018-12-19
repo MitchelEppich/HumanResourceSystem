@@ -16,9 +16,11 @@ const actionTypes = {
   REGISTER_CREDENTIALS: "REGISTER_CREDENTIALS",
   UPDATE_USER: "UPDATE_USER",
   SET_USER_DATA: "SET_USER_DATA",
+  SET_ALL_USER_DATA: "SET_ALL_USER_DATA",
   FETCH_USERS: "FETCH_USERS",
   MODIFY_USER: "MODIFY_USER",
-  DELETE_USER: "DELETE_USER"
+  DELETE_USER: "DELETE_USER",
+  CLEAR_USER_DATA: "CLEAR_USER_DATA"
 };
 
 const getActions = uri => {
@@ -27,6 +29,17 @@ const getActions = uri => {
       let _userData = input.userData;
       _userData[input.key] = input.value;
       return { type: actionTypes.SET_USER_DATA, input: _userData };
+    },
+    clearUserData: () => {
+      return { type: actionTypes.CLEAR_USER_DATA };
+    },
+    setAllUserData: input => {
+      let _focusUser = input.focusUser;
+      console.log("HELLO", _focusUser);
+      let _userData = {
+        ..._focusUser
+      };
+      return { type: actionTypes.SET_ALL_USER_DATA, input: _userData };
     },
     releaseCredentials: input => {
       return dispatch => {
@@ -134,6 +147,7 @@ const getActions = uri => {
     },
     updateUser: input => {
       return dispatch => {
+        console.log(input);
         const link = new HttpLink({ uri, fetch: fetch });
         const operation = {
           query: mutation.updateUser,
@@ -151,30 +165,27 @@ const getActions = uri => {
     },
     modifyUser: input => {
       return dispatch => {
-      let _promptUsers = input.promptUsers;
-      let _user = input.user;
-      let _focusUser = input.focusUser
-      console.log(_user != null &&
-          _user.username == _focusUser.username)
-        if (
-          _user != null &&
-          _user.username == _focusUser.username
-        ) {
+        let _promptUsers = input.promptUsers;
+        let _user = input.user;
+        let _focusUser = input.focusUser;
+        console.log(_user != null && _user.username == _focusUser.username);
+        if (_user != null && _user.username == _focusUser.username) {
           let NavActions = Navigation(uri);
           dispatch(NavActions.setFocusUser({ user: _user }));
         }
 
-      let _index = 0;
-      for (let _u of _promptUsers) {
-        if (_u.username == _user.username) {
-          _promptUsers[_index] = _user;
-          break;
+        let _index = 0;
+        for (let _u of _promptUsers) {
+          if (_u.username == _user.username) {
+            _promptUsers[_index] = _user;
+            break;
+          }
+          _index++;
         }
-        _index++;
-      }
 
-      dispatch( { type: actionTypes.MODIFY_USER, input: _promptUsers })
-    }}
+        dispatch({ type: actionTypes.MODIFY_USER, input: _promptUsers });
+      };
+    }
   };
 
   return { ...objects };
