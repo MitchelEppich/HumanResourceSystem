@@ -112,12 +112,9 @@ const UserViewer = props => {
           </div>
           <div style={{ width: "10%" }} className="pl-0 inline-flex">
             {/* Exclude lock button for current user */}
-            {props.user.currentUser != null &&
-            props.user.currentUser.username == user.username ? (
-              <div className="w-10 h-10 p-2 mx-auto align-center "> </div>
-            ) : (
               <div
-                className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
+                className={`}w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new ${props.user.currentUser != null &&
+                  props.user.currentUser.username == user.username ? 'pointer-events-none opacity-25': null }`}
                 onClick={() => {
                   let arr = [];
                   for (let _perm of user.permissions) {
@@ -135,7 +132,7 @@ const UserViewer = props => {
                   className="fa-lg"
                 />
               </div>
-            )}
+            
             <div
               onClick={() => {
                 props.deleteUser({
@@ -143,7 +140,8 @@ const UserViewer = props => {
                   promptUsers: props.user.promptUsers
                 });
               }}
-              className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
+              className={`}w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new ${props.user.currentUser != null &&
+                props.user.currentUser.username == user.username ? 'pointer-events-none opacity-25': null }`}
             >
               <FontAwesomeIcon icon={faTimes} className="fa-lg text-center" />
             </div>

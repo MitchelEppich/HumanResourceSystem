@@ -19,15 +19,13 @@ let print = () => {
 import moment from "moment";
 
 const ViewUserDescription = props => {
-  // let viewUserFile = document.querySelector("#viewUser")
-  // console.log(viewUserFile)
+ 
   let _user = props.nav.focusUser;
   if (_user == null) return <div />;
   return (
     <div
       id="viewUser"
-      style={{
-        // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+      style={{       
         borderTopLeftRadius: "10px",
         borderTopRightRadius: "10px",
         overflow: "hidden",
@@ -37,9 +35,7 @@ const ViewUserDescription = props => {
     >
       <div
         style={{
-          overflow: "hidden"
-          // borderTopLeftRadius: "10px",
-          // borderTopRightRadius: "10px"
+          overflow: "hidden"         
         }}
         className="inline-flex w-full bg-grey-new relative"
       >
@@ -178,7 +174,7 @@ const ViewUserDescription = props => {
           </p>
         </div>
         <div className="w-full bg-grey-lighter p-1 py-2 mt-2 inline-flex flex items-top">
-          <div style={{ width: "160px" }} className="text-left mt-2">
+          <div style={{ width: "160px" }} className="text-left mt-2 mb-2">
             <label className="font-bold pl-5 pr-3 pr-2 uppercase">
               Admin Notes:
             </label>
@@ -190,10 +186,11 @@ const ViewUserDescription = props => {
             }}
             className="p-2 text-left w-750"
           >
-            {/* {_user.adminNotes ? _user.adminNotes.toString() : "No Notes"} */}
-            {props.user.userData._adminNote
-              ? props.user.userData._adminNote.toString()
-              : "No Notes"}
+            {_user.adminNotes != null ? _user.adminNotes.toString() : "No Notes"}
+            {/* {props.user.userData.adminNotes
+              ? props.user.userData.adminNotes.toString()
+              : "No Notes"} */}
+              {console.log(_user.adminNotes)}
           </p>
         </div>
       </div>
