@@ -16,7 +16,10 @@ const RegisterUser = props => {
     let arr = [];
     for (let title of props.user.userData.jobTitle) {
       arr.push(
-        <div className="p-2 bg-grey-light text-grey uppercase mt-1 inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2">
+        <div
+          key={arr}
+          className="p-2 bg-grey-light text-grey uppercase mt-1 inline-flex flex items-center text-right justify-end hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2"
+        >
           <h4 className="px-4 capitalize">{title}</h4>
           <FontAwesomeIcon icon={faTimes} className="fa-lg cursor-pointer" />
         </div>
@@ -31,12 +34,9 @@ const RegisterUser = props => {
     let arr = [];
     for (let note of _notes) {
       arr.push(
-        <div className="w-full p-2 mt-2 bg-white">
-          <div
-            style={{ width: "50%" }}
-            className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify mr-2"
-          >
-            <p className="px-4 text-left">{note}</p>
+        <div key={arr} className="w-full mt-2 bg-white">
+          <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify hover:bg-grey-lightest hover:text-grey-new cursor-pointer ">
+            <p className="pl-6 mr-8 p-2 text-left">{note}</p>
             <FontAwesomeIcon
               onClick={() => {
                 _notes = _notes.filter(a => {
@@ -50,7 +50,7 @@ const RegisterUser = props => {
                 });
               }}
               icon={faTimes}
-              className="fa-lg cursor-pointer justify-end"
+              className="fa-lg cursor-pointer justify-end mr-8 pin-t"
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ const RegisterUser = props => {
             props.setVisibleScreen(["userViewer"]);
           }}
         >
-          <div className="w-full h-650 bg-white overflow-y-auto">
+          <div className="w-full bg-white overflow-y-auto">
             <div className="inline-flex w-full bg-grey-lighter py-2 text-grey p-1 mt-2 flex items-center">
               <div className="w-2/4 uppercase">
                 <div className="w-full pl-6 text-left inline-flex flex items-center">
@@ -392,8 +392,7 @@ const RegisterUser = props => {
                 />
               </div>
             </div>
-            {showNotes()}
-
+            <div>{showNotes()}</div>
             <div className="w-full mt-2 bg-white h-24 relative">
               <button
                 type="submit"

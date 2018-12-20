@@ -44,6 +44,7 @@ const Main = props => {
     }
     return arr;
   };
+
   let showWitnesses = () => {
     if (props.nav.complaint.witnessNames == null) return;
     let arr = [];
@@ -52,6 +53,44 @@ const Main = props => {
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
           <p className="w-full capitalize text-center">{name}</p>
           <FontAwesomeIcon icon={faTimes} className="text-right fa-lg ml-2" />
+        </div>
+      );
+    }
+    return arr;
+  };
+
+  let showHours = () => {
+    let arr = [];
+    for (let i = 1; i <= 24; i++) {
+      let hour = i;
+      let denom;
+      if (hour > 12) {
+        hour -= 12;
+        denom = "PM";
+      } else denom = "AM";
+      let value = `${hour.toString().padStart(2, "0")}:00 ${denom}`;
+      arr.push(
+        <div
+          style={{
+            width: "75px",
+            float: "left",
+            padding: "4px"
+          }}
+          className="hover:bg-blue-light cursor-pointer text-sm text-center"
+          name="incidentTime"
+          id="incidentTime"
+          onClick={e => {
+            props.setComplaint({
+              complaint: props.nav.complaint,
+              key: e.target.id,
+              value: e.target.value
+            });
+            console.log(e.target.id);
+          }}
+          id={value}
+          key={value}
+        >
+          {value}
         </div>
       );
     }
@@ -218,8 +257,8 @@ const Main = props => {
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Time:</label>
-                  <input
-                    type="time"
+                  {/* <select
+                    className="w-250 p-1 ml-4"
                     name="incidentTime"
                     id="incidentTime"
                     required
@@ -230,11 +269,72 @@ const Main = props => {
                         value: e.target.value
                       });
                     }}
-                    placeholder=""
-                    className="p-2 w-300 h-10"
-                  />
-                </div>
+                  >
+                    <option value="" disabled selected>
+                      Select here...
+                    </option>
+                    {hours()}
+                    
+                  </select> */}
 
+                  <div
+                    onClick={e => {
+                      e.preventDefault();
+                      props.setVisibleScreen(
+                        props.misc.visibleScreen.includes("showHours")
+                          ? "home"
+                          : ["showHours", "home"]
+                      );
+                    }}
+                    style={{
+                      border: "2px solid #e6e6e6",
+                      borderRadius: "7px",
+                      background: "white",
+                      padding: "8px",
+                      height: "38px"
+                    }}
+                    className="w-250 p-1"
+                  >
+                    <div
+                      style={{
+                        WebkitAppearance: "menulist",
+                        boxSizing: "border-box",
+                        alignItems: "center",
+                        whiteSpace: "pre",
+                        WebkitRtlOrdering: "logical",
+                        color: "black",
+                        cursor: "default"
+                      }}
+                    >
+                      {props.nav.complaint == null
+                        ? "00:01 AM"
+                        : props.nav.complaint[0]}
+                      {/* 00:00 AM                    */}
+                    </div>
+                  </div>
+
+                  {props.misc.visibleScreen.includes("showHours") ? (
+                    <div
+                      style={{
+                        backgroundColor: "#fff",
+                        width: "340px",
+                        height: "155px",
+                        display: "block",
+                        padding: "5px",
+                        MozColumnCount: "4",
+                        WebkitColumnCount: "4",
+                        columnCount: "4",
+                        border: "2px solid #e6e6e6",
+                        borderRadius: "5px",
+                        position: "absolute",
+                        marginLeft: "46px",
+                        marginTop: "97px"
+                      }}
+                    >
+                      {showHours()}
+                    </div>
+                  ) : null}
+                </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Location:</label>
                   <select

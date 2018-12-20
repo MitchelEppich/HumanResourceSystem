@@ -36,7 +36,7 @@ const getActions = uri => {
     },
     setAllUserData: input => {
       let _focusUser = input.focusUser;
-      console.log("HELLO", _focusUser);
+      // console.log("HELLO", _focusUser);
       let _userData = {
         ..._focusUser
       };

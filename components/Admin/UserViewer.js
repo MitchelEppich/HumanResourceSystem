@@ -21,8 +21,6 @@ import gql from "graphql-tag";
 
 const UserViewer = props => {
   let showUsers = () => {
-    // console.log(props.user);
-    // console.log(props);
     if (props.user.promptUsers == null) return;
     let arr = [];
     // let usersFiltered = props.user.promptUsers.filter(username => {
@@ -207,7 +205,7 @@ const UserViewer = props => {
             style={{ marginTop: "35px" }}
             className="inline-flex w-full absolute pin-l pin-t p-1 bg-orange-new uppercase text-white text-sm"
           >
-            <div style={{ width: "20%" }} className="pl-10">
+            <div style={{ width: "20%" }} className="pl-16">
               Name
             </div>
             <div style={{ width: "10%" }} className="">
