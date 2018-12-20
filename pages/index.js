@@ -19,7 +19,7 @@ import gql from "graphql-tag";
 
 class Index extends Component {
   componentDidMount() {
-    this.props.fetchUsers()
+    this.props.fetchUsers();
     this.props.fetchCredentials().then(res => {
       if (res.username == null) return;
       this.props.setVisibleScreen([]);
@@ -54,15 +54,15 @@ class Index extends Component {
           <Main {...this.props} />
         ) : null}
 
-        {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("userViewer") ? (
-          <UserViewer {...this.props} />
-        ) : null}
-
         {(this.props.misc.visibleScreen != null &&
           this.props.misc.visibleScreen.includes("RegisterUser")) ||
         this.props.misc.visibleScreen.includes("UpdateUser") ? (
           <RegisterUser {...this.props} />
+        ) : null}
+
+        {this.props.misc.visibleScreen != null &&
+        this.props.misc.visibleScreen.includes("userViewer") ? (
+          <UserViewer {...this.props} />
         ) : null}
 
         {this.props.misc.visibleScreen != null &&

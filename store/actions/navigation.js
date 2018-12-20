@@ -26,7 +26,6 @@ const getActions = uri => {
     setComplaint: input => {
       let _complaint = input.complaint;
       _complaint[input.key] = input.value;
-      // console.log(_complaint);
       return {
         type: actionTypes.SET_COMPLAINT,
         input: _complaint

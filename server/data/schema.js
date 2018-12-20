@@ -52,7 +52,7 @@ input UserInput {
   phone: String
   email: String
   jobDescription: String
-  adminNote: String
+  adminNotes: [String]
   token: String
   createdAt: String
   online: Boolean

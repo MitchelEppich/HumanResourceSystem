@@ -118,14 +118,20 @@ const UserViewer = props => {
             props.user.currentUser.username == user.username ? (
               <div className="w-10 h-10 p-2 mx-auto align-center "> </div>
             ) : (
-              <div className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new" onClick={() => {
-                let arr = [];
-                for (let _perm of user.permissions) { 
-                let _break = _perm.split(":")
-                arr.push(`${_break[0]}:${_break[1]}:${!totalLock ? 1 : 0}`);
-              }
-                props.updateUser({username: user.username, permissions: arr})
-              }}>
+              <div
+                className="w-10 h-10 p-2 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
+                onClick={() => {
+                  let arr = [];
+                  for (let _perm of user.permissions) {
+                    let _break = _perm.split(":");
+                    arr.push(`${_break[0]}:${_break[1]}:${!totalLock ? 1 : 0}`);
+                  }
+                  props.updateUser({
+                    username: user.username,
+                    permissions: arr
+                  });
+                }}
+              >
                 <FontAwesomeIcon
                   icon={totalLock ? faLock : faUnlock}
                   className="fa-lg"

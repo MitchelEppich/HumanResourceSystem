@@ -26,17 +26,29 @@ const RegisterUser = props => {
   };
 
   let showNotes = () => {
-    if (props.user.userData.adminNotes == null) return;
+    let _notes = props.user.userData.adminNotes;
+    if (_notes == null) return;
     let arr = [];
-    for (let note of props.user.userData.adminNotes) {
+    for (let note of _notes) {
       arr.push(
         <div className="w-full p-2 mt-2 bg-white">
           <div
             style={{ width: "50%" }}
-            className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify  hover:bg-grey-lightest hover:text-grey-new cursor-pointer mr-2"
+            className="p-2 bg-grey-lighter text-grey mt-1 inline-flex flex items-center text-justify mr-2"
           >
             <p className="px-4 text-left">{note}</p>
             <FontAwesomeIcon
+              onClick={() => {
+                _notes = _notes.filter(a => {
+                  if (a == note) return false;
+                  return true;
+                });
+                props.setUserData({
+                  userData: props.user.userData,
+                  key: "adminNotes",
+                  value: _notes
+                });
+              }}
               icon={faTimes}
               className="fa-lg cursor-pointer justify-end"
             />
@@ -48,7 +60,13 @@ const RegisterUser = props => {
   };
 
   return (
-    <div style={{ position: "absolute", height: "820px", width: "99vw" }}>
+    <div
+      style={{
+        position: "absolute",
+        height: "820px",
+        width: "99vw"
+      }}
+    >
       <div
         style={{
           // boxShadow: "0 0 4px rgba(220, 220, 220, 0.4)",
@@ -71,7 +89,10 @@ const RegisterUser = props => {
           >
             <h4
               className="p-2 text-white uppercase text-lg bg-orange-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer"
-              onClick={props.clearUserData}
+              onClick={() => {
+                props.clearUserData();
+                props.setFocusUser({ user: null });
+              }}
             >
               <FontAwesomeIcon icon={faAngleLeft} className="fa-2x mr-4" />
               Back
@@ -94,7 +115,12 @@ const RegisterUser = props => {
                 username: _user.username,
                 ...props.user.userData
               });
-            } else props.registerCredentials(props.user.userData);
+              props.setFocusUser({ user: null });
+            } else
+              props.registerCredentials(props.user.userData).then(res => {
+                props.fetchUsers();
+              });
+            props.setVisibleScreen(["userViewer"]);
           }}
         >
           <div className="w-full h-650 bg-white overflow-y-auto">
@@ -351,10 +377,10 @@ const RegisterUser = props => {
               <div className="w-10 h-10 flex items-center">
                 <FontAwesomeIcon
                   onClick={() => {
+                    document.querySelector("#_adminNote").value = "";
                     let adminNotes = props.user.userData.adminNotes || [];
                     let _new = props.user.userData._adminNote;
                     if (adminNotes.includes(_new) || _new == null) return;
-
                     props.setUserData({
                       userData: props.user.userData,
                       key: "adminNotes",

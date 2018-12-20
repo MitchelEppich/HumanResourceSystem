@@ -28,6 +28,7 @@ const getActions = uri => {
     setUserData: input => {
       let _userData = input.userData;
       _userData[input.key] = input.value;
+      console.log(_userData);
       return { type: actionTypes.SET_USER_DATA, input: _userData };
     },
     clearUserData: () => {
@@ -167,8 +168,12 @@ const getActions = uri => {
         let _promptUsers = input.promptUsers;
         let _user = input.user;
         let _focusUser = input.focusUser;
-
-        if (_focusUser != null && _user != null && _user.username == _focusUser.username) {
+        console.log("modify", _user);
+        if (
+          _focusUser != null &&
+          _user != null &&
+          _user.username == _focusUser.username
+        ) {
           let NavActions = Navigation(uri);
           dispatch(NavActions.setFocusUser({ user: _user }));
         }
@@ -269,7 +274,7 @@ const mutation = {
       $phone: String
       $email: String
       $jobDescription: String
-      $adminNotes: String
+      $adminNotes: [String]
     ) {
       registerCredentials(
         input: {
@@ -321,7 +326,7 @@ const mutation = {
       $phone: String
       $email: String
       $jobDescription: String
-      $adminNote: String
+      $adminNotes: [String]
       $permissions: [String]
       $online: Boolean
       $lastAction: String
@@ -337,7 +342,7 @@ const mutation = {
           phone: $phone
           email: $email
           jobDescription: $jobDescription
-          adminNote: $adminNote
+          adminNotes: $adminNotes
           permissions: $permissions
           online: $online
           lastAction: $lastAction

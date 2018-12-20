@@ -109,6 +109,7 @@ const resolvers = {
       }
     },
     updateUser: async (_, { input }) => {
+      console.log(input);
       let user;
       if (input.admin != null || input.locked != null) {
         user = await User.findOne({ username: input.username });

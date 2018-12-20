@@ -15,7 +15,7 @@ const UserSchema = Schema({
   phone: String,
   email: String,
   jobDescription: String,
-  adminNotes: String,
+  adminNotes: [String],
   token: String,
   createdAt: { type: Date, default: Date.now },
   online: { type: Boolean, default: false },
