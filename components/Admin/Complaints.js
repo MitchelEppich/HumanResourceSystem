@@ -22,7 +22,7 @@ const Complaints = props => {
     let arr = [];
     for (let complaint of _complaints) {
       arr.push(
-        <div key={arr} className="inline-flex w-full p-1 bg-grey-light text-grey mt-1 flex items-center ">
+        <div key={arr} className="inline-flex w-full p-1 bg-grey-lighter text-grey mt-1 flex items-center ">
           <div style={{ width: "15%" }} className=" text-center capitalize">
             {complaint.name || "NO NAME"}
           </div>

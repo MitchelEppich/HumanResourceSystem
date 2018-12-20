@@ -40,7 +40,7 @@ const Permissions = props => {
       let _admin = _break[1] == "1";
       let _locked = _break[2] == "1";
       arr.push(
-        <div className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
+        <div key={arr} className="mt-2 inline-flex w-full bg-grey-light text-grey p-1 flex items-center">
           <div className="w-3/5 text-left pl-4 uppercase">
             <h4>{props.misc.clientSystems[_break[0]]}</h4>
           </div>

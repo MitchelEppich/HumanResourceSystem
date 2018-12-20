@@ -26,7 +26,7 @@ const ComplaintFile = props => {
             borderRadius: "10px",
             height: "120vh",
             zIndex: "100",
-            boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+            // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
            
           }}
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto h-full"
