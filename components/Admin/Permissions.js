@@ -60,17 +60,9 @@ const Permissions = props => {
             className="fa-2x"
             />     
           </div>
-          {_user.username == props.user.currentUser.username && props.misc.clientSystems[_break[0]] == props.misc.clientSystems.HRS ? // Exclude lock button to HRS only for current user
-
-          ( 
-          <div className="w-10 h-10 justify-center mx-auto align-center">
-            {' '}
-          </div> 
-
-          ) : (
-
+          
           <div
-            className="w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new"
+            className={`w-10 h-10 p-1 text-center text-grey justify-center mx-auto align-center cursor-pointer hover:bg-semi-transparent hover:text-grey-new ${_user.username == props.user.currentUser.username && props.misc.clientSystems[_break[0]] == props.misc.clientSystems.HRS ? 'pointer-events-none opacity-25' : null} `}
             onClick={() => {
               _break[1] = _admin ? "0" : "1"; // Inverts
               _permissions[_index] = `${_break[0]}:${_break[1]}:${_break[2]}`;
@@ -85,7 +77,7 @@ const Permissions = props => {
               className="fa-2x"
             />                                 
         </div>   
-          )} 
+          
         </div>
       );
     }

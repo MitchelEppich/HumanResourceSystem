@@ -35,23 +35,27 @@ const RegisterUser = props => {
     for (let note of _notes) {
       arr.push(
         <div key={arr} className="w-full mt-2 bg-white">
-          <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify hover:bg-grey-lightest hover:text-grey-new cursor-pointer ">
-            <p className="pl-6 mr-8 p-2 text-left">{note}</p>
-            <FontAwesomeIcon
-              onClick={() => {
-                _notes = _notes.filter(a => {
-                  if (a == note) return false;
-                  return true;
-                });
-                props.setUserData({
-                  userData: props.user.userData,
-                  key: "adminNotes",
-                  value: _notes
-                });
-              }}
-              icon={faTimes}
-              className="fa-lg cursor-pointer justify-end mr-8 pin-t"
-            />
+          <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify cursor-pointer ">
+            <div style={{width: "822px"}} className="p-2">
+              <p className="pl-6 mr-8 p-2 text-left">{note}</p>
+            </div>
+            <div className="w-12 h-12 justify-center py-2 items-center flex hover:bg-grey hover:text-white">
+              <FontAwesomeIcon
+                onClick={() => {
+                  _notes = _notes.filter(a => {
+                    if (a == note) return false;
+                    return true;
+                  });
+                  props.setUserData({
+                    userData: props.user.userData,
+                    key: "adminNotes",
+                    value: _notes
+                  });
+                }}
+                icon={faTimes}
+                className="fa-lg cursor-pointer pin-t"
+              />
+            </div>
           </div>
         </div>
       );
@@ -85,7 +89,7 @@ const RegisterUser = props => {
             onClick={() => {
               props.setVisibleScreen("userViewer");
             }}
-            className="w-100 h-full inline-flex absolute"
+            className="w-100 h-10 inline-flex absolute"
           >
             <h4
               className="p-2 text-white uppercase text-lg bg-orange-new flex items-center hover:bg-semi-transparent text-grey cursor-pointer"

@@ -42,7 +42,7 @@ const Complaints = props => {
                 }`
               : "NO DESCRIPTION"}
           </div>
-          <div style={{ width: "15%" }} className="uppercase">
+          <div style={{ width: "15%" }} className="uppercase pl-1">
             <p className="text-center">{complaint.status || "NO STATUS"}</p>
           </div>
           <div
