@@ -9,9 +9,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Notes from "../Admin/Notes";
 
-import moment from "moment"
+import moment from "moment";
 
 const ComplaintFile = props => {
+  let showNotes = () => {
+    let _notes = props.nav.focusComplaint.adminResponses;
+    if (_notes == null) return;
+    let arr = [];
+    for (let note of _notes) {
+      arr.push(
+        <div key={arr} className="w-full mt-2 bg-white">
+          <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify hover:bg-grey-lightest hover:text-grey-new cursor-pointer ">
+            <p className="pl-6 mr-8 p-2 text-left">{note}</p>
+          </div>
+        </div>
+      );
+    }
+    return arr;
+  };
+
   let showComplaint = () => {
     let _complaint = props.nav.focusComplaint;
     if (_complaint == null) return <div />;
@@ -25,9 +41,8 @@ const ComplaintFile = props => {
           style={{
             borderRadius: "10px",
             height: "120vh",
-            zIndex: "100",
+            zIndex: "100"
             // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
-           
           }}
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto h-full"
         >
@@ -40,7 +55,7 @@ const ComplaintFile = props => {
           >
             <div
               onClick={() => {
-                props.setVisibleScreen("admin");
+                props.setVisibleScreen("complaints");
                 props.clearUserData();
               }}
               className="w-1/3 h-10 inline-flex bg-grey-new"
@@ -58,8 +73,8 @@ const ComplaintFile = props => {
                 onClick={() => {
                   props.setVisibleScreen(
                     props.misc.visibleScreen.includes("noteBy")
-                      ? ["complainFile", "admin"]
-                      : ["noteBy", "complainFile", "admin"]
+                      ? ["complainFile", "complaints"]
+                      : ["noteBy", "complainFile", "complaints"]
                   );
                 }}
                 style={{
@@ -79,10 +94,12 @@ const ComplaintFile = props => {
           <div className="w-full mt-4 py-2 px-6 overflow-y-auto">
             <div className="w-full mt-4 py-1 px-6 overflow-y-auto">
               <div
-                style={{
-                  // borderTopLeftRadius: "10px",
-                  // borderTopRightRadius: "10px"
-                }}
+                style={
+                  {
+                    // borderTopLeftRadius: "10px",
+                    // borderTopRightRadius: "10px"
+                  }
+                }
                 className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2"
               >
                 <h4>Reporter by:</h4>
@@ -93,7 +110,10 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4 ">
                   <p className="uppercase font-bold">
                     Name:{" "}
-                    <span className="pl-2 font-normal uppercase"> {_complaint.name}</span>
+                    <span className="pl-2 font-normal uppercase">
+                      {" "}
+                      {_complaint.name}
+                    </span>
                   </p>
                 </div>
                 <div className="w-1/3 text-left pl-4">
@@ -110,7 +130,9 @@ const ComplaintFile = props => {
                     Submitted on:{" "}
                     <span className="pl-2 font-normal">
                       {" "}
-                      {moment(_complaint.fileDate).format("DD/MM/YYYY - HH:MM:MM")}
+                      {moment(_complaint.fileDate).format(
+                        "DD/MM/YYYY - HH:MM:MM"
+                      )}
                     </span>
                   </p>
                 </div>
@@ -122,10 +144,12 @@ const ComplaintFile = props => {
 
             <div className="w-full mt-4 py-2 px-6 overflow-y-auto">
               <div
-                style={{
-                  // borderTopLeftRadius: "10px",
-                  // borderTopRightRadius: "10px"
-                }}
+                style={
+                  {
+                    // borderTopLeftRadius: "10px",
+                    // borderTopRightRadius: "10px"
+                  }
+                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Reported:</h4>
@@ -145,7 +169,8 @@ const ComplaintFile = props => {
                     <p className="uppercase font-bold">
                       Hour:{" "}
                       <span className="pl-2 font-normal uppercase">
-                      {moment(_complaint.incidentTime).format("HH:MM:SS") || "Not informed"}
+                        {moment(_complaint.incidentTime).format("HH:MM:SS") ||
+                          "Not informed"}
                       </span>
                     </p>
                   </div>
@@ -203,10 +228,12 @@ const ComplaintFile = props => {
 
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
-                style={{
-                  // borderTopLeftRadius: "10px",
-                  // borderTopRightRadius: "10px"
-                }}
+                style={
+                  {
+                    // borderTopLeftRadius: "10px",
+                    // borderTopRightRadius: "10px"
+                  }
+                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Additional Information:</h4>
@@ -229,10 +256,12 @@ const ComplaintFile = props => {
             </div>
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
-                style={{
-                  // borderTopLeftRadius: "10px",
-                  // borderTopRightRadius: "10px"
-                }}
+                style={
+                  {
+                    // borderTopLeftRadius: "10px",
+                    // borderTopRightRadius: "10px"
+                  }
+                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Proposed Action:</h4>
@@ -256,10 +285,12 @@ const ComplaintFile = props => {
 
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
-                style={{
-                  // borderTopLeftRadius: "10px",
-                  // borderTopRightRadius: "10px"
-                }}
+                style={
+                  {
+                    // borderTopLeftRadius: "10px",
+                    // borderTopRightRadius: "10px"
+                  }
+                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Admin Actions:</h4>
@@ -269,6 +300,7 @@ const ComplaintFile = props => {
                 <select
                   className="w-100 ml-4"
                   id="status"
+                  defaultValue={_complaint.status}
                   onChange={e => {
                     props.setComplaint({
                       complaint: props.nav.complaint,
@@ -299,10 +331,12 @@ const ComplaintFile = props => {
                     className="w-full mr-2"
                   />
                 </div>
+                <div>{showNotes()}</div>
                 <div className="w-full mt-2">
                   <div
                     className="bg-orange-new p-2 text-grey text-center uppercase hover:bg-grey-new hover:text-white cursor-pointer text-lg font-bold"
                     onClick={() => {
+                      props.setVisibleScreen(["complaints"]);
                       props.updateComplaint({
                         focusComplaint: props.nav.focusComplaint,
                         adminComplaint: props.nav.complaint

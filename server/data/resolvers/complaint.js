@@ -52,6 +52,9 @@ const resolvers = {
           $set: { ...input }
         };
 
+        if (input.adminResponse != null) {
+          operation["$push"] = { adminResponses: input.adminResponse };
+        }
         if (input.note != null) {
           operation["$push"] = { notes: input.note };
         }

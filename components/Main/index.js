@@ -111,7 +111,7 @@ const Main = props => {
         className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
       >
         {props.misc.visibleScreen == null ||
-        (!props.misc.visibleScreen.includes("admin") &&
+        (!props.misc.visibleScreen.includes("complaints") &&
           !props.misc.visibleScreen.includes("thanksMessage")) ? (
           <form
             onSubmit={e => {

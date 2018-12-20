@@ -16,7 +16,7 @@ const ComplaintSchema = Schema({
   additionalInfo: String,
   proposedAction: String,
   status: String,
-  adminResponse: String,
+  adminResponses: [String],
   notes: [String],
   anonymous: Boolean
 });

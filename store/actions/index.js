@@ -21,7 +21,8 @@ const imports = {
 };
 
 const actionTypes = {
-  SET_VISIBLE_SCREEN: "SET_VISIBLE_SCREEN"
+  SET_VISIBLE_SCREEN: "SET_VISIBLE_SCREEN",
+  SEND_ACTION_EMAIL: "SEND_ACTION_EMAIL"
 };
 
 const actions = {
@@ -30,12 +31,32 @@ const actions = {
       type: actionTypes.SET_VISIBLE_SCREEN,
       input: input
     };
+  },
+  sendActionEmail: input => {
+    return dispatch => {
+      const link = new HttpLink({ uri, fetch: fetch });
+
+      const operation = {
+        query: mutation.sendActionEmail,
+        variables: { ...input }
+      };
+
+      return makePromise(execute(link, operation))
+        .then(data => {
+          dispatch({
+            type: actionTypes.SEND_ACTION_EMAIL
+          });
+        })
+        .catch(error => console.log(error));
+    };
   }
 };
 
 const query = {};
 
-const mutation = {};
+const mutation = {
+  sendActionEmail: ""
+};
 
 export default {
   // TYPES

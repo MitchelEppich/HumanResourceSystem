@@ -74,7 +74,7 @@ type Complaint {
   witnessNames: [String]
   additionalInfo: String
   proposedAction: String
-  adminResponse: String
+  adminResponses: [String]
   notes: [String]
   anonymous: Boolean
 }
@@ -100,6 +100,13 @@ input ComplaintInput {
   anonymous: Boolean
 }
 
+input EmailInput {
+  username: String
+  body: String
+  date: String
+  status: String
+}
+
 type Subscription {
   userUpdate: User
   complaintUpdate: Complaint
@@ -114,6 +121,8 @@ type Mutation {
   createComplaint(input: ComplaintInput!): Complaint
   updateComplaint(input: ComplaintInput!): Complaint
   deleteComplaint(input: ComplaintInput!): Complaint
+
+  sendEmail(input: EmailInput!): Complaint
 }
 
 `;

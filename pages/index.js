@@ -66,7 +66,7 @@ class Index extends Component {
         ) : null}
 
         {this.props.misc.visibleScreen != null &&
-        this.props.misc.visibleScreen.includes("admin") ? (
+        this.props.misc.visibleScreen.includes("complaints") ? (
           <Complaints {...this.props} />
         ) : null}
       </Layout>
