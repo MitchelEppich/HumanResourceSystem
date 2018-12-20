@@ -17,14 +17,11 @@ const Main = props => {
   let showNames = () => {
     if (props.user.promptUsers == null) return;
     let arr = [];
-    let names = props.user.promptUsers.map(user => {
-      return user.name;
-    });
 
-    for (let name of names) {
+    for (let user of props.user.promptUsers) {
       arr.push(
-        <option key={arr} value={name}>
-          {name}
+        <option key={user.name} value={user.name} email={user.email}>
+          {user.name}
         </option>
       );
     }
@@ -83,11 +80,10 @@ const Main = props => {
             props.setComplaint({
               complaint: props.nav.complaint,
               key: e.target.id,
-              value: e.target.value
+              value: value
             });
-            console.log(e.target.id);
+            props.setVisibleScreen(["home"]);
           }}
-          id={value}
           key={value}
         >
           {value}
@@ -122,12 +118,7 @@ const Main = props => {
               )
                 return;
 
-              props.setVisibleScreen([
-                props.misc.visibleScreen != null &&
-                props.misc.visibleScreen.includes("thanksMessage")
-                  ? null
-                  : "thanksMessage"
-              ]);
+              props.setVisibleScreen(["successMessage"]);
               props.postComplaint(props.nav.complaint);
             }}
           >
@@ -187,10 +178,18 @@ const Main = props => {
                     required
                     onChange={e => {
                       let _value = e.target.value;
+                      let _email = e.target.options[
+                        e.target.selectedIndex
+                      ].getAttribute("email");
                       props.setComplaint({
                         complaint: props.nav.complaint,
                         key: e.target.id,
                         value: _value
+                      });
+                      props.setComplaint({
+                        complaint: props.nav.complaint,
+                        key: "email",
+                        value: _email
                       });
                     }}
                   >
@@ -257,26 +256,6 @@ const Main = props => {
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Time:</label>
-                  {/* <select
-                    className="w-250 p-1 ml-4"
-                    name="incidentTime"
-                    id="incidentTime"
-                    required
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                  >
-                    <option value="" disabled selected>
-                      Select here...
-                    </option>
-                    {hours()}
-                    
-                  </select> */}
-
                   <div
                     onClick={e => {
                       e.preventDefault();
@@ -306,10 +285,10 @@ const Main = props => {
                         cursor: "default"
                       }}
                     >
-                      {props.nav.complaint == null
-                        ? "00:01 AM"
-                        : props.nav.complaint[0]}
-                      {/* 00:00 AM                    */}
+                      {props.nav.complaint != null &&
+                      props.nav.complaint.incidentTime != null
+                        ? props.nav.complaint.incidentTime
+                        : "Select time"}
                     </div>
                   </div>
 

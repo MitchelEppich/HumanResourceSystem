@@ -110,9 +110,9 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4 ">
                   <p className="uppercase font-bold">
                     Name:{" "}
-                    <span className="pl-2 font-normal capitalize">
+                    <span className="pl-2 font-normal">
                       {" "}
-                      {_complaint.name}
+                      {_complaint.anonymous ? "Anonymous" : _complaint.name}
                     </span>
                   </p>
                 </div>
@@ -121,7 +121,7 @@ const ComplaintFile = props => {
                     Email:{" "}
                     <span className="pl-2 font-normal">
                       {" "}
-                      {_complaint.email}
+                      {_complaint.anonymous ? "Anonymous" : _complaint.email}
                     </span>
                   </p>
                 </div>
@@ -169,8 +169,7 @@ const ComplaintFile = props => {
                     <p className="uppercase font-bold">
                       Hour:{" "}
                       <span className="pl-2 font-normal uppercase">
-                        {moment(_complaint.incidentTime).format("HH:MM:SS") ||
-                          "Not informed"}
+                        {_complaint.incidentTime || "Not informed"}
                       </span>
                     </p>
                   </div>
@@ -338,10 +337,19 @@ const ComplaintFile = props => {
                         focusComplaint: props.nav.focusComplaint,
                         adminComplaint: props.nav.complaint
                       });
+                      props.sendActionEmail({
+                        email: _complaint.email,
+                        name: _complaint.name,
+                        date: moment().format("DD-MM-YY HH:mm:ss"),
+                        status: props.nav.complaint.status,
+                        body: props.nav.complaint.adminResponse,
+                        type: "update"
+                      });
                     }}
                   >
                     Send Message
                   </div>
+                  {console.log(props.nav.focusComplaint)}
                 </div>
               </div>
             </div>

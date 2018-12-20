@@ -4,6 +4,9 @@ const ComplaintResolvers = require("./Complaint");
 const User = UserResolvers.User;
 const Complaint = ComplaintResolvers.Complaint;
 
+const nodemailer = require("nodemailer");
+const emailTemplates = require("../email");
+
 const axios = require("axios");
 
 const resolvers = {
@@ -25,36 +28,26 @@ const resolvers = {
         service: "gmail",
         auth: {
           user: "hrsystem.noreply@gmail.com",
-          pass: "hrnremail."
+          pass: "qzldkaopkrwuewji"
         }
       });
 
       let mailOptions;
-      // switch (input.type) {
-      //   case "welcome":
-      //     mailOptions = emailTemplates.welcome({
-      //       ...input,
-      //       username: (await UserResolvers.Query.user(_, {
-      //         email: input.email
-      //       })).username,
-      //       url: url
-      //     });
-      //     break;
-      //   case "passwordReset":
-      //     mailOptions = emailTemplates.passwordReset({
-      //       ...input,
-      //       username: (await UserResolvers.Query.user(_, {
-      //         email: input.email
-      //       })).username,
-      //       url: url
-      //     });
-      //     break;
-      // }
+      switch (input.type) {
+        case "update":
+          mailOptions = emailTemplates.actionUpdate({
+            ...input
+          });
+          break;
+      }
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          // nothing
+          console.log("Email failed to send -> ", error);
+          return;
         }
+        console.log("Email sent.");
+        return;
       });
     }
   }

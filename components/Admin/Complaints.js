@@ -29,7 +29,7 @@ const Complaints = props => {
           className="inline-flex w-full p-1 bg-grey-lighter text-grey mt-1 flex items-center "
         >
           <div style={{ width: "15%" }} className=" text-center capitalize">
-            {complaint.name || "NO NAME"}
+            {complaint.anonymous ? "Anonymous" : complaint.name || "NO NAME"}
           </div>
           <div style={{ width: "15%" }} className=" text-center capitalize">
             {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") ||

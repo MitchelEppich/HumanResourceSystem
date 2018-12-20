@@ -18,7 +18,7 @@ const ComplaintSchema = Schema({
   status: String,
   adminResponses: [String],
   notes: [String],
-  anonymous: Boolean
+  anonymous: { type: Boolean, default: false }
 });
 
 module.exports = ComplaintSchema;

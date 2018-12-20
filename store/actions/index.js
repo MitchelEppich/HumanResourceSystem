@@ -55,7 +55,27 @@ const actions = {
 const query = {};
 
 const mutation = {
-  sendActionEmail: ""
+  sendActionEmail: gql`
+    mutation(
+      $email: String
+      $body: String
+      $status: String
+      $date: String
+      $type: String
+      $name: String
+    ) {
+      sendEmail(
+        input: {
+          email: $email
+          body: $body
+          status: $status
+          date: $date
+          type: $type
+          name: $name
+        }
+      )
+    }
+  `
 };
 
 export default {

@@ -101,10 +101,12 @@ input ComplaintInput {
 }
 
 input EmailInput {
-  username: String
+  name: String
   body: String
   date: String
   status: String
+  email: String
+  type: String
 }
 
 type Subscription {
@@ -122,7 +124,7 @@ type Mutation {
   updateComplaint(input: ComplaintInput!): Complaint
   deleteComplaint(input: ComplaintInput!): Complaint
 
-  sendEmail(input: EmailInput!): Complaint
+  sendEmail(input: EmailInput!): String
 }
 
 `;

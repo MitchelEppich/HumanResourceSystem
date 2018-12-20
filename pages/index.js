@@ -13,6 +13,7 @@ import Complaints from "../components/Admin/Complaints";
 import UserViewer from "../components/Admin/UserViewer";
 import RegisterUser from "../components/Admin/RegisterUser";
 import Navbar from "../components/Navbar";
+import SuccessMessage from "../components/Main/SuccessMessage";
 
 import { Subscription } from "react-apollo";
 import gql from "graphql-tag";
@@ -66,6 +67,11 @@ class Index extends Component {
         ) : null}
 
         {this.props.misc.visibleScreen != null &&
+        this.props.misc.visibleScreen.includes("successMessage") ? (
+          <SuccessMessage {...this.props} />
+        ) : null}
+
+        {this.props.misc.visibleScreen != null &&
         this.props.misc.visibleScreen.includes("complaints") ? (
           <Complaints {...this.props} />
         ) : null}
@@ -95,6 +101,7 @@ const mapDispatchToProps = dispatch => {
     deleteComplaint: input => dispatch(actions.deleteComplaint(input)),
     deleteUser: input => dispatch(actions.deleteUser(input)),
     updateUser: input => dispatch(actions.updateUser(input)),
+    sendActionEmail: input => dispatch(actions.sendActionEmail(input)),
     clearUserData: () => dispatch(actions.clearUserData())
   };
 };
