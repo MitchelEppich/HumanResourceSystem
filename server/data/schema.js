@@ -37,6 +37,7 @@ type User {
   createdAt: String
   online: Boolean
   lastAction: String
+  sotiId: Int
 }
 
 input UserInput {
@@ -57,6 +58,7 @@ input UserInput {
   createdAt: String
   online: Boolean
   lastAction: String
+  sotiId: Int
 }
 
 type Complaint {
