@@ -9,8 +9,6 @@ import {
 import moment from "moment";
 
 const RegisterUser = props => {
-  // console.log(props)
-
   let showJobTitles = () => {
     if (props.user.userData.jobTitle == null) return;
     let arr = [];
@@ -39,19 +37,20 @@ const RegisterUser = props => {
             <div style={{width: "822px"}} className="p-2">
               <p className="pl-6 mr-8 p-2 text-left">{note}</p>
             </div>
-            <div className="w-12 h-12 justify-center py-2 items-center flex hover:bg-grey hover:text-white">
-              <FontAwesomeIcon
-                onClick={() => {
-                  _notes = _notes.filter(a => {
-                    if (a == note) return false;
-                    return true;
-                  });
-                  props.setUserData({
-                    userData: props.user.userData,
-                    key: "adminNotes",
-                    value: _notes
-                  });
-                }}
+            <div
+            onClick={() => {
+              _notes = _notes.filter(a => {
+                if (a == note) return false;
+                return true;
+              });
+              props.setUserData({
+                userData: props.user.userData,
+                key: "adminNotes",
+                value: _notes
+              });
+            }}
+            className="w-12 h-12 justify-center py-2 items-center flex hover:bg-grey hover:text-white">
+              <FontAwesomeIcon                
                 icon={faTimes}
                 className="fa-lg cursor-pointer pin-t"
               />
@@ -72,8 +71,7 @@ const RegisterUser = props => {
       }}
     >
       <div
-        style={{
-          // boxShadow: "0 0 4px rgba(220, 220, 220, 0.4)",
+        style={{         
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
           overflow: "hidden",

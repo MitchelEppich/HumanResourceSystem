@@ -108,7 +108,7 @@ const Main = props => {
           right: "0",
           height: "785px"
         }}
-        className="w-newScreen h-halfscreen text-white mt-16 max-w-maxScreen"
+        className="w-newScreen h-halfscreen text-white mt-16"
       >
         {props.misc.visibleScreen == null ||
         (!props.misc.visibleScreen.includes("admin") &&

@@ -23,14 +23,14 @@ const Complaints = props => {
     for (let complaint of _complaints) {
       arr.push(
         <div key={arr} className="inline-flex w-full p-1 bg-grey-lighter text-grey mt-1 flex items-center ">
-          <div style={{ width: "15%" }} className=" text-center capitalize">
+          <div style={{ width: "15%" }} className=" text-center">
             {complaint.name || "NO NAME"}
           </div>
-          <div style={{ width: "15%" }} className=" text-center capitalize">
+          <div style={{ width: "15%" }} className=" text-center">
           
           {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") || "Not defined"}
           </div>
-          <div style={{ width: "45%" }} className=" pl-12 capitalize">
+          <div style={{ width: "45%" }} className=" pl-12 ">
             {complaint.incidentDescription != null
               ? `${complaint.incidentDescription.substring(0, 80)}${
                   complaint.incidentDescription.length > 80 ? "..." : ""
