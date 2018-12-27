@@ -257,25 +257,7 @@ const Main = props => {
                 </div>
                 <div className="w-1/3 h-10 mx-auto inline-flex flex items-center">
                   <label className="mr-2">Time:</label>
-                  {/* <select
-                    className="w-250 p-1 ml-4"
-                    name="incidentTime"
-                    id="incidentTime"
-                    required
-                    onChange={e => {
-                      props.setComplaint({
-                        complaint: props.nav.complaint,
-                        key: e.target.id,
-                        value: e.target.value
-                      });
-                    }}
-                  >
-                    <option value="" disabled selected>
-                      Select here...
-                    </option>
-                    {hours()}
-                    
-                  </select> */}
+                 
 
                   <div
                     onClick={e => {
@@ -306,10 +288,12 @@ const Main = props => {
                         cursor: "default"
                       }}
                     >
-                      {props.nav.complaint == null
-                        ? "00:01 AM"
-                        : props.nav.complaint[0]}
-                      {/* 00:00 AM                    */}
+                    {props.nav.complaint == null
+                      ? "00:00 AM"
+                      : props.nav.complaint[0]} 
+                                 
+                     
+                     
                     </div>
                   </div>
 
