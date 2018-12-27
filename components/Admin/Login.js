@@ -7,7 +7,6 @@ import {
   faUserLock
 } from "@fortawesome/free-solid-svg-icons";
 
-
 const Login = props => {
   return (
     <div
@@ -35,8 +34,8 @@ const Login = props => {
           <FontAwesomeIcon
             style={{
               transform: "scale(7)",
-              marginTop: "90px",
-              }}
+              marginTop: "90px"
+            }}
             icon={faUserLock}
             className="mb-6 text-almost-transparent"
           />
@@ -55,7 +54,7 @@ const Login = props => {
             // Verify login credentials
             props.verifyCredentials({ username, badge }).then(res => {
               if (res == null) return;
-              props.setVisibleScreen("admin");
+              props.setVisibleScreen("complaints");
               props.fetchComplaints();
             });
           }}

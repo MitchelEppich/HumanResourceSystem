@@ -9,9 +9,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Notes from "../Admin/Notes";
 
-import moment from "moment"
+import moment from "moment";
 
 const ComplaintFile = props => {
+  let showNotes = () => {
+    let _notes = props.nav.focusComplaint.adminResponses;
+    if (_notes == null) return;
+    let arr = [];
+    for (let note of _notes) {
+      arr.push(
+        <div key={arr} className="w-full mt-2 bg-white">
+          <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify hover:bg-grey-lightest hover:text-grey-new cursor-pointer ">
+            <p className="pl-6 mr-8 p-2 text-left">{note}</p>
+          </div>
+        </div>
+      );
+    }
+    return arr;
+  };
+
   let showComplaint = () => {
     let _complaint = props.nav.focusComplaint;
     if (_complaint == null) return <div />;
@@ -37,7 +53,7 @@ const ComplaintFile = props => {
           >
             <div
               onClick={() => {
-                props.setVisibleScreen("admin");
+                props.setVisibleScreen("complaints");
                 props.clearUserData();
               }}
               className="w-1/3 h-10 inline-flex bg-grey-new"
@@ -55,8 +71,8 @@ const ComplaintFile = props => {
                 onClick={() => {
                   props.setVisibleScreen(
                     props.misc.visibleScreen.includes("noteBy")
-                      ? ["complainFile", "admin"]
-                      : ["noteBy", "complainFile", "admin"]
+                      ? ["complainFile", "complaints"]
+                      : ["noteBy", "complainFile", "complaints"]
                   );
                 }}
                 style={{
@@ -94,7 +110,10 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4 ">
                   <p className="uppercase font-bold">
                     Name:{" "}
-                    <span className="pl-2 font-normal capitalize"> {_complaint.name}</span>
+                    <span className="pl-2 font-normal">
+                      {" "}
+                      {_complaint.anonymous ? "Anonymous" : _complaint.name}
+                    </span>
                   </p>
                 </div>
                 <div className="w-1/3 text-left pl-4">
@@ -102,7 +121,7 @@ const ComplaintFile = props => {
                     Email:{" "}
                     <span className="pl-2 font-normal lowercase">
                       {" "}
-                      {_complaint.email}
+                      {_complaint.anonymous ? "Anonymous" : _complaint.email}
                     </span>
                   </p>
                 </div>
@@ -111,7 +130,9 @@ const ComplaintFile = props => {
                     Submitted on:{" "}
                     <span className="pl-2 font-normal lowercase">
                       {" "}
-                      {moment(_complaint.fileDate).format("DD/MM/YYYY - HH:MM:MM")}
+                      {moment(_complaint.fileDate).format(
+                        "DD/MM/YYYY - HH:MM:MM"
+                      )}
                     </span>
                   </p>
                 </div>
@@ -142,7 +163,7 @@ const ComplaintFile = props => {
                     <p className="uppercase font-bold">
                       Hour:{" "}
                       <span className="pl-2 font-normal uppercase">
-                      {moment(_complaint.incidentTime).format("HH:MM:SS") || "Not informed"}
+                        {_complaint.incidentTime || "Not informed"}
                       </span>
                     </p>
                   </div>
@@ -231,10 +252,7 @@ const ComplaintFile = props => {
                   <div className="w-32">
                     <p className="uppercase font-bold">Description:</p>
                   </div>
-                  <div
-                    style={{ height: "110px" }}
-                    className="w-full"
-                  >
+                  <div style={{ height: "110px" }} className="w-full">
                     <p className="font-normal text-justify px-4">
                       {_complaint.proposedAction}
                     </p>
@@ -254,6 +272,7 @@ const ComplaintFile = props => {
                 <select
                   className="w-100 ml-4 uppercase"
                   id="status"
+                  defaultValue={_complaint.status}
                   onChange={e => {
                     props.setComplaint({
                       complaint: props.nav.complaint,
@@ -284,18 +303,29 @@ const ComplaintFile = props => {
                     className="w-full mr-2"
                   />
                 </div>
+                <div>{showNotes()}</div>
                 <div className="w-full mt-2">
                   <div
                     className="bg-orange-new p-2 text-grey text-center uppercase hover:bg-grey-new hover:text-white cursor-pointer text-lg font-bold"
                     onClick={() => {
+                      props.setVisibleScreen(["complaints"]);
                       props.updateComplaint({
                         focusComplaint: props.nav.focusComplaint,
                         adminComplaint: props.nav.complaint
+                      });
+                      props.sendActionEmail({
+                        email: _complaint.email,
+                        name: _complaint.name,
+                        date: moment().format("DD-MM-YY HH:mm:ss"),
+                        status: props.nav.complaint.status,
+                        body: props.nav.complaint.adminResponse,
+                        type: "update"
                       });
                     }}
                   >
                     Send Message
                   </div>
+                  {console.log(props.nav.focusComplaint)}
                 </div>
               </div>
             </div>

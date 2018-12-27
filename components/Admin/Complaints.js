@@ -16,19 +16,24 @@ import moment from "moment";
 const Complaints = props => {
   let showComplaints = () => {
     let _complaints = props.nav.promptComplaints;
-    if (_complaints == null) return <div />;
-    props.fetchComplaints()
+    if (_complaints == null) {
+      props.fetchComplaints();
+      return <div />;
+    }
 
     let arr = [];
     for (let complaint of _complaints) {
       arr.push(
-        <div key={arr} className="inline-flex w-full p-1 bg-grey-lighter text-grey mt-1 flex items-center ">
-          <div style={{ width: "15%" }} className=" text-center">
-            {complaint.name || "NO NAME"}
+        <div
+          key={arr}
+          className="inline-flex w-full p-1 bg-grey-lighter text-grey mt-1 flex items-center "
+        >
+          <div style={{ width: "15%" }} className=" text-center capitalize">
+            {complaint.anonymous ? "Anonymous" : complaint.name || "NO NAME"}
           </div>
-          <div style={{ width: "15%" }} className=" text-center">
-          
-          {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") || "Not defined"}
+          <div style={{ width: "15%" }} className=" text-center capitalize">
+            {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") ||
+              "Not defined"}
           </div>
           <div style={{ width: "45%" }} className=" pl-12 ">
             {complaint.incidentDescription != null
@@ -48,8 +53,8 @@ const Complaints = props => {
               onClick={() => {
                 props.setVisibleScreen(
                   props.misc.visibleScreen.includes("complainFile")
-                    ? ["admin"]
-                    : ["complainFile", "admin"]
+                    ? ["complaints"]
+                    : ["complainFile", "complaints"]
                 );
                 props.setFocusComplaint({ complaint });
               }}
@@ -95,7 +100,7 @@ const Complaints = props => {
         style={{
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
-          overflow: "hidden",         
+          overflow: "hidden"
         }}
         className="w-newScreen bg-white z-50 h-newScreen mt-16 align-absolute"
       >
@@ -135,7 +140,14 @@ const Complaints = props => {
             let _promptComplaints = props.nav.promptComplaints;
             let _complaint = data.complaintUpdate;
             let _focusComplaint = props.nav.focusComplaint;
-
+            console.log(
+              "SUB",
+              !JSON.stringify(_promptComplaints).includes(
+                JSON.stringify(_complaint)
+              ),
+              _complaint,
+              _promptComplaints
+            );
             if (
               !JSON.stringify(_promptComplaints).includes(
                 JSON.stringify(_complaint)
@@ -171,7 +183,7 @@ const subscription = {
         incidentDescription
         additionalInfo
         proposedAction
-        adminResponse
+        adminResponses
         anonymous
         witnessNames
         reportedNames

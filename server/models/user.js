@@ -19,7 +19,8 @@ const UserSchema = Schema({
   token: String,
   createdAt: { type: Date, default: Date.now },
   online: { type: Boolean, default: false },
-  lastAction: String
+  lastAction: String,
+  sotiId: Number
 });
 
 UserSchema.methods.createToken = function() {

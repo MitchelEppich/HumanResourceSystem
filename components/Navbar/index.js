@@ -33,7 +33,7 @@ const Navbar = props => {
                 props.setVisibleScreen([
                   props.misc.visibleScreen != null &&
                   props.misc.visibleScreen.includes("login")
-                    ? "admin"
+                    ? "complaints"
                     : "login"
                 ]);
               }}
@@ -62,14 +62,14 @@ const Navbar = props => {
                 onClick={() => {
                   props.setVisibleScreen([
                     props.misc.visibleScreen != null &&
-                    props.misc.visibleScreen.includes("admin")
-                      ? "admin"
-                      : "admin"
+                    props.misc.visibleScreen.includes("complaints")
+                      ? "complaints"
+                      : "complaints"
                   ]);
                   props.fetchComplaints();
                 }}
                 className={`p-2  unselectable font-bold uppercase cursor-pointer px-4 hover:bg-white hover:text-grey-new mr-2 ${
-                  !props.misc.visibleScreen.includes("admin")
+                  !props.misc.visibleScreen.includes("complaints")
                     ? "bg-grey-new text-white"
                     : "bg-white text-grey-new"
                 } `}

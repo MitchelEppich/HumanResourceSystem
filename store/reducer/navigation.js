@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case actionTypes.DELETE_COMPLAINT:
       return updateObject(state, { promptComplaints: action.input });
     case actionTypes.POST_COMPLAINT:
-      return updateObject(state, {});
+      return updateObject(state, { complaint: {} });
     default:
       return state;
   }

@@ -37,6 +37,7 @@ type User {
   createdAt: String
   online: Boolean
   lastAction: String
+  sotiId: Int
 }
 
 input UserInput {
@@ -57,6 +58,7 @@ input UserInput {
   createdAt: String
   online: Boolean
   lastAction: String
+  sotiId: Int
 }
 
 type Complaint {
@@ -74,7 +76,7 @@ type Complaint {
   witnessNames: [String]
   additionalInfo: String
   proposedAction: String
-  adminResponse: String
+  adminResponses: [String]
   notes: [String]
   anonymous: Boolean
 }
@@ -100,6 +102,15 @@ input ComplaintInput {
   anonymous: Boolean
 }
 
+input EmailInput {
+  name: String
+  body: String
+  date: String
+  status: String
+  email: String
+  type: String
+}
+
 type Subscription {
   userUpdate: User
   complaintUpdate: Complaint
@@ -114,6 +125,8 @@ type Mutation {
   createComplaint(input: ComplaintInput!): Complaint
   updateComplaint(input: ComplaintInput!): Complaint
   deleteComplaint(input: ComplaintInput!): Complaint
+
+  sendEmail(input: EmailInput!): String
 }
 
 `;
