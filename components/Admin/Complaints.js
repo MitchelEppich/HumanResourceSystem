@@ -35,7 +35,7 @@ const Complaints = props => {
             {moment(complaint.incidentDate).format("DD/MM/YY - hh:mm:ss") ||
               "Not defined"}
           </div>
-          <div style={{ width: "45%" }} className=" pl-12 capitalize">
+          <div style={{ width: "45%" }} className=" pl-12 ">
             {complaint.incidentDescription != null
               ? `${complaint.incidentDescription.substring(0, 80)}${
                   complaint.incidentDescription.length > 80 ? "..." : ""

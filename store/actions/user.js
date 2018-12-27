@@ -28,7 +28,7 @@ const getActions = uri => {
     setUserData: input => {
       let _userData = input.userData;
       _userData[input.key] = input.value;
-      console.log(_userData);
+      // console.log(_userData);
       return { type: actionTypes.SET_USER_DATA, input: _userData };
     },
     clearUserData: () => {

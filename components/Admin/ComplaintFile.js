@@ -39,10 +39,8 @@ const ComplaintFile = props => {
       >
         <div
           style={{
-            borderRadius: "10px",
-            // height: "120vh",
-            zIndex: "100"
-            // boxShadow: "0px 1px 4px rgb(187, 187, 187)",
+            borderRadius: "10px",          
+            zIndex: "100",    
           }}
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto"
         >
@@ -78,28 +76,30 @@ const ComplaintFile = props => {
                   );
                 }}
                 style={{
-                  borderRadius: "30%",
-                  width: "28px",
+                  borderRadius: "10%",
                   height: "28px",
                   marginTop: "4px",
-                  padding: "6px",
-                  fontSize: "17px"
+                  padding: "6px"
                 }}
-                className="flex justify-center text-grey float-right bg-almost-white mr-4 hover:bg-white cursor-pointer"
-              >
-                <FontAwesomeIcon icon={faStickyNote} />
-              </span>
+                className={`flex justify-center float-right bg-almost-white hover:bg-white cursor-pointer ${
+                  props.nav.focusComplaint.notes == 0
+                    ? "text-grey text-center w-8 mr-2"
+                    : " w-12 text-white bg-orange font-bold px-2 hover:bg-semi-transparent hover:text-grey items-center flex mr-4 text-sm"
+                }`}
+              > 
+                <FontAwesomeIcon icon={faStickyNote} className="fa-lg" />{" "}
+              {props.nav.focusComplaint.notes == null ||
+              props.nav.focusComplaint.notes == 0 ? null : (
+                <span className="pl-1">
+                  {props.nav.focusComplaint.notes.length}
+                </span>
+              )}
+            </span>
             </div>
           </div>
           <div className="w-full h-650 py-2 px-6 overflow-y-auto">
             <div className="w-full mt-4 py-1 px-6">
-              <div
-                style={
-                  {
-                    // borderTopLeftRadius: "10px",
-                    // borderTopRightRadius: "10px"
-                  }
-                }
+              <div                
                 className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2"
               >
                 <h4>Reporter by:</h4>
@@ -119,7 +119,7 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4">
                   <p className="uppercase font-bold">
                     Email:{" "}
-                    <span className="pl-2 font-normal">
+                    <span className="pl-2 font-normal lowercase">
                       {" "}
                       {_complaint.anonymous ? "Anonymous" : _complaint.email}
                     </span>
@@ -128,7 +128,7 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4">
                   <p className="uppercase font-bold">
                     Submitted on:{" "}
-                    <span className="pl-2 font-normal">
+                    <span className="pl-2 font-normal lowercase">
                       {" "}
                       {moment(_complaint.fileDate).format(
                         "DD/MM/YYYY - HH:MM:MM"
@@ -143,13 +143,7 @@ const ComplaintFile = props => {
             ) : null}
 
             <div className="w-full mt-4 py-2 px-6">
-              <div
-                style={
-                  {
-                    // borderTopLeftRadius: "10px",
-                    // borderTopRightRadius: "10px"
-                  }
-                }
+              <div                
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Reported:</h4>
@@ -227,12 +221,6 @@ const ComplaintFile = props => {
 
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
               <div
-                style={
-                  {
-                    // borderTopLeftRadius: "10px",
-                    // borderTopRightRadius: "10px"
-                  }
-                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Additional Information:</h4>
@@ -255,12 +243,6 @@ const ComplaintFile = props => {
             </div>
             <div className="w-full py-2 mt-4 px-6">
               <div
-                style={
-                  {
-                    // borderTopLeftRadius: "10px",
-                    // borderTopRightRadius: "10px"
-                  }
-                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Proposed Action:</h4>
@@ -281,12 +263,6 @@ const ComplaintFile = props => {
 
             <div className="w-full py-2 mt-4 px-6">
               <div
-                style={
-                  {
-                    // borderTopLeftRadius: "10px",
-                    // borderTopRightRadius: "10px"
-                  }
-                }
                 className="w-full bg-grey-new-light uppercase text-white text-center p-2"
               >
                 <h4>Admin Actions:</h4>

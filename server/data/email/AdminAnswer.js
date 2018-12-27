@@ -1,9 +1,9 @@
-<html>
-<head>
-<title>test</title>
-</head>
-<body>
-<table style="background-color:#fff; display:block; padding: 15px; min-height: 400px; width: 600px"><tbody style="background-color:#fff; width: 100%"> 
+exports.adminAnswer = input => {
+    return {
+      from: '"HR System" <no_reply@vancoastindustries.com>',
+      to: input.email,
+      subject: "Your complaint received a new status",
+      html: `<table style="background-color:#fff; display:block; padding: 15px; min-height: 400px; width: 600px"><tbody style="background-color:#fff; width: 100%"> 
       <tr>        
           <td style="background: #ff9b35; color:#131313; display:block; width: 600px;">   
                 <h2 style="text-align:center">HR SYSTEM</h2>
@@ -21,6 +21,6 @@
               <p style="color: #131313; margin-top: 25px; font-weight: bold; font-size: 15px; padding: 5px;">©2018 - HR SYSTEM TEAM</p>
               </td>               
             </tr>               
-          </table>
-</body>
-</hmtl>
+          </table>`
+    };
+  };
