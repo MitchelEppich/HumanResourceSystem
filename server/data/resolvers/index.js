@@ -34,6 +34,7 @@ const resolvers = {
 
       let mailOptions;
       switch (input.type) {
+        case "post":
         case "update":
           mailOptions = emailTemplates.actionUpdate({
             ...input

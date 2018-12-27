@@ -9,8 +9,6 @@ import {
 import moment from "moment";
 
 const RegisterUser = props => {
-  // console.log(props)
-
   let showJobTitles = () => {
     if (props.user.userData.jobTitle == null) return;
     let arr = [];
@@ -36,7 +34,7 @@ const RegisterUser = props => {
       arr.push(
         <div key={arr} className="w-full mt-2 bg-white">
           <div className="bg-grey-lighter w-full text-grey mt-1 inline-flex flex items-center text-justify cursor-pointer ">
-            <div style={{width: "822px"}} className="p-2">
+            <div style={{ width: "822px" }} className="p-2">
               <p className="pl-6 mr-8 p-2 text-left">{note}</p>
             </div>
             <div className="w-12 h-12 justify-center py-2 items-center flex hover:bg-grey hover:text-white">

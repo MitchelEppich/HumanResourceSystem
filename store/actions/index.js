@@ -34,6 +34,7 @@ const actions = {
   },
   sendActionEmail: input => {
     return dispatch => {
+      console.log(input);
       const link = new HttpLink({ uri, fetch: fetch });
 
       const operation = {

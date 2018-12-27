@@ -13,6 +13,8 @@ import SuccessMessage from "../Main/SuccessMessage";
 import Login from "../Admin/Login";
 import UserViewer from "../Admin/UserViewer";
 
+import moment from "moment";
+
 const Main = props => {
   let showNames = () => {
     if (props.user.promptUsers == null) return;
@@ -112,14 +114,30 @@ const Main = props => {
           <form
             onSubmit={e => {
               e.preventDefault();
+              let _complaint = props.nav.complaint;
               if (
-                props.nav.complaint.reportedNames == null ||
-                props.nav.complaint.reportedNames.length == 0
+                _complaint.reportedNames == null ||
+                _complaint.reportedNames.length == 0
               )
                 return;
 
               props.setVisibleScreen(["successMessage"]);
-              props.postComplaint(props.nav.complaint);
+              props.postComplaint(_complaint);
+
+              props.sendActionEmail({
+                email: _complaint.email,
+                name: _complaint.name,
+                date: moment().format("DD-MM-YY HH:mm:ss"),
+                status: _complaint.status,
+                body: `Reported Incident : ${
+                  _complaint.name
+                }\nReported Parties : ${_complaint.reportedNames.toString()}\nReported Time : ${
+                  _complaint.incidentDate
+                } ${_complaint.incidentTime}\nDescription :\n${
+                  _complaint.incidentDescription
+                }`,
+                type: "post"
+              });
             }}
           >
             <div
