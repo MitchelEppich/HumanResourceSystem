@@ -1,5 +1,5 @@
-const UserResolvers = require("./User");
-const ComplaintResolvers = require("./Complaint");
+const UserResolvers = require("./user");
+const ComplaintResolvers = require("./complaint");
 
 const User = UserResolvers.User;
 const Complaint = ComplaintResolvers.Complaint;

@@ -23,7 +23,8 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const subscriptionsPath = "/subscriptions";
-const subscriptionsEndpoint = `ws://${url}:${port}${subscriptionsPath}`;
+// const subscriptionsEndpoint = `ws://${url}:${port}${subscriptionsPath}`;
+const subscriptionsEndpoint = `ws://159.89.117.30:${port}${subscriptionsPath}`;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
