@@ -128,14 +128,12 @@ const Main = props => {
                 email: _complaint.email,
                 name: _complaint.name,
                 date: moment().format("DD-MM-YY HH:mm:ss"),
-                status: _complaint.status,
-                body: `Reported Incident : ${
-                  _complaint.name
-                }\nReported Parties : ${_complaint.reportedNames.toString()}\nReported Time : ${
-                  _complaint.incidentDate
-                } ${_complaint.incidentTime}\nDescription :\n${
-                  _complaint.incidentDescription
+                status: "Awaiting Response",
+                reportedParties: _complaint.reportedNames.toString(),
+                reportedDate: `${_complaint.incidentDate} ${
+                  _complaint.incidentTime
                 }`,
+                report: _complaint.incidentDescription,
                 type: "post"
               });
             }}

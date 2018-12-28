@@ -34,7 +34,6 @@ const actions = {
   },
   sendActionEmail: input => {
     return dispatch => {
-      console.log(input);
       const link = new HttpLink({ uri, fetch: fetch });
 
       const operation = {
@@ -61,6 +60,9 @@ const mutation = {
       $email: String
       $body: String
       $status: String
+      $reportedParties: String
+      $reportedDate: String
+      $report: String
       $date: String
       $type: String
       $name: String
@@ -69,6 +71,9 @@ const mutation = {
         input: {
           email: $email
           body: $body
+          reportedParties: $reportedParties
+          reportedDate: $reportedDate
+          report: $report
           status: $status
           date: $date
           type: $type

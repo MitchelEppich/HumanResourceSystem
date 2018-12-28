@@ -35,8 +35,14 @@ const resolvers = {
       let mailOptions;
       switch (input.type) {
         case "post":
+          mailOptions = emailTemplates.actionPost({
+            subject: "Your complaint has been received.",
+            ...input
+          });
+          break;
         case "update":
           mailOptions = emailTemplates.actionUpdate({
+            subject: "Your complaint has received an update.",
             ...input
           });
           break;

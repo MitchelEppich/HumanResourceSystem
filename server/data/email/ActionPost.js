@@ -1,4 +1,4 @@
-exports.actionUpdate = input => {
+exports.actionPost = input => {
   return {
     from: '"HR Team" <no_reply@vancoastindustries.com>',
     to: input.email,
@@ -19,8 +19,17 @@ exports.actionUpdate = input => {
               <p style="padding: 5px; margin-bottom: 20px; color: black;"><small><b>Status:</b> ${
                 input.status
               }</small></p>
-              <p style="padding: 5px; margin-bottom: 45px; color: black;"><small><b>Message:</b> ${
-                input.body
+              <p style="padding: 5px; color: black;"><small><b>Reporter:</b> ${
+                input.name
+              }</small></p>
+              <p style="padding: 5px; color: black;"><small><b>Reported Parties:</b> ${
+                input.reportedParties
+              }</small></p>
+              <p style="padding: 5px; margin-bottom: 2px; color: black;"><small><b>Incident Date:</b> ${
+                input.reportedDate
+              }</small></p>
+              <p style="padding: 5px; color: black;"><small><b>Description:</b> ${
+                input.report
               }</small></p>
               
               <p style="padding: 5px; margin-top: 40px; color:black;">If you did not place this complaint or have any concerns/questions, please speak to your office admin.</p>

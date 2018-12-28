@@ -105,6 +105,9 @@ input ComplaintInput {
 input EmailInput {
   name: String
   body: String
+  reportedParties: String
+  reportedDate: String
+  report: String
   date: String
   status: String
   email: String
