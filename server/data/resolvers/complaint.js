@@ -22,7 +22,7 @@ const resolvers = {
       subscribe: withFilter(
         () => pubsub.asyncIterator("complaintUpdate"),
         (payload, variables) => {
-          console.log(payload, variables);
+          // console.log(payload, variables);
           return true;
         }
       )

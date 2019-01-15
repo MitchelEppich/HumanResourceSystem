@@ -39,8 +39,8 @@ const ComplaintFile = props => {
       >
         <div
           style={{
-            borderRadius: "10px",          
-            zIndex: "100",    
+            borderRadius: "10px",
+            zIndex: "100"
           }}
           className="w-newScreen align-absolute mx-auto absolute mt-16 bg-white pin-auto"
         >
@@ -86,22 +86,20 @@ const ComplaintFile = props => {
                     ? "text-grey text-center w-8 mr-2"
                     : " w-12 text-white bg-orange font-bold px-2 hover:bg-semi-transparent hover:text-grey items-center flex mr-4 text-sm"
                 }`}
-              > 
+              >
                 <FontAwesomeIcon icon={faStickyNote} className="fa-lg" />{" "}
-              {props.nav.focusComplaint.notes == null ||
-              props.nav.focusComplaint.notes == 0 ? null : (
-                <span className="pl-1">
-                  {props.nav.focusComplaint.notes.length}
-                </span>
-              )}
-            </span>
+                {props.nav.focusComplaint.notes == null ||
+                props.nav.focusComplaint.notes == 0 ? null : (
+                  <span className="pl-1">
+                    {props.nav.focusComplaint.notes.length}
+                  </span>
+                )}
+              </span>
             </div>
           </div>
           <div className="w-full h-650 py-2 px-6 overflow-y-auto">
             <div className="w-full mt-4 py-1 px-6">
-              <div                
-                className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2"
-              >
+              <div className="w-full bg-grey-new-light uppercase text-white px-6 text-center p-2">
                 <h4>Reporter by:</h4>
               </div>
             </div>
@@ -119,7 +117,7 @@ const ComplaintFile = props => {
                 <div className="w-1/3 text-left pl-4">
                   <p className="uppercase font-bold">
                     Email:{" "}
-                    <span className="pl-2 font-normal lowercase">
+                    <span className="pl-2 font-normal">
                       {" "}
                       {_complaint.anonymous ? "Anonymous" : _complaint.email}
                     </span>
@@ -143,9 +141,7 @@ const ComplaintFile = props => {
             ) : null}
 
             <div className="w-full mt-4 py-2 px-6">
-              <div                
-                className="w-full bg-grey-new-light uppercase text-white text-center p-2"
-              >
+              <div className="w-full bg-grey-new-light uppercase text-white text-center p-2">
                 <h4>Reported:</h4>
               </div>
               <div className="w-full mt-1">
@@ -220,9 +216,7 @@ const ComplaintFile = props => {
             </div>
 
             <div className="w-full py-2 mt-4 px-6 overflow-y-auto">
-              <div
-                className="w-full bg-grey-new-light uppercase text-white text-center p-2"
-              >
+              <div className="w-full bg-grey-new-light uppercase text-white text-center p-2">
                 <h4>Additional Information:</h4>
               </div>
               <div className="inline-flex w-full flex py-3 mt-2 bg-grey-lighter">
@@ -242,9 +236,7 @@ const ComplaintFile = props => {
               </div>
             </div>
             <div className="w-full py-2 mt-4 px-6">
-              <div
-                className="w-full bg-grey-new-light uppercase text-white text-center p-2"
-              >
+              <div className="w-full bg-grey-new-light uppercase text-white text-center p-2">
                 <h4>Proposed Action:</h4>
               </div>
               <div className="inline-flex w-full flex py-3 mt-2 bg-grey-lighter">
@@ -262,9 +254,7 @@ const ComplaintFile = props => {
             </div>
 
             <div className="w-full py-2 mt-4 px-6">
-              <div
-                className="w-full bg-grey-new-light uppercase text-white text-center p-2"
-              >
+              <div className="w-full bg-grey-new-light uppercase text-white text-center p-2">
                 <h4>Admin Actions:</h4>
               </div>
               <div className="text-grey p-2 flex justify-end items-center w-full inline-flex bg-grey-light uppercase mt-2">
@@ -325,7 +315,7 @@ const ComplaintFile = props => {
                   >
                     Send Message
                   </div>
-                  {console.log(props.nav.focusComplaint)}
+                  {/* {console.log(props.nav.focusComplaint)} */}
                 </div>
               </div>
             </div>

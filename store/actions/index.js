@@ -13,7 +13,7 @@ import fetch from "node-fetch";
 import User from "./user";
 import Nav from "./navigation";
 
-// const uri = "http://localhost:3000/graphql";
+// const uri = "http://localhost:80/graphql";
 const uri = "http://159.89.117.30:80/graphql";
 
 const imports = {

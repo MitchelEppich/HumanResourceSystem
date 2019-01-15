@@ -85,9 +85,12 @@ const getActions = uri => {
             badge: input.badge
           }
         };
+
         return makePromise(execute(link, operation)).then(data => {
           let user = data.data.verifyCredentials;
           if (user == null) return;
+          user = inferPermissions(user, "HRS");
+          if (user.locked) return;
           sessionStorage.setItem("token", user.token);
           dispatch({ type: actionTypes.VERIFY_CREDENTIALS, user: user });
           return Promise.resolve(user);
@@ -168,7 +171,7 @@ const getActions = uri => {
         let _promptUsers = input.promptUsers;
         let _user = input.user;
         let _focusUser = input.focusUser;
-        console.log("modify", _user);
+        // console.log("modify", _user);
         if (
           _focusUser != null &&
           _user != null &&
@@ -194,6 +197,24 @@ const getActions = uri => {
 
   return { ...objects };
 };
+
+function inferPermissions(user, CLIENT_ACR) {
+  let _new = user;
+
+  let _permissions =
+    _new.permissions != null && _new.permissions.length != 0
+      ? _new.permissions
+          .filter(a => {
+            if (a.includes(CLIENT_ACR)) return true;
+            return false;
+          })[0]
+          .split(":")
+      : [CLIENT_ACR, 0, 0];
+  _new.admin = _permissions[1] == "1";
+  _new.locked = _permissions[2] == "1";
+  return _new;
+}
+
 const query = {
   getUsers: gql`
     query {

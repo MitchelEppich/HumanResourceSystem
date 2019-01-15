@@ -41,7 +41,7 @@ const resolvers = {
       subscribe: withFilter(
         () => pubsub.asyncIterator("userUpdate"),
         (payload, variables) => {
-          console.log(payload, variables);
+          // console.log(payload, variables);
           return true;
         }
       )
@@ -109,7 +109,7 @@ const resolvers = {
       }
     },
     updateUser: async (_, { input }) => {
-      console.log(input);
+      // console.log(input);
       let user;
       if (input.admin != null || input.locked != null) {
         user = await User.findOne({ username: input.username });

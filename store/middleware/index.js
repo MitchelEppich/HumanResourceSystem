@@ -14,7 +14,7 @@ const middleware = [
     return next => {
       return action => {
         const result = next(action);
-        console.log(result);
+        // console.log(result);
         return result;
       };
     };

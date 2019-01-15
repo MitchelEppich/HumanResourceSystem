@@ -19,13 +19,12 @@ let print = () => {
 import moment from "moment";
 
 const ViewUserDescription = props => {
- 
   let _user = props.nav.focusUser;
   if (_user == null) return <div />;
   return (
     <div
       id="viewUser"
-      style={{       
+      style={{
         borderTopLeftRadius: "10px",
         borderTopRightRadius: "10px",
         overflow: "hidden",
@@ -35,7 +34,7 @@ const ViewUserDescription = props => {
     >
       <div
         style={{
-          overflow: "hidden"         
+          overflow: "hidden"
         }}
         className="inline-flex w-full bg-grey-new relative"
       >
@@ -186,11 +185,12 @@ const ViewUserDescription = props => {
             }}
             className="p-2 text-left w-750"
           >
-            {_user.adminNotes != null ? _user.adminNotes.toString() : "No Notes"}
+            {_user.adminNotes != null
+              ? _user.adminNotes.toString()
+              : "No Notes"}
             {/* {props.user.userData.adminNotes
               ? props.user.userData.adminNotes.toString()
               : "No Notes"} */}
-              {console.log(_user.adminNotes)}
           </p>
         </div>
       </div>

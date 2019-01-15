@@ -31,13 +31,29 @@ const Main = props => {
   };
 
   let showReportedNames = () => {
-    if (props.nav.complaint.reportedNames == null) return;
+    let _reportedNames = props.nav.complaint.reportedNames;
+    if (_reportedNames == null) return;
     let arr = [];
-    for (let name of props.nav.complaint.reportedNames) {
+    for (let name of _reportedNames) {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
           <p className="w-full capitalize text-center">{name}</p>
-          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg ml-2" />
+          <FontAwesomeIcon
+            icon={faTimes}
+            className="text-right fa-lg ml-2"
+            onClick={() => {
+              _reportedNames = _reportedNames.filter(a => {
+                if (a == name) return false;
+                return true;
+              });
+
+              props.setComplaint({
+                complaint: props.nav.complaint,
+                key: "reportedNames",
+                value: _reportedNames
+              });
+            }}
+          />
         </div>
       );
     }
@@ -45,13 +61,29 @@ const Main = props => {
   };
 
   let showWitnesses = () => {
-    if (props.nav.complaint.witnessNames == null) return;
+    let _witnessNames = props.nav.complaint.witnessNames;
+    if (_witnessNames == null) return;
     let arr = [];
-    for (let name of props.nav.complaint.witnessNames) {
+    for (let name of _witnessNames) {
       arr.push(
         <div className="w-250 p-2 bg-grey-light mt-1 text-grey inline-flex mr-2 cursor-pointer hover:bg-grey-lighter hover:text-grey-new">
           <p className="w-full capitalize text-center">{name}</p>
-          <FontAwesomeIcon icon={faTimes} className="text-right fa-lg ml-2" />
+          <FontAwesomeIcon
+            icon={faTimes}
+            className="text-right fa-lg ml-2"
+            onClick={() => {
+              _witnessNames = _witnessNames.filter(a => {
+                if (a == name) return false;
+                return true;
+              });
+
+              props.setComplaint({
+                complaint: props.nav.complaint,
+                key: "witnessNames",
+                value: _witnessNames
+              });
+            }}
+          />
         </div>
       );
     }
@@ -153,18 +185,25 @@ const Main = props => {
               </div>
               <div className="w-full p-2 bg-white text-black">
                 <p className="p-2">
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium voluptatum deleniti atque corrupti quos
-                  dolores et quas molestias excepturi sint occaecati cupiditate
-                  non provident, similique sunt in culpa qui officia deserunt
-                  mollitia animi, id est laborum et dolorum fuga. Et harum
-                  quidem rerum facilis est et expedita distinctio. Nam libero
-                  tempore, cum soluta nobis est eligendi optio cumque nihil
-                  impedit quo minus id quod maxime placeat facere possimus,
-                  omnis voluptas assumenda est, omnis dolor repellendus.
-                  Temporibus autem quibusdam et aut officiis debitis aut rerum
-                  necessitatibus saepe eveniet ut et voluptates repudiandae sint
-                  et molestiae non recusandae.
+                  This Form is to be used by an Employee to report information
+                  about Harassment and/or Discrimination in circumstances where
+                  the Employee submitting the Complaint is alleging that they
+                  have personally experienced Harassment and/or Discrimination
+                  (Complainant*). An Employee will not be subject to penalty
+                  (reprisal) for submitting a Compliant in good faith or for
+                  participating in a related investigation. For additional
+                  information regarding the filing Complaint Form, please
+                  contact the Employee and Labour relations Unit within Human
+                  Resources.
+                </p>
+                <p className="p-2">
+                  Any updates on your complaint will be sent to your company
+                  email, please check that for further communications.
+                </p>
+                <p className="p-2">
+                  * A Complainant refers to an employee who alleges that they
+                  have directly experienced Discrimination and/or Harassment may
+                  that be physical and/or verbal. *
                 </p>
               </div>
             </div>
@@ -388,13 +427,18 @@ const Main = props => {
                     <select
                       name="reportedNames"
                       className="w-250 p-1 ml-4"
-                      id="reportedName"
+                      id="reportedNames"
                       required
                       onChange={e => {
+                        let reportedNames =
+                          props.nav.complaint.reportedNames || [];
+                        let _new = e.target.value;
+                        if (reportedNames.includes(_new) || _new == null)
+                          return;
                         props.setComplaint({
                           complaint: props.nav.complaint,
                           key: e.target.id,
-                          value: e.target.value
+                          value: [...reportedNames, _new]
                         });
                       }}
                     >
@@ -403,22 +447,6 @@ const Main = props => {
                       </option>
                       {showNames()}
                     </select>
-                    <FontAwesomeIcon
-                      onClick={() => {
-                        let reportedNames =
-                          props.nav.complaint.reportedNames || [];
-                        let _new = props.nav.complaint.reportedName;
-                        if (reportedNames.includes(_new) || _new == null)
-                          return;
-                        props.setComplaint({
-                          complaint: props.nav.complaint,
-                          key: "reportedNames",
-                          value: [...reportedNames, _new]
-                        });
-                      }}
-                      icon={faPlus}
-                      className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
-                    />
                   </div>
                   <div
                     style={{ paddingRight: "69px" }}
@@ -432,13 +460,18 @@ const Main = props => {
                     <label className="mr-2">Witnesses:</label>
                     <select
                       name="witnessNames"
-                      id="witnessName"
+                      id="witnessNames"
                       className="w-250 p-1 ml-4"
                       onChange={e => {
+                        let witnessNames =
+                          props.nav.complaint.witnessNames || [];
+                        let _new = e.target.value;
+
+                        if (witnessNames.includes(_new) || _new == null) return;
                         props.setComplaint({
                           complaint: props.nav.complaint,
                           key: e.target.id,
-                          value: e.target.value
+                          value: [...witnessNames, _new]
                         });
                       }}
                     >
@@ -447,22 +480,6 @@ const Main = props => {
                       </option>
                       {showNames()}
                     </select>
-                    <FontAwesomeIcon
-                      onClick={() => {
-                        let witnessNames =
-                          props.nav.complaint.witnessNames || [];
-                        let _new = props.nav.complaint.witnessName;
-
-                        if (witnessNames.includes(_new) || _new == null) return;
-                        props.setComplaint({
-                          complaint: props.nav.complaint,
-                          key: "witnessNames",
-                          value: [...witnessNames, _new]
-                        });
-                      }}
-                      icon={faPlus}
-                      className="cursor-pointer text-grey ml-2 fa-lg hover:text-grey-new"
-                    />
                   </div>
                   <div
                     style={{ paddingRight: "97px" }}
@@ -566,22 +583,22 @@ const Main = props => {
               className="w-full justify-between mt-12"
             >
               <div className="w-full text-center bg-grey-new uppercase p-2">
-                <h3>Disclaimer</h3>
+                <h3>Acknowledgements</h3>
               </div>
               <div className="w-full p-2 bg-white text-black">
                 <p className="p-2">
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium voluptatum deleniti atque corrupti quos
-                  dolores et quas molestias excepturi sint occaecati cupiditate
-                  non provident, similique sunt in culpa qui officia deserunt
-                  mollitia animi, id est laborum et dolorum fuga. Et harum
-                  quidem rerum facilis est et expedita distinctio. Nam libero
-                  tempore, cum soluta nobis est eligendi optio cumque nihil
-                  impedit quo minus id quod maxime placeat facere possimus,
-                  omnis voluptas assumenda est, omnis dolor repellendus.
-                  Temporibus autem quibusdam et aut officiis debitis aut rerum
-                  necessitatibus saepe eveniet ut et voluptates repudiandae sint
-                  et molestiae non recusandae.
+                  I am filing this Complaint because I believe that I have
+                  personally experienced an incident(s) of Harassment and/or
+                  Discrimination.
+                </p>
+                <p className="p-2">
+                  I understand that I am required to maintain the
+                  confidentiality of all information disclosed during the
+                  procedure, including ant Personal Information disclosed to me.
+                  I further understand that making a frivolous or vexatious
+                  Complaint, exhibiting bad faith in the course of an
+                  investigation, or any breach of my obligation to maintain
+                  confidentiality, is grounds for corrective action.
                 </p>
                 <div className="w-300 mt-4 mb-2 ml-2">
                   <label>

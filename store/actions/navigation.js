@@ -39,7 +39,7 @@ const getActions = uri => {
         let _complaint = input.complaint;
         let _promptComplaints = input.promptComplaints;
 
-        console.log("InPUT", _promptComplaints);
+        // console.log("InPUT", _promptComplaints);
 
         let _focusComplaint = input.focusComplaint;
         if (_focusComplaint != null && _focusComplaint._id == _complaint._id) {
@@ -58,7 +58,7 @@ const getActions = uri => {
 
         if (_index != -1) _promptComplaints.push(_complaint);
 
-        console.log("OUTPUT", _promptComplaints);
+        // console.log("OUTPUT", _promptComplaints);
 
         dispatch({
           type: actionTypes.MODIFY_COMPLAINT,

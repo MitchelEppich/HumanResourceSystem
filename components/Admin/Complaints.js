@@ -140,14 +140,14 @@ const Complaints = props => {
             let _promptComplaints = props.nav.promptComplaints;
             let _complaint = data.complaintUpdate;
             let _focusComplaint = props.nav.focusComplaint;
-            console.log(
-              "SUB",
-              !JSON.stringify(_promptComplaints).includes(
-                JSON.stringify(_complaint)
-              ),
-              _complaint,
-              _promptComplaints
-            );
+            // console.log(
+            //   "SUB",
+            //   !JSON.stringify(_promptComplaints).includes(
+            //     JSON.stringify(_complaint)
+            //   ),
+            //   _complaint,
+            //   _promptComplaints
+            // );
             if (
               !JSON.stringify(_promptComplaints).includes(
                 JSON.stringify(_complaint)

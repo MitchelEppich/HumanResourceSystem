@@ -24,7 +24,7 @@ const handle = app.getRequestHandler();
 
 const subscriptionsPath = "/subscriptions";
 // const subscriptionsEndpoint = `ws://${url}:${port}${subscriptionsPath}`;
-const subscriptionsEndpoint = `ws://159.89.117.30:${port}${subscriptionsPath}`;
+const subscriptionsEndpoint = `ws://159.89.117.30:80${subscriptionsPath}`;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -81,7 +81,7 @@ app
     });
 
     const ws = createServer(server);
-    ws.listen(port, url, () => {
+    ws.listen(port, () => {
       // remove url before heroku!!
       console.log(`Apollo Server is now running on https://${url}:${port}`);
       // Set up the WebSocket for handling GraphQL subscriptions
