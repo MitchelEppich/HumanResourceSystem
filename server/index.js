@@ -23,14 +23,11 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const subscriptionsPath = "/subscriptions";
-// const subscriptionsEndpoint = `ws://${url}:${port}${subscriptionsPath}`;
-const subscriptionsEndpoint = `ws://159.89.117.30:80${subscriptionsPath}`;
+const subscriptionsEndpoint = `ws://${url}:${port}${subscriptionsPath}`;
+// const subscriptionsEndpoint = `ws://159.89.117.30:80${subscriptionsPath}`;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  process.env.M_URL,
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.M_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
 db.once("open", () => console.log("We are connected!"));

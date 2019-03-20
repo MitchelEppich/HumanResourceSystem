@@ -11,7 +11,7 @@ router.post("/update", updateUser);
 
 async function getUser(req, res) {
   let _post = req.body;
-  let _user = await resolvers.Query.user(null, { ..._post });
+  let _user = await resolvers.Query.user(null, { input: { ..._post } });
   res.send(_user);
 }
 
